@@ -960,6 +960,22 @@ table tr:hover .table-links {
 .table-striped tbody tr:nth-of-type(odd) {
   background-color: rgba(0, 0, 0, 0.02); }
 
+.prod_current{
+    color: #fff;
+    background-color: #f0a5a5 !important; /**/
+}
+
+.prod_finished{
+    color: #fff;
+    background-color: #40e791 !important;/**/
+}
+
+.prod_paused{
+    color: #fff;
+    background-color: #f1d781 !important;/**/
+}
+
+
 @media (max-width: 575.98px) {
   .table-responsive table {
     min-width: 800px; } }

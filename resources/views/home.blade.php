@@ -39,13 +39,15 @@
 
             @foreach ($machines as $machine)
                 <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-                    <form id="mach{{ $machine->id }}" action="{{ url('operation') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name='prodctn_id' value="{{ $machine->prod->id }}">
-                        <input type="hidden" name='machine_id' value="{{ $machine->id }}">
-                    </form>
-                    @if(Auth::user()->load('roles')->roles->contains('title', 'operator'))
-                    <a href="" onclick="event.preventDefault(); document.getElementById('mach{{ $machine->id }}').submit();">
+                    @if($machine->status == '1')
+                        <form id="mach{{ $machine->id }}" action="{{ url('operation') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name='prodctn_id' value="{{ $machine->prod->id }}">
+                            <input type="hidden" name='machine_id' value="{{ $machine->id }}">
+                        </form>
+                        @if(Auth::user()->load('roles')->roles->contains('title', 'operator'))
+                            <a href="" onclick="event.preventDefault(); document.getElementById('mach{{ $machine->id }}').submit();">
+                        @endif
                     @endif
                         <div class="card card-primary rounded-lg hs_stats bg-gradient">
                             <span style="background-color: {{ $machine->status == '1' ? '#45b762':'#ff5858' }};">&nbsp</span>
@@ -53,11 +55,12 @@
                                 <h5>{{__("Machine #").$machine->name}}</h5>
                             </div>
                             <div class="card-body stats">
-                                <i class="fas fa-industry text-info"></i><span class="right">{{ $machine->prod->objectif }}</span>
+                                <i class="fas fa-industry text-info"></i>
+                                @if($machine->status == '1')<span class="right">{{ $machine->prod->objectif }}</span>@endif
                             </div>
                         </div>
-                    @if(Auth::user()->load('roles')->roles->contains('title', 'operator'))
-                    </a>
+                    @if(Auth::user()->load('roles')->roles->contains('title', 'operator') && $machine->status == '1')
+                        </a>
                     @endif
                 </div>
             @endforeach

@@ -16,11 +16,12 @@ class HomeController extends Controller
             return redirect('login');
 
         //Default values
-
-
         $machines  = Machine::get();
         foreach ($machines as $machine){
-            $machine->prod = Production::where('machine_id', $machine->id)->where('status', 1)->first();
+            $machine->prod = Production::where('machine_id', $machine->id)->where('status', 'C')->first();
+            if($machine->prod == null){
+                $machine->status = '0';
+            }
         }
         return view(
             'home',

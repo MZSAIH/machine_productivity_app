@@ -63,7 +63,22 @@
                             </thead>
                             <tbody>
                                 @foreach ($productions as $production)
-                                    <tr>
+                                    {{-- <tr class="{{
+                                        if($production->status == 'F')
+                                            'prod_finished'
+                                        elseif ($production->status == 'P')
+                                            'prod_paused'
+                                        else
+                                            'prod_current'
+                                    }}"> --}}
+                                    <tr
+                                    @class([
+                                        'prod_finished' => $production->status == 'F',
+                                        'prod_paused' => $production->status == 'P',
+                                        'prod_current' => $production->status == 'C'
+                                    ])>
+
+
                                         <td>
                                             <input name="id[]" value="{{$production->id}}" id="{{$production->id}}" data-id="{{ $production->id }}" class="sub_chk" type="checkbox" />
                                             <label for="{{$production->id}}"></label>
@@ -77,29 +92,12 @@
                                         <td>{{ $production->starting_date }}</td>
                                         <td>{{ $production->ending_date }}</td>
                                         <td><strong>{{ $production->objectif }}</strong></td>
-                                        <td>{{ $production->status }}</td>
-                                        {{-- <td>
-                                            <label class="switch">
-                                                <input type="checkbox" name="status" onclick="change_status('/production',{{ $production->id }})" {{($production->status == 1) ? 'checked' : ''}}>
-                                                <div class="slider"></div>
-                                            </label>
-                                        </td>
-                                        <!--if (Gate::check('production_edit') && Gate::check('production_access') && Gate::check('production_delete'))-->
-                                        <td class="d-flex">
-                                            <!--can('production_edit')-->
-                                                <a href="{{ url('/production/'.$production->id.'/edit') }}" class="btn btn-primary btn-action mr-1 " data-toggle="tooltip" title="" data-original-title="{{__('Edit production')}}"><i class="fas fa-pencil-alt"></i></a>
-                                            <!--endcan-->
-                                            <!--can('production_access')-->
-                                                <a href="{{ url('/production/'.$production->id) }}" data-toggle="tooltip" title="" data-original-title="{{__('show production profile')}}" class="btn btn-primary btn-action mr-1"><i class="fas fa-eye"></i></a>
-                                            <!--endcan-->
-                                            <!--can('production_delete')-->
-                                                <a href="javascript:void(0);" class="table-action btn btn-danger btn-action" onclick="deleteData('/production',{{ $production->id }},'production')">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            <!--endcan-->
-                                        </td>
-                                        <!--endif--> --}}
-
+                                        
+                                            <td>
+                                                @if($production->status == 'P')
+                                                    <a href="{{ url('/production/'.$production->id.'/edit') }}" class="btn btn-primary btn-action mr-1 " data-toggle="tooltip" title="" data-original-title="{{__('Open')}}"><i class="fas fa-open"></i></a>
+                                                @endif
+                                            </td>
                                     </tr>
                                 @endforeach
                             </tbody>

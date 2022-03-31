@@ -25,6 +25,9 @@
             <div class="card profile-widget">
                 <div class="profile-widget-header section-header">
                     <h3>Order details</h3>
+                    <div class="w-100">
+                        <a href="{{ url('production') }}" class="btn btn-primary float-right">{{__('All orders')}}</a>
+                    </div>
                 </div>
                 <div class="profile-widget-description">
                     <div class="profile-widget-name">
