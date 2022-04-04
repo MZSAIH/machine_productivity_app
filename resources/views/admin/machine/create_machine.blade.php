@@ -19,13 +19,13 @@
         <p class="section-lead">{{__('Create machine')}}</p>
         <div class="card">
             <div class="card-body">
-                <form class="container-fuild" action="{{ url('admin/machine') }}" method="post">
+                <form class="container-fuild" action="{{ url('machine') }}" method="post">
                     @csrf
                     <div class="row">
                         <div class="col-md-12 mb-3">
-                            <label for="name">{{__('machine name')}}</label>
-                            <input type="text" name="name" class="form-control @error('title') is_invalide @enderror" id="" placeholder="{{__('machine name')}}" value="{{old('name')}}" required="" style="text-transform: none;">
-                            @error('title')
+                            <label for="name">{{__('Machine name')}}</label>
+                            <input type="text" name="name" class="form-control @error('name') is_invalide @enderror" id="" placeholder="{{__('Machine name')}}" value="{{old('name')}}" required="" style="text-transform: none;">
+                            @error('name')
                                 <span class="custom_error" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -33,47 +33,6 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-12 mb-3">
-                            <label for="email">{{__('email')}}</label>
-                            <input type="email" name="email_id" class="form-control @error('email_id') is_invalide @enderror"P placeholder="{{__('email')}}" value="{{old('email')}}" required="" style="text-transform: none;">
-                            @error('email_id')
-                                <span class="custom_error" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12 mb-3">
-                            <label for="phone">{{__('phone')}}</label>
-                            <input type="number" name="phone" class="form-control @error('phone') is_invalide @enderror" id="" placeholder="{{__('phone')}}" value="{{old('phone')}}" required="" style="text-transform: none;">
-                            @error('phone')
-                                <span class="custom_error" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12 mb-3">
-                            <label for="password">{{__('password')}}</label>
-                            <input type="password" name="password" class="form-control @error('password') is_invalide @enderror" id="" placeholder="{{__('* * * * * *')}}" value="{{old('password')}}" required="" style="text-transform: none;">
-                            @error('password')
-                                <span class="custom_error" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 mb-3">
-                            <label for="role">{{__('Roles')}}</label>
-                            
-                        </div>
-                    </div>
                     <div class="text-center">
                         <button class="btn btn-primary" type="submit">{{__('Add machine')}}</button>
                     </div>

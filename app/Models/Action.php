@@ -13,6 +13,8 @@ class Action extends Model
 
     protected $fillable = ['number','name'];
 
+    public $timestamps = false;
+
     public function productions()
     {
         return $this->belongsToMany(Production::class,'operation')->withPivot('user_id');

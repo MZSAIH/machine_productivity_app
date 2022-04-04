@@ -6,7 +6,7 @@
 
 <section class="section">
     <div class="section-header">
-    <h1>{{__('machine profile')}}</h1>
+    <h1>{{__('machine infos')}}</h1>
     <div class="section-header-breadcrumb">
         <div class="breadcrumb-item active"><a href="{{ url('admin/home') }}">{{__('Dashboard')}}</a></div>
         <div class="breadcrumb-item active"><a href="{{ url('admin/machine') }}">{{__('machine')}}</a></div>
@@ -14,7 +14,7 @@
     </div>
     </div>
     <div class="section-body">
-    <h2 class="section-title">{{$machine->name}}</h2>
+    <h2 class="section-title">Machine #{{$machine->name}}</h2>
     <p class="section-lead">
         {{__('Information about machine')}}
     </p>
@@ -22,28 +22,10 @@
    <div class="row mt-sm-4">
         <div class="col-12 col-md-12 col-lg-12">
             <div class="card profile-widget">
-                <div class="profile-widget-header">
-                    <img alt="image" src="{{ $machine->image }}" class="rounded-circle profile-widget-picture">
-                    <div class="profile-widget-items">
-                        <div class="profile-widget-item">
-                            <div class="profile-widget-item-label">{{__('Total order')}}</div>
-                            <div class="profile-widget-item-value">0</div>
-                        </div>
-                        <div class="profile-widget-item">
-                            <div class="profile-widget-item-label">{{__('Pending')}}</div>
-                            <div class="profile-widget-item-value">0</div>
-                        </div>
-                        <div class="profile-widget-item">
-                            <div class="profile-widget-item-label">{{__('Approve')}}</div>
-                            <div class="profile-widget-item-value">0</div>
-                        </div>
-                    </div>
-                </div>
+
                 <div class="profile-widget-description">
                     <div class="profile-widget-name">
                         {{__('machine Name')}} : {{ $machine->name }}<br>
-                        {{__('Phone number')}} : {{ $machine->phone }}<br>
-                        {{__('Email')}} : {{ $machine->email_id }}<br>
                     </div>
                 </div>
             </div>
@@ -53,232 +35,64 @@
         <div class="col-12 col-sm-12 col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>{{ $machine->name }}  {{__('order details')}}</h4>
+                    <h4>{{ $machine->name }}  {{__('productions details')}}</h4>
                 </div>
                 <div class="card-body">
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active show" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
-                                aria-selected="false">{{__('All')}}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                                aria-controls="profile" aria-selected="false">{{__('Approve')}}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
-                                aria-controls="contact" aria-selected="true">{{__('Pending')}}</a>
-                        </li>
-                    </ul>
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade active show" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <table class="datatable table table-striped table-bordered" cellspacing="0" width="100%">
+                            <table id="datatable" class="table table-striped table-bordered text-center" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
+                                        {{-- <th>
+                                            <input name="select_all" value="1" id="master" type="checkbox" />
+                                            <label for="master"></label>
+                                        </th> --}}
                                         <th>#</th>
-                                        <th>{{__('Order Id')}}</th>
-                                        <th>{{__('Vendor name')}}</th>
-                                        <th>{{__('machine Name')}}</th>
-                                        <th>{{__('Date')}}</th>
-                                        <th>{{__('Time')}}</th>
-                                        <th>{{__('Order Status')}}</th>
-                                        <th>{{__('Payment status')}}</th>
-                                        <th>{{__('View')}}</th>
+                                        <th>{{__('production code')}}</th>
+                                        <th>{{__('Article code')}}</th>
+                                        <th>{{__('Article desc')}}</th>
+                                        <th>{{__('Stampo')}}</th>
+                                        <th>{{__('Machine')}}</th>
+                                        <th>{{__('Starting date')}}</th>
+                                        <th>{{__('Ending date')}}</th>
+                                        <th>{{__('Quantity')}}</th>
+                                        @if(Auth::user()->load('roles')->roles->contains('title', 'operator'))
+                                        <th>{{__('Open')}}</th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{-- @foreach ($productions as $order)
-                                        <tr>
+                                    @foreach ($productions as $production)
+                                        <tr @class([
+                                                'prod_finished' => $production->status == 'F',
+                                                'prod_paused' => $production->status == 'P',
+                                                'prod_current' => $production->status == 'C'
+                                            ])
+                                        >
+
+
+                                            {{-- <td>
+                                                <input name="id[]" value="{{$production->id}}" id="{{$production->id}}" data-id="{{ $production->id }}" class="sub_chk" type="checkbox" />
+                                                <label for="{{$production->id}}"></label>
+                                            </td> --}}
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{$order->order_id}}</td>
-                                            <td>{{ $order['vendor']->name }}</td>
-                                            <td>{{ $order['machine']->name }}</td>
-                                            <td>{{ $order->date }}</td>
-                                            <td>{{ $order->time }}</td>
-                                            <td>
-                                                @if ($order->order_status == 'PENDING')
-                                                    <span class="badge badge-pill pending">{{__('PENDING')}}</span>
-                                                @endif
-
-                                                @if ($order->order_status == 'APPROVE')
-                                                    <span class="badge badge-pill approve">{{__('APPROVE')}}</span>
-                                                @endif
-
-                                                @if ($order->order_status == 'REJECT')
-                                                    <span class="badge badge-pill reject">{{__('REJECT')}}</span>
-                                                @endif
-
-                                                @if ($order->order_status == 'CANCEL')
-                                                    <span class="badge badge-pill cancel">{{__('REJECT')}}</span>
-                                                @endif
-
-                                                @if ($order->order_status == 'PICKUP')
-                                                    <span class="badge badge-pill pickup">{{__('PICKUP')}}</span>
-                                                @endif
-
-                                                @if ($order->order_status == 'DELIVERED')
-                                                    <span class="badge badge-pill delivered">{{__('REJECT')}}</span>
-                                                @endif
-
-                                                @if ($order->order_status == 'COMPLETE')
-                                                    <span class="badge badge-pill complete">{{__('COMPLETE')}}</span>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @if ($order->payment_status == 1)
-                                                    <div class="span">{{__('payment complete')}}</div>
-                                                @endif
-
-                                                @if ($order->payment_status == 0)
-                                                    <div class="span">{{__('payment not complete')}}</div>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                <a href="{{ url('admin/order/'.$order->id) }}" onclick="show_admin_order({{ $order->id }})" data-toggle="modal" data-target="#view_order">{{__('View Order')}}</a>
-                                            </td>
+                                            <td>{{ $production->order_id }}</td>
+                                            <td>{{ $production->code_article }}</td>
+                                            <td>{{ $production->desc_article }}</td>
+                                            <td>{{ $production->stampo }}</td>
+                                            <td>{{ $production->machine->name }}</td>
+                                            <td>{{ $production->starting_date }}</td>
+                                            <td>{{ $production->ending_date }}</td>
+                                            <td><strong>{{ $production->objectif }}</strong></td>
+                                            @if(Auth::user()->load('roles')->roles->contains('title', 'operator'))
+                                                <td>
+                                                    @if($production->status == 'P')
+                                                        <a href="{{ url('/production/'.$production->id.'/open') }}" class="btn btn-primary btn-action mr-1 " data-toggle="tooltip" title="" data-original-title="{{__('Open')}}"><i class="fas fa-open"></i></a>
+                                                    @endif
+                                                </td>
+                                            @endif
                                         </tr>
-                                    @endforeach --}}
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <table class="datatable table table-striped table-bordered" cellspacing="0" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>{{__('Order Id')}}</th>
-                                        <th>{{__('Vendor name')}}</th>
-                                        <th>{{__('machine Name')}}</th>
-                                        <th>{{__('Date')}}</th>
-                                        <th>{{__('Time')}}</th>
-                                        <th>{{__('Order Status')}}</th>
-                                        <th>{{__('Payment status')}}</th>
-                                        <th>{{__('View')}}</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {{-- @foreach ($approve_orders as $order)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{$order->order_id}}</td>
-                                            <td>{{ $order['vendor']->name }}</td>
-                                            <td>{{ $order['machine']->name }}</td>
-                                            <td>{{ $order->date }}</td>
-                                            <td>{{ $order->time }}</td>
-                                            <td>
-                                                @if ($order->order_status == 'PENDING')
-                                                    <span class="badge badge-pill pending">{{__('PENDING')}}</span>
-                                                @endif
-
-                                                @if ($order->order_status == 'APPROVE')
-                                                    <span class="badge badge-pill approve">{{__('APPROVE')}}</span>
-                                                @endif
-
-                                                @if ($order->order_status == 'REJECT')
-                                                    <span class="badge badge-pill reject">{{__('REJECT')}}</span>
-                                                @endif
-
-                                                @if ($order->order_status == 'CANCEL')
-                                                    <span class="badge badge-pill cancel">{{__('REJECT')}}</span>
-                                                @endif
-
-                                                @if ($order->order_status == 'PICKUP')
-                                                    <span class="badge badge-pill pickup">{{__('PICKUP')}}</span>
-                                                @endif
-
-                                                @if ($order->order_status == 'DELIVERED')
-                                                    <span class="badge badge-pill delivered">{{__('REJECT')}}</span>
-                                                @endif
-
-                                                @if ($order->order_status == 'COMPLETE')
-                                                    <span class="badge badge-pill complete">{{__('COMPLETE')}}</span>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @if ($order->payment_status == 1)
-                                                    <div class="span">{{__('payment complete')}}</div>
-                                                @endif
-
-                                                @if ($order->payment_status == 0)
-                                                    <div class="span">{{__('payment not complete')}}</div>
-                                                @endif
-                                            </td>
-
-                                            <td>
-                                                <a href="{{ url('admin/order/'.$order->id) }}" onclick="show_admin_order({{ $order->id }})" data-toggle="modal" data-target="#view_order">{{__('View Order')}}</a>
-                                            </td>
-                                        </tr>
-                                    @endforeach --}}
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                            <table class="datatable table table-striped table-bordered" cellspacing="0" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>{{__('Order Id')}}</th>
-                                        <th>{{__('Vendor name')}}</th>
-                                        <th>{{__('machine Name')}}</th>
-                                        <th>{{__('Date')}}</th>
-                                        <th>{{__('Time')}}</th>
-                                        <th>{{__('Order Status')}}</th>
-                                        <th>{{__('Payment status')}}</th>
-                                        <th>{{__('View')}}</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {{-- @foreach ($pending_orders as $order)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{$order->order_id}}</td>
-                                            <td>{{ $order['vendor']->name }}</td>
-                                            <td>{{ $order['machine']->name }}</td>
-                                            <td>{{ $order->date }}</td>
-                                            <td>{{ $order->time }}</td>
-                                            <td>
-                                                @if ($order->order_status == 'PENDING')
-                                                    <span class="badge badge-pill pending">{{__('PENDING')}}</span>
-                                                @endif
-
-                                                @if ($order->order_status == 'APPROVE')
-                                                    <span class="badge badge-pill approve">{{__('APPROVE')}}</span>
-                                                @endif
-
-                                                @if ($order->order_status == 'REJECT')
-                                                    <span class="badge badge-pill reject">{{__('REJECT')}}</span>
-                                                @endif
-
-                                                @if ($order->order_status == 'CANCEL')
-                                                    <span class="badge badge-pill cancel">{{__('REJECT')}}</span>
-                                                @endif
-
-                                                @if ($order->order_status == 'PICKUP')
-                                                    <span class="badge badge-pill pickup">{{__('PICKUP')}}</span>
-                                                @endif
-
-                                                @if ($order->order_status == 'DELIVERED')
-                                                    <span class="badge badge-pill delivered">{{__('REJECT')}}</span>
-                                                @endif
-
-                                                @if ($order->order_status == 'COMPLETE')
-                                                    <span class="badge badge-pill complete">{{__('COMPLETE')}}</span>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @if ($order->payment_status == 1)
-                                                    <div class="span">{{__('payment complete')}}</div>
-                                                @endif
-
-                                                @if ($order->payment_status == 0)
-                                                    <div class="span">{{__('payment not complete')}}</div>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                <a href="{{ url('admin/order/'.$order->id) }}" onclick="show_admin_order({{ $order->id }})" data-toggle="modal" data-target="#view_order">{{__('View Order')}}</a>
-                                            </td>
-                                        </tr>
-                                    @endforeach --}}
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

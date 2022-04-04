@@ -23,8 +23,8 @@
                     @csrf
                     <div class="row">
                         <div class="col-md-12 mb-3">
-                            <label for="name">{{__('machine name')}}</label>
-                            <input type="text" name="name" class="form-control @error('title') is_invalide @enderror" id="" placeholder="{{__('machine name')}}" value="{{old('name')}}" required="" style="text-transform: none;">
+                            <label for="name">{{__('Production name')}}</label>
+                            <input type="text" name="name" class="form-control @error('name') is_invalide @enderror" id="" placeholder="{{__('machine name')}}" value="{{old('name')}}" required="" style="text-transform: none;">
                             @error('title')
                                 <span class="custom_error" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -71,7 +71,7 @@
                     <div class="row">
                         <div class="col-md-12 mb-3">
                             <label for="role">{{__('Roles')}}</label>
-                            
+
                         </div>
                     </div>
                     <div class="text-center">

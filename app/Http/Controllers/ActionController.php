@@ -29,7 +29,7 @@ class ActionController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.action.create_action');
     }
 
     /**
@@ -40,7 +40,13 @@ class ActionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'number' => 'bail|required|unique:actions',
+            'name' => 'bail|required|max:255'
+        ]);
+        $data = $request->all();
+        Action::create($data);
+        return redirect('action')->with('msg','Action added successfully');
     }
 
     /**
@@ -62,7 +68,7 @@ class ActionController extends Controller
      */
     public function edit(action $action)
     {
-        //
+        return view('admin.action.edit_action',compact('action'));
     }
 
     /**
@@ -74,7 +80,13 @@ class ActionController extends Controller
      */
     public function update(Request $request, action $action)
     {
-        //
+        $request->validate([
+            'number' => 'bail|required|unique:actions|max:255',
+            'name' => 'bail|required|max:255'
+        ]);
+        $data = $request->all();
+        $action->update($data);
+        return redirect('action')->with('msg','Action Updated Successfully');
     }
 
     /**

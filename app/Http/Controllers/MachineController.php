@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Machine;
+use App\Models\Production;
 use Illuminate\Http\Request;
 
 class MachineController extends Controller
@@ -39,7 +40,13 @@ class MachineController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'bail|required|unique:machines|max:255',
+        ]);
+        $data = $request->all();
+        $data['status'] = 0;
+        $machine = Machine::create($data);
+        return redirect('machine')->with('msg','Machine added successfully');
     }
 
     /**
@@ -51,7 +58,8 @@ class MachineController extends Controller
     public function show($id)
     {
         $machine = Machine::find($id);
-        return view('admin.machine.show_machine',compact('machine'));
+        $productions = Production::where('machine_id',$id)->get();
+        return view('admin.machine.show_machine',compact('machine','productions'));
     }
 
     /**
@@ -74,7 +82,12 @@ class MachineController extends Controller
      */
     public function update(Request $request, Machine $machine)
     {
-        //
+        $request->validate([
+            'name' => 'bail|required|unique:machines|max:255'
+        ]);
+        $data = $request->all();
+        $machine->update($data);
+        return redirect('machine')->with('msg','Machine Updated Successfully');
     }
 
     /**

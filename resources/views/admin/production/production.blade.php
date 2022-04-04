@@ -35,18 +35,18 @@
                 <p class="section-lead">{{__('Add, Edit, manage productions.')}}</p>
                 <div class="card">
                     <div class="card-header">
-                        <div class="w-100">
+                        {{-- <div class="w-100">
                             <a href="{{ url('/production/create') }}" class="btn btn-primary float-right"><i class="fas fa-plus"></i>{{__('  Add')}}</a>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="card-body">
                         <table id="datatable" class="table table-striped table-bordered text-center" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
-                                    <th>
+                                    {{-- <th>
                                         <input name="select_all" value="1" id="master" type="checkbox" />
                                         <label for="master"></label>
-                                    </th>
+                                    </th> --}}
                                     <th>#</th>
                                     <th>{{__('production code')}}</th>
                                     <th>{{__('Article code')}}</th>
@@ -56,55 +56,48 @@
                                     <th>{{__('Starting date')}}</th>
                                     <th>{{__('Ending date')}}</th>
                                     <th>{{__('Quantity')}}</th>
-                                    <th>{{__('status')}}</th>
-                                    {{-- <th>{{__('Activer')}}</th>
-                                    <th>{{__('Action')}}</th> --}}
+                                    @if(Auth::user()->load('roles')->roles->contains('title', 'operator'))
+                                    <th>{{__('Open')}}</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($productions as $production)
-                                    {{-- <tr class="{{
-                                        if($production->status == 'F')
-                                            'prod_finished'
-                                        elseif ($production->status == 'P')
-                                            'prod_paused'
-                                        else
-                                            'prod_current'
-                                    }}"> --}}
-                                    <tr
-                                    @class([
-                                        'prod_finished' => $production->status == 'F',
-                                        'prod_paused' => $production->status == 'P',
-                                        'prod_current' => $production->status == 'C'
-                                    ])>
+                                    <tr @class([
+                                            'prod_finished' => $production->status == 'F',
+                                            'prod_paused' => $production->status == 'P',
+                                            'prod_current' => $production->status == 'C'
+                                        ])
+                                    >
 
 
-                                        <td>
+                                        {{-- <td>
                                             <input name="id[]" value="{{$production->id}}" id="{{$production->id}}" data-id="{{ $production->id }}" class="sub_chk" type="checkbox" />
                                             <label for="{{$production->id}}"></label>
-                                        </td>
+                                        </td> --}}
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $production->order_id }}</td>
                                         <td>{{ $production->code_article }}</td>
                                         <td>{{ $production->desc_article }}</td>
                                         <td>{{ $production->stampo }}</td>
-                                        <td>{{ $production->machine_id }}</td>
+                                        <td>{{ $production->machine->name }}</td>
                                         <td>{{ $production->starting_date }}</td>
                                         <td>{{ $production->ending_date }}</td>
                                         <td><strong>{{ $production->objectif }}</strong></td>
-                                        
+                                        @if(Auth::user()->load('roles')->roles->contains('title', 'operator'))
                                             <td>
                                                 @if($production->status == 'P')
-                                                    <a href="{{ url('/production/'.$production->id.'/edit') }}" class="btn btn-primary btn-action mr-1 " data-toggle="tooltip" title="" data-original-title="{{__('Open')}}"><i class="fas fa-open"></i></a>
+                                                    <a href="{{ url('/production/'.$production->id.'/open') }}" class="btn btn-primary btn-action mr-1 " data-toggle="tooltip" title="" data-original-title="{{__('Open')}}"><i class="fas fa-open"></i></a>
                                                 @endif
                                             </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
                     <div class="card-footer">
-                        <input type="button" value="Delete selection" onclick="deleteAll('production_multi_delete','production')" class="btn btn-primary">
+                        {{-- <input type="button" value="Delete selection" onclick="deleteAll('production_multi_delete','production')" class="btn btn-primary"> --}}
                     </div>
                 </div>
             </div>

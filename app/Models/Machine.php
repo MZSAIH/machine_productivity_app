@@ -11,7 +11,9 @@ class Machine extends Model
 
     protected $table = 'machines';
 
-    protected $fillable = ['id','name','status'];
+    protected $fillable = ['name','status'];
+
+    public $timestamps = false;
 
     public function productions()
     {

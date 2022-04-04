@@ -19,7 +19,7 @@
         <p class="section-lead">{{__('Edit machine')}}</p>
         <div class="card">
             <div class="card-body">
-                <form class="container-fuild" action="{{ url('admin/machine/'.$machine->id) }}" method="post">
+                <form class="container-fuild" action="{{ url('machine/'.$machine->id) }}" method="post">
                     @csrf
                     @method('PUT')
                     <div class="row">
@@ -31,48 +31,6 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12 mb-3">
-                            <label for="email">{{__('email')}}</label>
-                            <input type="email" name="email" class="form-control @error('email') is_invalide @enderror" id="" placeholder="{{__('email')}}" value="{{ $machine->email }}" readonly style="text-transform: none;">
-                            @error('email')
-                                <span class="custom_error" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12 mb-3">
-                            <label for="phone">{{__('phone')}}</label>
-                            <input type="number" name="phone" class="form-control @error('phone') is_invalide @enderror" id="" placeholder="{{__('phone')}}" value="{{ $machine->phone }}" required="" style="text-transform: none;">
-                            @error('phone')
-                                <span class="custom_error" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12 mb-3">
-                            <label for="password">{{__('New password')}}</label>
-                            <input type="password" name="password" class="form-control @error('password') is_invalide @enderror" id="" placeholder="{{__('* * * * * *')}}" value="{{old('password')}}" style="text-transform: none;">
-                            @error('password')
-                                <span class="custom_error" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 mb-3">
-                            <label for="role">{{__('Roles')}}</label>
-                            
                         </div>
                     </div>
                     <div class="text-center">

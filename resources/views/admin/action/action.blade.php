@@ -61,8 +61,8 @@
                                             <label for="{{$action->id}}"></label>
                                         </td>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $action->Number }}</td>
-                                        <td>{{ $action->Name }}</td>
+                                        <td>{{ $action->number }}</td>
+                                        <td>{{ $action->name }}</td>
                                         <!--if (Gate::check('action_edit') && Gate::check('action_access') && Gate::check('action_delete'))-->
                                         <td class="d-flex">
                                             <!--can('action_edit')-->

@@ -45,10 +45,8 @@
                                 <label for="master"></label>
                             </th>
                             <th>#</th>
-                            <th>{{__('Machine code')}}</th>
+                            <th>{{__('Machine')}}</th>
                             <th>{{__('Status')}}</th>
-                            <th>{{__('Quantity')}}</th>
-                            <th>{{__('Activer')}}</th>
                             <th>{{__('Action')}}</th>
                         </tr>
                     </thead>
@@ -60,14 +58,13 @@
                                     <label for="{{$machine->id}}"></label>
                                 </td>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $machine->id }}</td>
-                                <td>{{ $machine->phone }}</td>
-                                <td>{{ $machine->email_id }}</td>
+                                <td>{{ $machine->name }}</td>
                                 <td>
-                                    <label class="switch">
-                                        <input type="checkbox" name="status" onclick="change_status('/machine',{{ $machine->id }})" {{($machine->status == 1) ? 'checked' : ''}}>
-                                        <div class="slider"></div>
-                                    </label>
+                                    @if($machine->status == '1')
+                                    <span class="badge badge-success">ON</span>
+                                    @else
+                                    <span class="badge badge-danger">OFF</span>
+                                    @endif
                                 </td>
                                 <!--if (Gate::check('machine_edit') && Gate::check('machine_access') && Gate::check('machine_delete'))-->
                                 <td class="d-flex">
