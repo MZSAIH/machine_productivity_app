@@ -98,6 +98,7 @@ class ActionController extends Controller
      */
     public function destroy(action $action)
     {
-        //
+        $action->delete();
+        return response(['success' => true]);
     }
 }

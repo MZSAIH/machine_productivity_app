@@ -98,6 +98,7 @@ class MachineController extends Controller
      */
     public function destroy(Machine $machine)
     {
-        //
+        $machine->delete();
+        return response(['success' => true]);
     }
 }

@@ -89,6 +89,7 @@ class ProductionController extends Controller
      */
     public function destroy(Production $production)
     {
-        //
+        $production->delete();
+        return response(['success' => true]);
     }
 }
