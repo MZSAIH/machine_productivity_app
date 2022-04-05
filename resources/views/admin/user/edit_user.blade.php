@@ -23,54 +23,36 @@
                     @csrf
                     @method('PUT')
                     <div class="row">
-                        <div class="col-md-12 mb-3">
-                            <label for="name">{{__('user name')}}</label>
-                            <input type="text" name="name" class="form-control @error('name') is_invalide @enderror" id="" placeholder="{{__('user name')}}" value="{{ $user->name }}" required="" style="text-transform: none;">
+                        <div class="col-lg-6 col-md-12 mb-3">
+                            <label for="name">{{__('Name')}}</label>
+                            <input type="text" name="name" class="form-control @error('name') is_invalide @enderror" id="" placeholder="{{__('Name')}}" value="{{ $user->name}}" required="" style="text-transform: none;">
                             @error('name')
                                 <span class="custom_error" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12 mb-3">
-                            <label for="email">{{__('email')}}</label>
-                            <input type="email" name="email" class="form-control @error('email') is_invalide @enderror" id="" placeholder="{{__('email')}}" value="{{ $user->email }}" readonly style="text-transform: none;">
-                            @error('email')
-                                <span class="custom_error" role="alert">
+                        <div class="col-lg-6 col-md-12 mb-3">
+                            <label for="name">{{__('Username')}}</label>
+                            <input type="text" name="username" class="form-control @error('username') is_invalide @enderror" id="" placeholder="{{__('Username')}}" value="{{$user->username}}" required="" style="text-transform: none;">
+                            @error('username')
+                                <span class="custom_    error" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
                     </div>
-
                     <div class="row">
-                        <div class="col-md-12 mb-3">
-                            <label for="phone">{{__('phone')}}</label>
-                            <input type="number" name="phone" class="form-control @error('phone') is_invalide @enderror" id="" placeholder="{{__('phone')}}" value="{{ $user->phone }}" required="" style="text-transform: none;">
-                            @error('phone')
-                                <span class="custom_error" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12 mb-3">
+                        <div class="col-md-6 mb-3">
                             <label for="password">{{__('New password')}}</label>
-                            <input type="password" name="password" class="form-control @error('password') is_invalide @enderror" id="" placeholder="{{__('* * * * * *')}}" value="{{old('password')}}" style="text-transform: none;">
+                            <input type="password" name="password" class="form-control @error('password') is_invalide @enderror" id="" placeholder="{{__('* * * * * *')}}" value="" style="text-transform: none;">
                             @error('password')
                                 <span class="custom_error" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 mb-3">
+                        <div class="col-md-6 mb-3">
                             <label for="role">{{__('Roles')}}</label>
                             <select class="form-control select2" name="roles[]">
                                 @foreach ($roles as $role)

@@ -85,6 +85,7 @@ class ActionController extends Controller
             'name' => 'bail|required|max:255'
         ]);
         $data = $request->all();
+        $data['is_verified'] = 1;
         $action->update($data);
         return redirect('action')->with('msg','Action Updated Successfully');
     }

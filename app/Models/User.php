@@ -19,14 +19,12 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email_id',
         'username',
         'password',
-        'phone',
-        'image',
         'is_verified'
     ];
 
+    public $timestamps = false;
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -47,17 +45,15 @@ class User extends Authenticatable
     ];
 
 
-    protected $appends = ['image'];
-
     public function roles()
     {
         return $this->belongsToMany(Role::class);
     }
 
-    public function getImageAttribute()
-    {
-        return url('images/upload') . '/'.$this->attributes['image'];
-    }
+    // public function getImageAttribute()
+    // {
+    //     return url('images/upload') . '/'.$this->attributes['image'];
+    // }
 
     public function hasAccess($permission){
         foreach ($this->roles as $role) {

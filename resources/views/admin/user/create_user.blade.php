@@ -43,7 +43,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-lg-12 col-md-12 mb-3">
+                        <div class="col-lg-6 col-md-6 mb-3">
                             <label for="password">{{__('password')}}</label>
                             <input type="password" name="password" class="form-control @error('password') is_invalide @enderror" id="" placeholder="{{__('* * * * * *')}}" value="{{old('password')}}" required="" style="text-transform: none;">
                             @error('password')
@@ -52,10 +52,7 @@
                                 </span>
                             @enderror
                         </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-lg-6 col-md-12 mb-3">
+                        <div class="col-lg-6 col-md-6 mb-3">
                             <label for="role">{{__('Roles')}}</label>
                             <select class="form-control select2" name="roles[]" id="">
                                 @foreach ($roles as $role)

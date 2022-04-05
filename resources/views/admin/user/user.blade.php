@@ -48,9 +48,7 @@
                             <th>{{__('User')}}</th>
                             <th>{{__('Username')}}</th>
                             <th>{{__('Role')}}</th>
-                            <th>{{__('Phone')}}</th>
-                            <th>{{__('Email')}}</th>
-                            <th>{{__('Activer')}}</th>
+                            {{-- <th>{{__('Activer')}}</th> --}}
                             <th>{{__('Action')}}</th>
                         </tr>
                     </thead>
@@ -69,14 +67,12 @@
                                         <span class="badge badge-success">{{ $item->title }}</span>
                                     @endforeach
                                 </td>
-                                <td>{{ $user->phone }}</td>
-                                <td>{{ $user->email_id }}</td>
-                                <td>
+                                {{-- <td>
                                     <label class="switch">
                                         <input type="checkbox" name="status" onclick="change_status('user',{{ $user->id }})" {{($user->status == 1) ? 'checked' : ''}}>
                                         <div class="slider"></div>
                                     </label>
-                                </td>
+                                </td> --}}
                                 <!--if (Gate::check('user_edit') && Gate::check('user_access') && Gate::check('user_delete'))-->
                                 <td class="d-flex">
                                     <!--can('user_edit')-->

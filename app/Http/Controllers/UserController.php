@@ -45,19 +45,10 @@ class UserController extends Controller
         $request->validate([
             'name' => 'bail|required|max:255',
             'username' => 'bail|required|max:10',
-            'email_id' => 'bail|required|unique:users',
             'password' => 'bail|required|min:6',
-            'phone' => 'bail|required|numeric|digits_between:6,12'
         ]);
         $data = $request->all();
-        if (isset($data['status']))
-        {
-            $data['status'] = 1;
-        }
-        else
-        {
-            $data['status'] = 0;
-        }
+        $data['status'] = 1;
         $data['is_verified'] = 1;
         $data['password'] = Hash::make($data['password']);
         $data['image'] = 'noimage.png';
@@ -102,7 +93,7 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'bail|required|max:255',
-            'phone' => 'bail|required|numeric|digits_between:6,12'
+            'username' => 'bail|required'
         ]);
         $data = $request->all();
         $user = User::find($id);
