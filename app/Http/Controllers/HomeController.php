@@ -20,7 +20,7 @@ class HomeController extends Controller
         foreach ($machines as $machine){
             $machine->prod = Production::where('machine_id', $machine->id)->where('status', 'C')->first();
             if($machine->prod == null){
-                $machine->status = '0';
+                $machine->prod = Production::where('machine_id', $machine->id)->where('status', 'P')->first();
             }
         }
         return view(

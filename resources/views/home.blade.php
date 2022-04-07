@@ -39,27 +39,34 @@
 
             @foreach ($machines as $machine)
                 <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-                    @if($machine->status == '1')
-                        <form id="mach{{ $machine->id }}" action="{{ url('operation') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name='prodctn_id' value="{{ $machine->prod->id }}">
-                            <input type="hidden" name='machine_id' value="{{ $machine->id }}">
-                        </form>
-                        @if(Auth::user()->load('roles')->roles->contains('title', 'operator'))
-                            <a href="" onclick="event.preventDefault(); document.getElementById('mach{{ $machine->id }}').submit();">
-                        @endif
+                    <form id="mach{{ $machine->id }}" action="{{ url('operation') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name='machine_id' value="{{ $machine->id }}">
+                    </form>
+                    @if(Auth::user()->load('roles')->roles->contains('title', 'operator'))
+                        <a href="" onclick="event.preventDefault(); document.getElementById('mach{{ $machine->id }}').submit();">
                     @endif
                         <div class="card card-primary rounded-lg hs_stats bg-gradient">
-                            <span style="background-color: {{ $machine->status == '1' ? '#45b762':'#ff5858' }};">&nbsp</span>
+                            <span @class([
+                                'prod_finished' => $machine->status == 'F',
+                                'prod_paused' => $machine->status == 'P',
+                                'prod_current' => $machine->status == 'C'
+                            ])>&nbsp</span>
                             <div class="card-header">
                                 <h5>{{__("Machine #").$machine->name}}</h5>
+
                             </div>
+
+                            @if($machine->status == 'C' || $machine->status == 'P')
                             <div class="card-body stats">
                                 <i class="fas fa-industry text-info"></i>
-                                @if($machine->status == '1')<span class="right">{{ $machine->prod->objectif }}</span>@endif
+                                <span class="right">{{ $machine->prod->objectif }}</span>
+                                <canvas id="progressChart{{ $machine->id }}" width="80" height="80"></canvas>
+                                <span class="right">{{ $machine->prod->production_lotto }}</span>
                             </div>
+                            @endif
                         </div>
-                    @if(Auth::user()->load('roles')->roles->contains('title', 'operator') && $machine->status == '1')
+                    @if(Auth::user()->load('roles')->roles->contains('title', 'operator'))
                         </a>
                     @endif
                 </div>

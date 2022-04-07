@@ -21,16 +21,22 @@
     </div>
 
     <div class="row mt-sm-4">
-        <div class="col-12 col-md-12 col-lg-12">
+        @if( $production != null && $production->status == 'C' )
+        <div class="col-12 col-md-12 col-lg-6">
             <div class="card profile-widget">
                 <div class="profile-widget-header section-header">
-                    <h3>Order details</h3>
+                    <h3>Current Order Details</h3>
                     <div class="w-100">
-                        <a href="{{ url('production') }}" class="btn btn-primary float-right">{{__('All orders')}}</a>
+                        <form id="machine_prod" action="{{ url('production_machine') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name='machine_id' value="{{ $machine->id }}">
+                            <a href="" onclick="event.preventDefault(); document.getElementById('machine_prod').submit();" class="btn btn-primary float-right">{{__('All orders')}}</a>
+                        </form>
                     </div>
                 </div>
                 <div class="profile-widget-description">
                     <div class="profile-widget-name">
+                        {{__('Production #')}} : {{ $production->id }}<br>
                         {{__('Order id')}} : {{ $production->order_id }}<br>
                         {{__('Article code')}} : {{ $production->phone }}<br>
                         {{__('Article')}} : {{ $production->desc_article }}<br>
@@ -41,8 +47,26 @@
                 </div>
             </div>
         </div>
+        {{-- <div class="col-6 col-md-12 col-lg-6">
+            <div class="card profile-widget">
+                <canvas id="progressChart" width="400" height="400"></canvas>
+            </div>
+        </div> --}}
+        @else
+        <div class="col-6 col-md-12 col-lg-6">
+            <div class="card profile-widget">
+                    <div class="profile-widget-header section-header">
+                        <h3>No current order</h3>
+                        <div class="w-100">
+                            <a href="{{ url('production') }}" class="btn btn-primary float-right">{{__('All orders')}}</a>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        @endif
    </div>
 
+@if( $production != null  && $production->status == 'C' )
     <div class="section-body">
         <h2 class="section-title">{{__('Actions')}}</h2>
         <p class="section-lead">{{__('Actions within production #').$production->id}}</p>
@@ -80,5 +104,8 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+    </div>
+@endif
 </section>
 @endsection

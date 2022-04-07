@@ -2,8 +2,97 @@ var base_url = $('#mainurl').val();
 var appointment_chart = "";
 var earning_chart = "";
 
+
+function chartMachineProd(canvas,objectif,progress,labels){
+    let reste = objectif - progress;
+    const data = {
+        labels: labels?['Progress', 'Remaining']:[],
+        datasets: [
+            {
+                data: [progress, reste],
+                backgroundColor: ['#72e484','#dfe7e0']
+            }
+        ]
+    };
+    const config = {
+        type: 'doughnut',
+        data: data,
+        options: {
+            responsive: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Progress'
+                }
+            }
+        },
+    };
+
+    const myChart = new Chart(
+        document.getElementById(canvas),
+        config
+    );
+}
+
+function change_production(id) {
+    $.ajax({
+        headers:
+        {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "POST",
+        url: base_url + '/operation/change_production',
+        data:
+        {
+            id: id,
+        },
+        success: function (result) {
+            location.reload();
+            //console.log(result);
+            iziToast.success({
+                message: 'Change production successfully..!!',
+                position: 'topRight',
+            })
+        },
+        error: function (err) {
+            //console.log(err);
+        }
+    });
+}
+
+
 $(document).ready(function ()
 {
+    // if (window.location.origin + window.location.pathname == $('#mainurl').val() + '/operation')
+    // {
+    //     chartMachineProd('progressChart',10000,5410,true);
+    // }
+
+    if (window.location.origin + window.location.pathname == $('#mainurl').val() + '/home')
+    {
+        chartMachineProd(
+            'progressChart1',
+            12000,
+            5410,
+            false
+        );
+        chartMachineProd(
+            'progressChart3',
+            20000,
+            14000,
+            false
+        );
+        chartMachineProd(
+            'progressChart4',
+            50000,
+            14000,
+            false
+        );
+    }
+
     $(document).on('mouseover','.main-sidebar', function () {
         $(this).getNiceScroll().resize();
     });
@@ -1618,177 +1707,6 @@ function addhours(i) {
     });
 }
 
-// function view_custimization(submenu_id)
-// {
-//     $.ajax(
-//     {
-//         headers:
-//         {
-//             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-//         },
-//         type: "GET",
-//         url: base_url + '/vendor/order/view_custimization/' + submenu_id,
-//         success: function (result) {
-//             console.log(result);
-//             if (result.success == true) {
-//                 $('.custimization_name').html('');
-//                 if (result.data.item.length > 0) {
-//                     $.each(result.data.item, function (i, element) {
-//                         $('.custimization_name').append('<input type="hidden" name="submenu_id" value="' + element.submenu_id + '"><table class="table custimization_table"><tr><td class="cust_items' + i + '"><hr><input type="checkbox" value=' + "custimization" + element.name + ' id="chkbox' + i + '" name="custimization' + element.name + '"><label for="chkbox' + i + '">' + element.name + '</label><hr></td></tr></table>');
-//                         if (element.custimazation_item != null) {
-//                             var c = JSON.parse(element.custimazation_item);
-//                             $.each(c, function (j, item) {
-//                                 var check = '';
-//                                 if (item.isDefault == 1) {
-//                                     check = 'checked';
-//                                 }
-
-//                                 $('.cust_items' + i).append('<tr class="radios' + i + '"><td><label for="radio' + j + '">' + item.name + '</label></td><td class="text-right w-100"><label for="radio' + j + '">' + result.currency + item.price + '</label>&nbsp;<input id="radio' + i + '_' + j + '" name="cust_item' + element.id + '" type="radio" ' + check + ' value="' + item.name + '_' + item.price + '"></td></tr>');
-
-//                                 // if (result.data.session != "")
-//                                 // {
-//                                 //     var s = JSON.parse(result.data.session);
-//                                 //     $.each(s, function (k, session)
-//                                 //     {
-//                                 //         if (session.main_menu == $('input[type=checkbox][name="custimization' + element.name + '"]').val())
-//                                 //         {
-//                                 //             $('input[type=checkbox][name="custimization' + element.name + '"]').prop("checked", true);
-//                                 //         }
-//                                 //         console.log(session.data.name + '_' + session.data.price == $('input[type=radio][id="radio' + i + '_' + j + '"]').val());
-//                                 //         if (session.data.name + '_' + session.data.price == $('input[type=radio][id="radio' + i + '_' + j + '"]').val())
-//                                 //         {
-//                                 //             $('input[type=radio][id="radio' + i + '_' + j + '"]').prop("checked", true);
-//                                 //         }
-//                                 //     });
-//                                 // }
-//                             });
-
-//                             if (result.data.session != "") {
-//                                 $.each(c, function (j, item) {
-//                                     if (result.data.session != "") {
-//                                         var s = JSON.parse(result.data.session);
-//                                         $.each(s, function (k, session) {
-//                                             if (session.main_menu == $('input[type=checkbox][name="custimization' + element.name + '"]').val()) {
-//                                                 $('input[type=checkbox][name="custimization' + element.name + '"]').prop("checked", true);
-//                                             }
-//                                             if (session.data.name + '_' + session.data.price == $('input[type=radio][id="radio' + i + '_' + j + '"]').val()) {
-//                                                 $('input[type=radio][id="radio' + i + '_' + j + '"]').prop("checked", true);
-//                                             }
-//                                         });
-//                                     }
-//                                 });
-//                             }
-//                         }
-//                         else {
-//                             $('.custimization_name').append('No custimization available');
-//                         }
-//                     });
-//                 }
-//                 else {
-//                     $('.custimization_name').append('No custimization available');
-//                 }
-//             }
-
-//         },
-//         error: function (err) {
-//             console.log('err ', err)
-//         }
-//     });
-// }
-
-// function update_cust()
-// {
-//     var table_length = $('.custimization_table').length;
-//     var custimization = [];
-
-//     for (let i = 0; i < table_length; i++) {
-//         if ($('input[type=checkbox][id=chkbox' + i + ']:checked').val() != undefined) {
-//             var radio_length = $('.radios' + i).length
-//             for (let j = 0; j < radio_length; j++) {
-//                 if ($('input[type=radio][id=radio' + i + '_' + j + ']:checked').val() != undefined) {
-//                     var temp = $('input[type=radio][id=radio' + i + '_' + j + ']:checked').val();
-//                     name = temp.split('_')[0];
-//                     price = temp.split('_')[1];
-//                 }
-//             }
-//             custimization.push(
-//                 {
-//                     'main_menu': $('input[type=checkbox][id=chkbox' + i + ']:checked').val(),
-//                     'data': {
-//                         'name': name,
-//                         'price': price,
-//                     }
-//                 });
-//         }
-//     }
-//     $.ajax(
-//     {
-//         headers:
-//         {
-//             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-//         },
-//         type: "POST",
-//         url: base_url + '/vendor/order/update_custimization',
-//         data:
-//         {
-//             submenu_id: $('input[type=hidden][name=submenu_id]').val(),
-//             custimization: custimization,
-//         },
-//         success: function (result) {
-//             var currency = $('.hidden_currency').val();
-//             if (result.success == true) {
-//                 var price = result.data.price;
-//                 $('#view_custimization').modal('hide');
-//                 $('.item_total').text(currency + price);
-//                 $('.to_pay').text(currency + price);
-//                 $('#hidden_price').val(price);
-//             }
-//             else {
-
-//             }
-//         }
-//     });
-// }
-
-// function addUser() {
-//     var user_name = $('#name').val();
-//     var email_id = $('#email_id').val();
-//     var password = $('#password').val();
-//     var phone = $('#phone').val();
-
-//     $.ajax(
-//         {
-//             headers:
-//             {
-//                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-//             },
-//             type: "POST",
-//             url: base_url + '/vendor/add_user',
-//             data:
-//             {
-//                 name: user_name,
-//                 email_id: email_id,
-//                 password: password,
-//                 phone: phone,
-//             },
-//             success: function (result) {
-//                 if (result.success == true) {
-//                     $('#user').modal('hide');
-//                     $('select[name=user_id]').append();
-//                     $('select[name=user_id]').append('<option value="' + result.data.id + '"' + "selected" + '>' + result.data.name + '</option>');
-//                     $('select[name=user_id]').trigger('change');
-//                 }
-//             },
-//             error: function (err) {
-//                 console.log('err ', err)
-//                 for (let v1 of Object.keys(err.responseJSON.errors)) {
-//                     $('.show_alert').show();
-//                     $('.display').text(err.responseJSON.errors[v1]);
-//                 }
-//             }
-//         });
-// }
-
 function show_order(id) {
     $.ajax(
     {
@@ -1953,44 +1871,6 @@ function show_admin_order(id) {
     });
 }
 
-// function view_total(id) {
-//     $.ajax(
-//     {
-//         headers:
-//         {
-//             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-//         },
-//         type: "POST",
-//         url: base_url + '/vendor/order/view_total',
-//         data:
-//         {
-//             id: id,
-//         },
-//         success: function (result) {
-//             if (result.success == true) {
-//                 var price = result.data.cart.price;
-//                 $('.item_name').text(result.data.cart.name);
-//                 $('.item_quantity').text(result.data.cart.qty);
-//                 $('.item_price').text(result.data.currency + price);
-//                 var custimization_price = 0;
-//                 if (result.data.cart.custimization == undefined) {
-//                     $('.item_custimization').text('No custimization selected');
-//                 }
-//                 else {
-//                     JSON.parse(result.data.cart.custimization).forEach(element => {
-//                         custimization_price += parseInt(element.data.price);
-//                     });
-//                     $('.item_custimization').text(result.data.currency + custimization_price);
-//                 }
-//                 $('.total_bill').text(result.data.currency + (parseInt(price) + parseInt(custimization_price)));
-//             }
-//         },
-//         error: function (err) {
-//             console.log('err ', err)
-//         }
-//     });
-// }
-
 function show_settle_details(index) {
     var duration = $('#duration' + index).text();
     $.ajax({
@@ -2089,34 +1969,6 @@ function notificationTemplateEdit(id) {
         }
     });
 }
-
-// function removeSingleItem(id) {
-//     $.ajax({
-//         headers: {
-//             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-//         },
-//         type: "POST",
-//         url: base_url + '/vendor/order/removeSingleItem',
-//         data:
-//         {
-//             id: id,
-//         },
-//         success: function (result) {
-//             if (result.success == true) {
-//                 swal(result.data);
-//                 location.reload();
-//             }
-//             else {
-//                 swal({
-//                     text: result.data,
-//                 });
-//             }
-//         },
-//         error: function (err) {
-
-//         }
-//     });
-// }
 
 function update_submenu(id) {
     $.ajax({

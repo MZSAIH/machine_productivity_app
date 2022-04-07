@@ -6,6 +6,7 @@ use App\Models\Machine;
 use App\Models\Production;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OperatorController extends Controller
 {
@@ -17,8 +18,10 @@ class OperatorController extends Controller
     public function index(Request $req)
     {
         $machine = Machine::find($req['machine_id']);
-        $production = Production::find($req['prodctn_id']);
-
+        $production = Production::where('machine_id', $machine->id)->where('status', 'C')->first();
+        if($production == null){
+            $production = Production::where('machine_id', $machine->id)->where('status', 'P')->first();
+        }
         return view(
             'operator.operation',
             compact(
@@ -86,6 +89,20 @@ class OperatorController extends Controller
      */
     public function destroy()
     {
+    }
+
+    public function change_production(Request $request)
+    {
+        $production = Production::find($request['id']);
+        //Update other productons with C status to P
+        DB::table('productions')
+            ->where('machine_id',$production->machine_id)
+            ->where('status','C')
+            ->update(['status' => "P"]);
+        //Update our production to C status
+        DB::table('productions')
+            ->where('id', $request['id'])
+            ->update(['status' => "C"]);
     }
 
 }

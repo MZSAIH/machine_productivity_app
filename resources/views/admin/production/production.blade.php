@@ -23,12 +23,18 @@
             @endif
             <div class="section-header">
                 <h1>{{__('productions')}}</h1>
-                {{-- <div class="section-header-breadcrumb">
+
+                <div class="section-header-breadcrumb">
                     <div class="section-header-breadcrumb">
-                        <div class="breadcrumb-item active"><a href="{{ url('/home') }}">{{__('Dashboard')}}</a></div>
-                        <div class="breadcrumb-item">{{__('production')}}</div>
+                        <div class="right">
+                            <form id="back" action="{{ url('operation') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name='machine_id' value="{{ $machine_id }}">
+                            </form>
+                            <a href="" onclick="event.preventDefault(); document.getElementById('back').submit();" class="btn btn-primary">Go back</a>
+                        </div>
                     </div>
-                </div> --}}
+                </div>
             </div>
             <div class="section-body">
                 <h2 class="section-title">{{__('Manage productions')}}</h2>
@@ -87,7 +93,7 @@
                                         @if(Auth::user()->load('roles')->roles->contains('title', 'operator'))
                                             <td>
                                                 @if($production->status == 'P')
-                                                    <a href="{{ url('/production/'.$production->id.'/open') }}" class="btn btn-primary btn-action mr-1 " data-toggle="tooltip" title="" data-original-title="{{__('Open')}}"><i class="fas fa-open"></i></a>
+                                                    <input type="button" class="btn btn-primary btn-action mr-1 " onclick="change_production({{ $production->id }})" value="Open">
                                                 @endif
                                             </td>
                                         @endif

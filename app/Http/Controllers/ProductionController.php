@@ -14,15 +14,16 @@ class ProductionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $productions = Production::all();
-        $actions = Action::all();
+        $machine_id = 0;
+        if($request->has('machine_id')){
+            $machine_id = $request['machine_id'];
+            $productions = Production::where('machine_id', $machine_id)->get();
+        }else
+            $productions = Production::all();
         return view(
-            'admin.production.production',
-            compact(
-                'productions',
-                'actions')
+            'admin.production.production',compact('productions','machine_id')
         );
     }
 

@@ -2786,6 +2786,7 @@ body.layout-3 .main-footer {
   padding-right: 0; }
 
 .main-sidebar .sidebar-brand {
+    background-color: #2e2e2e;
   display: inline-block;
   width: 100%;
   text-align: center;
