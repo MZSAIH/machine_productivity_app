@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 30 mars 2022 à 22:53
+-- Généré le : ven. 08 avr. 2022 à 13:40
 -- Version du serveur :  10.4.17-MariaDB
 -- Version de PHP : 8.0.0
 
@@ -40,7 +40,8 @@ CREATE TABLE `actions` (
 INSERT INTO `actions` (`id`, `number`, `name`) VALUES
 (1, 71, 'Action from mysql'),
 (2, 71, 'Action from mysql 2\r\n'),
-(3, 45, 'Action 3\r\n\r\n');
+(3, 45, 'Action 3\r\n\r\n'),
+(4, 999, 'ppppppp');
 
 -- --------------------------------------------------------
 
@@ -86,7 +87,7 @@ CREATE TABLE `general_setting` (
 --
 
 INSERT INTO `general_setting` (`id`, `business_name`, `company_white_logo`, `company_black_logo`, `site_color`, `color_secondary`, `favicon`, `contact_person_name`, `contact`, `business_address`, `city`, `created_at`, `updated_at`, `license_verify`) VALUES
-(1, 'Machine Productivity Beta', 'logo.png', 'logo.png', '#DF3596', '#52608b', 'logo.png', 'Hamza SAIH', '0652250366', 'Al amal street', 0, NULL, '2022-03-24 19:14:04', 1);
+(1, 'Machine Productivity Beta', 'logo.png', 'logo.png', '#D9D7D9', '#52608b', 'logo.png', 'Hamza SAIH', '0652250366', 'Al amal street', 0, NULL, '2022-04-04 14:46:09', 1);
 
 -- --------------------------------------------------------
 
@@ -97,7 +98,7 @@ INSERT INTO `general_setting` (`id`, `business_name`, `company_white_logo`, `com
 CREATE TABLE `machines` (
   `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `status` int(11) NOT NULL
+  `status` varchar(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -105,11 +106,12 @@ CREATE TABLE `machines` (
 --
 
 INSERT INTO `machines` (`id`, `name`, `status`) VALUES
-(1, '001', 1),
-(2, '002', 0),
-(3, '003', 0),
-(4, '045', 1),
-(5, '095', 1);
+(1, '001', 'C'),
+(2, '002', 'C'),
+(3, '003', 'P'),
+(4, '045', 'C'),
+(5, '095', 'F'),
+(6, '088', 'F');
 
 -- --------------------------------------------------------
 
@@ -153,7 +155,7 @@ CREATE TABLE `operation` (
 --
 
 INSERT INTO `operation` (`id`, `production_id`, `action_id`, `user_id`, `quantity`, `created_at`) VALUES
-(1, 1, 2, 541, 0, '2022-03-24'),
+(1, 5, 2, 541, 0, '2022-03-24'),
 (2, 1, 1, 540, 0, '2022-03-24'),
 (3, 1, 2, 540, 0, '2022-03-24');
 
@@ -203,20 +205,22 @@ CREATE TABLE `productions` (
   `starting_date` date NOT NULL,
   `ending_date` date NOT NULL,
   `objectif` int(11) NOT NULL,
-  `status` int(1) NOT NULL
+  `production_lotto` int(11) NOT NULL,
+  `scarto` int(11) NOT NULL,
+  `status` varchar(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `productions`
 --
 
-INSERT INTO `productions` (`id`, `order_id`, `code_article`, `desc_article`, `stampo`, `machine_id`, `starting_date`, `ending_date`, `objectif`, `status`) VALUES
-(1, '22/672', '910730003AA', 'Falcone 40ML', 763, 1, '2022-03-22', '2022-03-31', 12000, 1),
-(2, '22/672', '910730003AA', 'Falcone 60ML', 763, 2, '2022-03-22', '2022-03-31', 12000, 1),
-(3, '22/672', '910730003AA', 'Falcone 60ML', 763, 3, '2022-03-22', '2022-03-31', 12000, 1),
-(4, '22/672', '910730003AA', 'Falcone 60ML', 763, 4, '2022-03-22', '2022-03-31', 12000, 1),
-(5, '22/672', '910730003AA', 'Falcone 60ML', 763, 5, '2022-03-22', '2022-03-31', 12000, 1),
-(6, '22/673', '910730003AA', 'Falcone 60ML', 763, 1, '2022-03-22', '2022-03-31', 12000, 0);
+INSERT INTO `productions` (`id`, `order_id`, `code_article`, `desc_article`, `stampo`, `machine_id`, `starting_date`, `ending_date`, `objectif`, `production_lotto`, `scarto`, `status`) VALUES
+(1, '22/672', '910730003AA', 'Falcone 40ML', 763, 1, '2022-03-22', '2022-03-31', 12000, 12000, 0, 'F'),
+(2, '22/673', '910730003AA', 'Falcone 60ML', 763, 2, '2022-03-22', '2022-03-31', 12000, 0, 0, 'C'),
+(3, '22/674', '910730003AA', 'Falcone 60ML', 763, 3, '2022-03-22', '2022-03-31', 12000, 4000, 0, 'C'),
+(4, '22/675', '910730003AA', 'Falcone 60ML', 763, 4, '2022-03-22', '2022-03-31', 16000, 0, 0, 'C'),
+(5, '22/676', '910730003AA', 'Falcone 60ML', 763, 1, '2022-03-22', '2022-03-31', 50000, 0, 0, 'C'),
+(6, '22/677', '910730003AA', 'Falcone 60ML', 763, 1, '2022-03-22', '2022-03-31', 12000, 0, 0, 'P');
 
 -- --------------------------------------------------------
 
@@ -261,7 +265,7 @@ CREATE TABLE `role_user` (
 INSERT INTO `role_user` (`id`, `user_id`, `role_id`, `created_at`, `updated_at`) VALUES
 (1, 1, 1, '2022-01-01 11:09:17', '2022-01-02 11:09:23'),
 (12, 12, 2, '2022-01-05 13:22:48', '2022-03-15 19:06:16'),
-(15, 18, 2, NULL, NULL);
+(17, 18, 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -272,16 +276,13 @@ INSERT INTO `role_user` (`id`, `user_id`, `role_id`, `created_at`, `updated_at`)
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `username` int(11) NOT NULL,
-  `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` int(11) NOT NULL DEFAULT 1,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `device_token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `is_verified` int(11) NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'profile_holder.png',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -290,10 +291,10 @@ CREATE TABLE `users` (
 -- Déchargement des données de la table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email_id`, `username`, `email_verified_at`, `password`, `phone`, `status`, `remember_token`, `device_token`, `image`, `is_verified`, `created_at`, `updated_at`) VALUES
-(1, 'Hamza', 'hamza@dev.com', 540, '2021-09-07 13:02:55', '$2a$12$yV2EJvqCf4v7gma69k9eMeN9PLdQSeKqaUeCxqEA45VzIbVXtOh0C', '', 1, NULL, NULL, 'profile_holder.png', 1, '2022-01-01 11:10:16', '2022-01-16 00:36:23'),
-(12, 'OP 01', 'hamza@op01.com', 541, '2022-01-15 15:29:40', '$2a$12$yV2EJvqCf4v7gma69k9eMeN9PLdQSeKqaUeCxqEA45VzIbVXtOh0C', '0652250366', 1, NULL, 'N/A', 'profile_holder.png', 1, '2022-01-03 10:28:56', '2022-01-16 00:01:54'),
-(18, 'Test adding 2', 'hamzasaih.2a@gmail.com', 100, NULL, '$2y$10$UUQ3IOzpUNEeA26sHpzGZOrVao1kHmWpueGeUdtZZuOCyw7kamXzS', '0652250000', 1, NULL, NULL, 'noimage.png', 1, '2022-03-22 19:02:09', '2022-03-22 19:12:31');
+INSERT INTO `users` (`id`, `name`, `username`, `password`, `status`, `remember_token`, `device_token`, `is_verified`, `image`, `created_at`, `updated_at`) VALUES
+(1, 'Hamza', 540, '$2a$12$yV2EJvqCf4v7gma69k9eMeN9PLdQSeKqaUeCxqEA45VzIbVXtOh0C', 1, NULL, NULL, 1, 'profile_holder.png', '2022-01-01 11:10:16', '2022-01-16 00:36:23'),
+(12, 'OP 01', 541, '$2a$12$yV2EJvqCf4v7gma69k9eMeN9PLdQSeKqaUeCxqEA45VzIbVXtOh0C', 1, NULL, 'N/A', 1, 'profile_holder.png', '2022-01-03 10:28:56', '2022-01-16 00:01:54'),
+(18, 'Test eding', 999, '$2y$10$UUQ3IOzpUNEeA26sHpzGZOrVao1kHmWpueGeUdtZZuOCyw7kamXzS', 1, NULL, NULL, 1, 'profile_holder.png', '2022-03-22 19:02:09', '2022-04-04 17:51:49');
 
 --
 -- Index pour les tables déchargées
@@ -372,8 +373,7 @@ ALTER TABLE `role_user`
 -- Index pour la table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -383,7 +383,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `actions`
 --
 ALTER TABLE `actions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `failed_jobs`
@@ -401,7 +401,7 @@ ALTER TABLE `general_setting`
 -- AUTO_INCREMENT pour la table `machines`
 --
 ALTER TABLE `machines`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `migrations`
@@ -437,7 +437,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT pour la table `role_user`
 --
 ALTER TABLE `role_user`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT pour la table `users`

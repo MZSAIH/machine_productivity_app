@@ -53,14 +53,33 @@
             </div>
         </div> --}}
         @else
-        <div class="col-6 col-md-12 col-lg-6">
-            <div class="card profile-widget">
-                    <div class="profile-widget-header section-header">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card card-primary rounded-lg" style="padding: 20px">
+                <div class="row">
+                    <div class="col-9 col-md-9 col-lg-9">
                         <h3>No current order</h3>
+                    </div>
+                    <div class="col-3 col-md-3 col-lg-3">
                         <div class="w-100">
-                            <a href="{{ url('production') }}" class="btn btn-primary float-right">{{__('All orders')}}</a>
+                            <div class="row">
+                                <form id="machine_prod" action="{{ url('production_machine') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name='machine_id' value="{{ $machine->id }}">
+                                    <a href="" onclick="event.preventDefault(); document.getElementById('machine_prod').submit();" class="btn btn-primary float-right">{{__('All orders')}}</a>
+                                </form>
+                            </div>
+                            <div class="row">
+                                <form id="create_prod" action="{{ url('add_operation') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name='machine_id' value="{{ $machine->id }}">
+                                    <input type="hidden" name='operation_id' value="{{ 74 }}">
+                                    <a href="" onclick="event.preventDefault(); document.getElementById('machine_prod').submit();" class="btn btn-primary float-right">{{__('Create new order')}}</a>
+                                </form>
+                            </div>
                         </div>
                     </div>
+                </div>
+
             </div>
         </div>
         @endif
@@ -73,7 +92,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="w-100">
-                    <a href="{{ url('operation/create') }}" class="btn btn-primary float-right"><i class="fas fa-plus"></i>{{__('Add action')}}</a>
+                    <a href="{{ url('operation/create') }}" class="btn btn-primary float-right"><i class="fas fa-plus"></i>{{__('Add operation')}}</a>
                 </div>
             </div>
             <div class="card-body">
