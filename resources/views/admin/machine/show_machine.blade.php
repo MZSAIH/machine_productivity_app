@@ -1,6 +1,6 @@
 @extends('layouts.app',['activePage' => 'machine'])
 
-@section('title','machine Profile')
+@section('title','machine infos')
 
 @section('content')
 
@@ -64,9 +64,11 @@
                                 <tbody>
                                     @foreach ($productions as $production)
                                         <tr @class([
-                                                'prod_finished' => $production->status == 'F',
-                                                'prod_paused' => $production->status == 'P',
-                                                'prod_current' => $production->status == 'C'
+                                            'machine_finished' => $machine->status == 'F',
+                                            'machine_paused' => $machine->status == 'P',
+                                            'machine_operating' => $machine->status == 'C',
+                                            'machine_error' => $machine->status == 'E',
+                                            'machine_preparing' => $machine->status == 'R'
                                             ])
                                         >
 

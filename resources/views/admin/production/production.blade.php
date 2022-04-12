@@ -70,9 +70,11 @@
                             <tbody>
                                 @foreach ($productions as $production)
                                     <tr @class([
-                                            'prod_finished' => $production->status == 'F',
-                                            'prod_paused' => $production->status == 'P',
-                                            'prod_current' => $production->status == 'C'
+                                            'machine_finished' => $production->status == 'F',
+                                            'machine_paused' => $production->status == 'P',
+                                            'machine_operating' => $production->status == 'C',
+                                            'machine_error' => $production->status == 'E',
+                                            'machine_preparing' => $production->status == 'R'
                                         ])
                                     >
 

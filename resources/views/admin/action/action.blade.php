@@ -69,7 +69,7 @@
                                                 <a href="{{ url('/action/'.$action->id.'/edit') }}" class="btn btn-primary btn-action mr-1 " data-toggle="tooltip" title="" data-original-title="{{__('Edit action')}}"><i class="fas fa-pencil-alt"></i></a>
                                             <!--endcan-->
                                             <!--can('action_access')-->
-                                                <a href="{{ url('/action/'.$action->id) }}" data-toggle="tooltip" title="" data-original-title="{{__('show action profile')}}" class="btn btn-primary btn-action mr-1"><i class="fas fa-eye"></i></a>
+                                                {{-- <a href="{{ url('/action/'.$action->id) }}" data-toggle="tooltip" title="" data-original-title="{{__('show action profile')}}" class="btn btn-primary btn-action mr-1"><i class="fas fa-eye"></i></a> --}}
                                             <!--endcan-->
                                             <!--can('action_delete')-->
                                                 <a href="javascript:void(0);" class="table-action btn btn-danger btn-action" onclick="deleteData('/action',{{ $action->id }},'action')">

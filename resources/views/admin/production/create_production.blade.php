@@ -1,6 +1,6 @@
-@extends('layouts.app',['activePage' => 'machine'])
+@extends('layouts.app',['activePage' => 'production'])
 
-@section('title','create a machine')
+@section('title','create a production')
 
 @section('content')
 

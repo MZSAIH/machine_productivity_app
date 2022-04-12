@@ -1,6 +1,6 @@
-@extends('layouts.app',['activePage' => 'user'])
+@extends('layouts.app',['activePage' => 'action'])
 
-@section('title','User Profile')
+@section('title','Action')
 
 @section('content')
 

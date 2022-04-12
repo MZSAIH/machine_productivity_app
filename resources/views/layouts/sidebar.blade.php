@@ -46,7 +46,7 @@ background-color: #fff !important">
             </li>
             <li class="{{ $activePage == 'machine' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('/machine') }}">
-                    <i class="fas fa-pallet"></i>
+                    <i class="fas fa-hdd"></i>
                     <span>{{__('Machine')}}</span>
                 </a>
             </li>
@@ -58,7 +58,7 @@ background-color: #fff !important">
             </li>
             <li class="{{ $activePage == 'action' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('/action') }}">
-                    <i class="fas fa-pallet"></i>
+                    <i class="fas fa-tasks"></i>
                     <span>{{__('Action')}}</span>
                 </a>
             </li>

@@ -1,4 +1,4 @@
-@extends('layouts.app',['activePage' => 'machine'])
+@extends('layouts.app',['activePage' => 'action'])
 
 @section('title','Edit machine')
 

@@ -60,11 +60,13 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $machine->name }}</td>
                                 <td>
-                                    @if($machine->status == '1')
-                                    <span class="badge badge-success">ON</span>
-                                    @else
-                                    <span class="badge badge-danger">OFF</span>
-                                    @endif
+                                    <span @class([
+                                        'machine_finished badge' => $machine->status == 'F',
+                                        'machine_paused badge' => $machine->status == 'P',
+                                        'machine_operating badge' => $machine->status == 'C',
+                                        'machine_error badge' => $machine->status == 'E',
+                                        'machine_preparing badge' => $machine->status == 'R'
+                                    ])>&nbsp;&nbsp;&nbsp;</span>
                                 </td>
                                 <!--if (Gate::check('machine_edit') && Gate::check('machine_access') && Gate::check('machine_delete'))-->
                                 <td class="d-flex">

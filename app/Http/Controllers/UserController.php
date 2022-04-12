@@ -6,6 +6,7 @@ use App\Models\Machine;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -66,7 +67,12 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        return view('admin.user.show_user',compact('user'));
+
+        $productions = DB::table('productions')
+        ->leftjoin('operation', 'productions.id', '=', 'operation.production_id')
+        ->where('operation.user_id', $id)
+        ->get();
+        return view('admin.user.show_user',compact('user','productions'));
     }
 
     /**

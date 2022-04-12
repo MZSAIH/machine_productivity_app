@@ -1,6 +1,6 @@
-@extends('layouts.app',['activePage' => 'machine'])
+@extends('layouts.app',['activePage' => 'production'])
 
-@section('title','Edit machine')
+@section('title','Edit production')
 
 @section('content')
 
@@ -72,7 +72,7 @@
                     <div class="row">
                         <div class="col-md-12 mb-3">
                             <label for="role">{{__('Roles')}}</label>
-                            
+
                         </div>
                     </div>
                     <div class="text-center">

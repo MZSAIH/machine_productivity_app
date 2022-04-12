@@ -38,7 +38,7 @@
 
 
             @foreach ($machines as $machine)
-                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12 machine">
                     <form id="mach{{ $machine->id }}" action="{{ url('operation') }}" method="POST">
                         @csrf
                         <input type="hidden" name='machine_id' value="{{ $machine->id }}">
@@ -48,9 +48,11 @@
                     @endif
                         <div class="card card-primary rounded-lg hs_stats bg-gradient">
                             <span @class([
-                                'prod_finished' => $machine->status == 'F',
-                                'prod_paused' => $machine->status == 'P',
-                                'prod_current' => $machine->status == 'C'
+                                'machine_finished' => $machine->status == 'F',
+                                'machine_paused' => $machine->status == 'P',
+                                'machine_operating' => $machine->status == 'C',
+                                'machine_error' => $machine->status == 'E',
+                                'machine_preparing' => $machine->status == 'R'
                             ])>&nbsp</span>
                             <div class="card-header">
                                 <h5>{{__("Machine #").$machine->name}}</h5>
@@ -59,10 +61,17 @@
 
                             @if($machine->status == 'C' || $machine->status == 'P')
                             <div class="card-body stats">
-                                <i class="fas fa-industry text-info"></i>
-                                <span class="right">{{ $machine->prod->objectif }}</span>
-                                <canvas id="progressChart{{ $machine->id }}" width="80" height="80"></canvas>
-                                <span class="right">{{ $machine->prod->production_lotto }}</span>
+                                <div class="row">
+                                    <div class="col">
+                                        <i class="fas fa-pallet text-info"></i>
+                                    </div>
+                                    <div class="col">
+                                        {{-- <canvas id="progressChart{{ $machine->id }}" width="80" height="80"></canvas> --}}
+
+                                        <div class="row"><span class="right">{{ $machine->prod->objectif }}</span></div>
+                                        <div class="row"><span class="right">{{ $machine->prod->production_lotto }}</span></div>
+                                    </div>
+                                </div>
                             </div>
                             @endif
                         </div>

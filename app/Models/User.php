@@ -62,7 +62,7 @@ class User extends Authenticatable
         }
         return false;
     }
-
+    
     public function productions(){
         return $this->belongsToMany(Production::class,'operation')->withPivot('action_id');
     }

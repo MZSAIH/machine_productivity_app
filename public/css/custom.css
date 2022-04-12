@@ -129,7 +129,9 @@ input:checked + .slider:after
 {
     content:'Oui';
 }
-
+.machine .card{
+    min-height: 333px;
+}
 #datatable_filter
 {
     float: right;

@@ -71,27 +71,27 @@ $(document).ready(function ()
     //     chartMachineProd('progressChart',10000,5410,true);
     // }
 
-    if (window.location.origin + window.location.pathname == $('#mainurl').val() + '/home')
-    {
-        chartMachineProd(
-            'progressChart1',
-            12000,
-            5410,
-            false
-        );
-        chartMachineProd(
-            'progressChart3',
-            20000,
-            14000,
-            false
-        );
-        chartMachineProd(
-            'progressChart4',
-            50000,
-            14000,
-            false
-        );
-    }
+    // if (window.location.origin + window.location.pathname == $('#mainurl').val() + '/home')
+    // {
+    //     chartMachineProd(
+    //         'progressChart1',
+    //         12000,
+    //         5410,
+    //         false
+    //     );
+    //     chartMachineProd(
+    //         'progressChart3',
+    //         20000,
+    //         14000,
+    //         false
+    //     );
+    //     chartMachineProd(
+    //         'progressChart4',
+    //         50000,
+    //         14000,
+    //         false
+    //     );
+    // }
 
     $(document).on('mouseover','.main-sidebar', function () {
         $(this).getNiceScroll().resize();
