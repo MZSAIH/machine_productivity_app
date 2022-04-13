@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 08 avr. 2022 à 13:40
+-- Généré le : mer. 13 avr. 2022 à 11:13
 -- Version du serveur :  10.4.17-MariaDB
 -- Version de PHP : 8.0.0
 
@@ -38,10 +38,38 @@ CREATE TABLE `actions` (
 --
 
 INSERT INTO `actions` (`id`, `number`, `name`) VALUES
-(1, 71, 'Action from mysql'),
-(2, 71, 'Action from mysql 2\r\n'),
-(3, 45, 'Action 3\r\n\r\n'),
-(4, 999, 'ppppppp');
+(16, 16, 'Pulizia Stampo'),
+(17, 17, 'Macchina in allarme'),
+(25, 25, 'Diminsioni NC'),
+(40, 40, 'Pezzi confromi'),
+(42, 42, 'Datario non aggiornato'),
+(43, 43, 'Non benestare'),
+(44, 44, 'benestare'),
+(45, 45, 'Materiale per produzione non funzionale'),
+(46, 46, 'Mancanza materia prima'),
+(47, 47, 'Mancanza personale'),
+(48, 48, 'Mancanza del materiale accessorio di produzione'),
+(49, 49, 'accettazione in deroga'),
+(50, 50, 'Tolto Benestare'),
+(53, 53, 'Continua da ordine precedente'),
+(54, 54, 'Fine settimana'),
+(55, 55, 'Manutenzione'),
+(56, 56, 'Pressa stampo non funzionante'),
+(57, 57, 'Fornitura campioni per validazione'),
+(58, 58, 'Ordine sospeso'),
+(60, 60, 'CQ'),
+(61, 61, 'Avvio'),
+(62, 62, 'Riavvio'),
+(63, 63, 'Montaggio e smontaggio Stampo/Accessori'),
+(64, 64, 'Macchina ferma per'),
+(65, 65, 'Chiusiura impronta'),
+(66, 66, 'Inizio bordo Macchina'),
+(67, 67, 'Fine bordo Macchina'),
+(68, 68, 'Fine produzione'),
+(69, 69, 'Apertura impronta'),
+(70, 70, 'Oi evaso'),
+(71, 71, 'Carico/controllo materiale'),
+(88, 88, 'Eol Non funzionante');
 
 -- --------------------------------------------------------
 
@@ -107,10 +135,10 @@ CREATE TABLE `machines` (
 
 INSERT INTO `machines` (`id`, `name`, `status`) VALUES
 (1, '001', 'C'),
-(2, '002', 'C'),
+(2, '002', 'E'),
 (3, '003', 'P'),
 (4, '045', 'C'),
-(5, '095', 'F'),
+(5, '095', 'R'),
 (6, '088', 'F');
 
 -- --------------------------------------------------------
@@ -155,9 +183,10 @@ CREATE TABLE `operation` (
 --
 
 INSERT INTO `operation` (`id`, `production_id`, `action_id`, `user_id`, `quantity`, `created_at`) VALUES
-(1, 5, 2, 541, 0, '2022-03-24'),
-(2, 1, 1, 540, 0, '2022-03-24'),
-(3, 1, 2, 540, 0, '2022-03-24');
+(1, 5, 2, 12, 0, '2022-03-24'),
+(2, 1, 1, 12, 0, '2022-03-24'),
+(3, 1, 2, 1, 0, '2022-03-24'),
+(4, 5, 3, 12, 0, '2022-03-24');
 
 -- --------------------------------------------------------
 
@@ -219,8 +248,8 @@ INSERT INTO `productions` (`id`, `order_id`, `code_article`, `desc_article`, `st
 (2, '22/673', '910730003AA', 'Falcone 60ML', 763, 2, '2022-03-22', '2022-03-31', 12000, 0, 0, 'C'),
 (3, '22/674', '910730003AA', 'Falcone 60ML', 763, 3, '2022-03-22', '2022-03-31', 12000, 4000, 0, 'C'),
 (4, '22/675', '910730003AA', 'Falcone 60ML', 763, 4, '2022-03-22', '2022-03-31', 16000, 0, 0, 'C'),
-(5, '22/676', '910730003AA', 'Falcone 60ML', 763, 1, '2022-03-22', '2022-03-31', 50000, 0, 0, 'C'),
-(6, '22/677', '910730003AA', 'Falcone 60ML', 763, 1, '2022-03-22', '2022-03-31', 12000, 0, 0, 'P');
+(5, '22/676', '910730003AA', 'Falcone 60ML', 763, 1, '2022-03-22', '2022-03-31', 50000, 0, 0, 'P'),
+(6, '22/677', '910730003AA', 'Falcone 60ML', 763, 1, '2022-03-22', '2022-03-31', 12000, 0, 0, 'C');
 
 -- --------------------------------------------------------
 
@@ -383,7 +412,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `actions`
 --
 ALTER TABLE `actions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT pour la table `failed_jobs`
@@ -413,7 +442,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT pour la table `operation`
 --
 ALTER TABLE `operation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `personal_access_tokens`
