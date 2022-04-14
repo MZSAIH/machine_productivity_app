@@ -123,6 +123,7 @@
                             <th>#</th>
                             <th>{{__('Action')}}</th>
                             <th>{{__('User')}}</th>
+                            <th>{{__('Quantity')}}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -135,6 +136,7 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $action->name }}</td>
                                 <td>{{ $action->user_id }}</td>
+                                <td>{{ $action->quantity }}</td>
                             </tr>
                         @endforeach
                     </tbody>

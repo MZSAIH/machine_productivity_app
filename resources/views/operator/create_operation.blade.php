@@ -46,11 +46,20 @@
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
                             <label for="action">{{__('Action')}}</label>
-                            <select class="form-control select2" name="action" id="">
+                            <select class="form-control select2" name="action_id">
                                 @foreach ($actions as $action)
                                     <option value="{{ $action->id }}"> {{ $action->name  }} </option>
                                 @endforeach
                             </select>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                            <label for="qte">{{__('Production code')}}</label>
+                            <input type="number" name="qte" class="form-control @error('qte') is_invalide @enderror" id="" placeholder="{{__('Quantity')}}" value="" required="" style="text-transform: none;">
+                            @error('qte')
+                                <span class="custom_error" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
 

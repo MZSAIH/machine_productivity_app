@@ -67,10 +67,12 @@ class OperatorController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        //return $data;
-        //$machine = Machine::create($data);
-        return redirect('operation?machine_id='.$data['machine_id'])->with('msg','Operation added successfully');
+        $data['production_id'] = $request['production_id'];
+        $data['action_id'] = $request['action_id'];
+        $data['user_id'] = $request['user_id'];
+        $data['quantity'] = $request['qte'];
+        DB::table('operation')->insert($data);
+        return redirect('operation?machine_id='.$request['machine_id'])->with('msg','Operation added successfully');
     }
 
     /**
