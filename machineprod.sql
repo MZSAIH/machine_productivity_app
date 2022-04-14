@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 13 avr. 2022 à 11:13
+-- Généré le : jeu. 14 avr. 2022 à 20:55
 -- Version du serveur :  10.4.17-MariaDB
 -- Version de PHP : 8.0.0
 
@@ -174,8 +174,8 @@ CREATE TABLE `operation` (
   `production_id` int(11) NOT NULL,
   `action_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `created_at` date NOT NULL
+  `quantity` int(11) NOT NULL DEFAULT 0,
+  `created_at` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -183,10 +183,14 @@ CREATE TABLE `operation` (
 --
 
 INSERT INTO `operation` (`id`, `production_id`, `action_id`, `user_id`, `quantity`, `created_at`) VALUES
-(1, 5, 2, 12, 0, '2022-03-24'),
-(2, 1, 1, 12, 0, '2022-03-24'),
-(3, 1, 2, 1, 0, '2022-03-24'),
-(4, 5, 3, 12, 0, '2022-03-24');
+(1, 6, 16, 12, 0, '2022-03-24'),
+(2, 1, 25, 12, 0, '2022-03-24'),
+(3, 1, 45, 1, 0, '2022-03-24'),
+(4, 5, 50, 12, 0, '2022-03-24'),
+(5, 6, 25, 12, 0, '2022-04-14'),
+(6, 6, 25, 12, 0, '2022-04-14'),
+(7, 6, 56, 12, 0, '2022-04-14'),
+(8, 6, 71, 12, 10007, '2022-04-14');
 
 -- --------------------------------------------------------
 
@@ -442,7 +446,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT pour la table `operation`
 --
 ALTER TABLE `operation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `personal_access_tokens`
