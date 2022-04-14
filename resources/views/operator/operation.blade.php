@@ -14,8 +14,7 @@
         <h1>{{ __('Machine #').$machine->name }}</h1>
         <div class="section-header-breadcrumb">
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="{{ url('/home') }}">{{__('Dashboard')}}</a></div>
-                <div class="breadcrumb-item">{{__('Operation')}}</div>
+                <a href="/home" class="btn btn-primary">Go back</a>
             </div>
         </div>
     </div>
@@ -92,7 +91,11 @@
         <div class="card">
             <div class="card-header">
                 <div class="w-100">
-                    <a href="{{ url('operation/create') }}" class="btn btn-primary float-right"><i class="fas fa-plus"></i>{{__('Add operation')}}</a>
+                    <form id="add_op" action="operation/create" method="POST">
+                        @csrf
+                        <input type="hidden" name='machine_id' value="{{ $machine->id }}">
+                        <a href="" onclick="event.preventDefault(); document.getElementById('add_op').submit();" class="btn btn-primary float-right">{{__('Add operation')}}</a>
+                    </form>
                 </div>
             </div>
             <div class="card-body">

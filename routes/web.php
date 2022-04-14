@@ -41,6 +41,7 @@ Route::middleware(['auth'])->group(function ()
     //Operator
     Route::post('operation', [OperatorController::class, 'index']);
     Route::post('production_machine', [ProductionController::class,'index']);
+    Route::Post('operation/create', [OperatorController::class, 'create']);
 
     Route::post('operation/change_production',[OperatorController::class,'change_production']);
 

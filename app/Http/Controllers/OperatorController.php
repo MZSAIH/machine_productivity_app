@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Action;
 use App\Models\Machine;
 use App\Models\Production;
 use Illuminate\Database\Eloquent\Relations\Pivot;
@@ -36,9 +37,17 @@ class OperatorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $req)
     {
-
+        $machine = Machine::find($req['machine_id']);
+        $actions = Action::all();
+        return view(
+            'operator.create_operation',
+            compact(
+                'machine',
+                'actions'
+            )
+        );
     }
 
     /**
