@@ -23,11 +23,18 @@ class OperatorController extends Controller
         if($production == null){
             $production = Production::where('machine_id', $machine->id)->where('status', 'P')->first();
         }
+
+        $actions = DB::table('actions')
+        ->rightjoin('operation', 'actions.id', '=', 'operation.action_id')
+        ->where('operation.production_id', $production->id)
+        ->get();
+
         return view(
             'operator.operation',
             compact(
                 'machine',
-                'production'
+                'production',
+                'actions'
             )
         );
     }
@@ -40,12 +47,14 @@ class OperatorController extends Controller
     public function create(Request $req)
     {
         $machine = Machine::find($req['machine_id']);
+        $production = Production::find($req['production_id']);
         $actions = Action::all();
         return view(
             'operator.create_operation',
             compact(
                 'machine',
-                'actions'
+                'actions',
+                'production'
             )
         );
     }
@@ -58,6 +67,10 @@ class OperatorController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request->all();
+        //return $data;
+        //$machine = Machine::create($data);
+        return redirect('operation?machine_id='.$data['machine_id'])->with('msg','Operation added successfully');
     }
 
     /**

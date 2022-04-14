@@ -39,7 +39,7 @@
 
             @foreach ($machines as $machine)
                 <div class="col-lg-3 col-md-4 col-sm-6 col-12 machine">
-                    <form id="mach{{ $machine->id }}" action="{{ url('operation') }}" method="POST">
+                        <form id="mach{{ $machine->id }}" action="{{ url('operation') }}" method="GET">
                         @csrf
                         <input type="hidden" name='machine_id' value="{{ $machine->id }}">
                     </form>

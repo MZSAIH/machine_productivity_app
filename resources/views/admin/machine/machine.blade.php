@@ -5,19 +5,19 @@
 @section('content')
 
 <section class="section">
-    @if (Session::has('msg'))
-    <script>
-            var msg = "<?php echo Session::get('msg'); ?>"
-        $(window).on('load', function()
-        {
-            iziToast.success({
-                message: msg,
-                position: 'topRight'
-            });
-            console.log(msg);
-    });
-    </script>
-    @endif
+        @if (Session::has('msg'))
+        <script>
+                var msg = "<?php echo Session::get('msg'); ?>"
+            $(window).on('load', function()
+            {
+                iziToast.success({
+                    message: msg,
+                    position: 'topRight'
+                });
+                console.log(msg);
+        });
+        </script>
+        @endif
     <div class="section-header">
         <h1>{{__('machines')}}</h1>
         <div class="section-header-breadcrumb">

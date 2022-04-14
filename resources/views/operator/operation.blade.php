@@ -9,6 +9,19 @@
             $(".main-sidebar").niceScroll();
         }
     </script>
+    @if (Session::has('msg'))
+    <script>
+            var msg = "<?php echo Session::get('msg'); ?>"
+        $(window).on('load', function()
+        {
+            iziToast.success({
+                message: msg,
+                position: 'topRight'
+            });
+            console.log(msg);
+    });
+    </script>
+    @endif
 <section class="section">
     <div class="section-header">
         <h1>{{ __('Machine #').$machine->name }}</h1>
@@ -94,6 +107,7 @@
                     <form id="add_op" action="operation/create" method="POST">
                         @csrf
                         <input type="hidden" name='machine_id' value="{{ $machine->id }}">
+                        <input type="hidden" name='production_id' value="{{ $production->id }}">
                         <a href="" onclick="event.preventDefault(); document.getElementById('add_op').submit();" class="btn btn-primary float-right">{{__('Add operation')}}</a>
                     </form>
                 </div>
@@ -112,7 +126,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($production['actions'] as $action)
+                        @foreach ($actions as $action)
                             <tr>
                                 <td>
                                     <input name="id[]" value="{{$action->id}}" id="{{$action->id}}" data-id="{{ $action->id }}" class="sub_chk" type="checkbox" />
@@ -120,7 +134,7 @@
                                 </td>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $action->name }}</td>
-                                <td>{{ $action->pivot->user_id }}</td>
+                                <td>{{ $action->user_id }}</td>
                             </tr>
                         @endforeach
                     </tbody>

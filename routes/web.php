@@ -39,9 +39,10 @@ Route::middleware(['auth'])->group(function ()
     Route::post('update_general_setting',[SettingController::class, 'update_general_setting']);
 
     //Operator
-    Route::post('operation', [OperatorController::class, 'index']);
+    Route::get('operation', [OperatorController::class, 'index']);
     Route::post('production_machine', [ProductionController::class,'index']);
     Route::Post('operation/create', [OperatorController::class, 'create']);
+    Route::Post('operation/store', [OperatorController::class, 'store']);
 
     Route::post('operation/change_production',[OperatorController::class,'change_production']);
 

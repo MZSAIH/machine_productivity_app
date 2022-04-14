@@ -27,7 +27,7 @@
                 <div class="section-header-breadcrumb">
                     <div class="section-header-breadcrumb">
                         <div class="right">
-                            <form id="back" action="{{ url('operation') }}" method="POST">
+                            <form id="back" action="{{ url('operation') }}" method="GET">
                                 @csrf
                                 <input type="hidden" name='machine_id' value="{{ $machine_id }}">
                             </form>
