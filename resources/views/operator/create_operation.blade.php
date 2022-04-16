@@ -8,7 +8,7 @@
     <div class="section-header">
         <h1>{{__('Add operation')}}</h1>
         <div class="section-header-breadcrumb">
-            <form id="back" action="{{ url('operation') }}" method="POST">
+            <form id="back" action="{{ url('operation') }}" method="GET">
                 @csrf
                 <input type="hidden" name='machine_id' value="{{ $machine->id }}">
             </form>
@@ -54,7 +54,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
                             <label for="qte">{{__('Production code')}}</label>
-                            <input type="number" name="qte" class="form-control @error('qte') is_invalide @enderror" id="" placeholder="{{__('Quantity')}}" value="" required="" style="text-transform: none;">
+                            <input type="number" name="qte" class="form-control @error('qte') is_invalide @enderror" id="" placeholder="{{__('Quantity')}}" value="{{ $production->production_lotto }}" required="" min="{{ $production->production_lotto }}" style="text-transform: none;">
                             @error('qte')
                                 <span class="custom_error" role="alert">
                                     <strong>{{ $message }}</strong>

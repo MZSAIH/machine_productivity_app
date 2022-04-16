@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Action;
 use App\Models\Machine;
 use App\Models\Production;
 use Illuminate\Support\Facades\Auth;
@@ -23,10 +24,12 @@ class HomeController extends Controller
                 $machine->prod = Production::where('machine_id', $machine->id)->where('status', 'P')->first();
             }
         }
+        $latest_action = Action::find(45);
         return view(
             'home',
             compact(
-                'machines'
+                'machines',
+                'latest_action'
             )
         );
     }

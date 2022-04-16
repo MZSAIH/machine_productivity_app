@@ -130,7 +130,7 @@ input:checked + .slider:after
     content:'Oui';
 }
 .machine .card{
-    min-height: 333px;
+    min-height: 280px;
 }
 #datatable_filter
 {

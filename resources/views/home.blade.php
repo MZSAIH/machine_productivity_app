@@ -59,8 +59,8 @@
 
                             </div>
 
-                            @if($machine->status == 'C' || $machine->status == 'P')
                             <div class="card-body stats">
+                                @if($machine->status == 'C' || $machine->status == 'P')
                                 <div class="row">
                                     <div class="col">
                                         <i class="fas fa-pallet text-info"></i>
@@ -68,12 +68,17 @@
                                     <div class="col">
                                         {{-- <canvas id="progressChart{{ $machine->id }}" width="80" height="80"></canvas> --}}
 
-                                        <div class="row"><span class="right">{{ $machine->prod->objectif }}</span></div>
-                                        <div class="row"><span class="right">{{ $machine->prod->production_lotto }}</span></div>
+                                        <div class="row"><span class="right">{{ $machine->prod->production_lotto }} / {{ $machine->prod->objectif }}</span></div>
+                                        {{-- <div class="row"><span class="right">{{ $machine->prod->objectif }}</span></div> --}}
                                     </div>
                                 </div>
+                                @endif
+                                {{-- @if($machine->status == 'E') --}}
+                                    <div class="row">
+                                        <p>{{ $latest_action->name }}</p>
+                                    </div>
+                                {{-- @endif --}}
                             </div>
-                            @endif
                         </div>
                     @if(Auth::user()->load('roles')->roles->contains('title', 'operator'))
                         </a>

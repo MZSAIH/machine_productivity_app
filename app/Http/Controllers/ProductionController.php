@@ -20,10 +20,12 @@ class ProductionController extends Controller
         if($request->has('machine_id')){
             $machine_id = $request['machine_id'];
             $productions = Production::where('machine_id', $machine_id)->get();
-        }else
+        }else{
             $productions = Production::all();
+            $machines = Machine::all();
+        }
         return view(
-            'admin.production.production',compact('productions','machine_id')
+            'admin.production.production',compact('productions','machine_id','machines')
         );
     }
 

@@ -26,6 +26,8 @@
 
                 <div class="section-header-breadcrumb">
                     <div class="section-header-breadcrumb">
+
+                        @if(Auth::user()->load('roles')->roles->contains('title', 'operator'))
                         <div class="right">
                             <form id="back" action="{{ url('operation') }}" method="GET">
                                 @csrf
@@ -33,6 +35,7 @@
                             </form>
                             <a href="" onclick="event.preventDefault(); document.getElementById('back').submit();" class="btn btn-primary">Go back</a>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -61,7 +64,7 @@
                                     <th>{{__('Machine')}}</th>
                                     <th>{{__('Starting date')}}</th>
                                     <th>{{__('Ending date')}}</th>
-                                    <th>{{__('Quantity')}}</th>
+                                    <th>{{__('Objectif')}}</th>
                                     @if(Auth::user()->load('roles')->roles->contains('title', 'operator'))
                                     <th>{{__('Open')}}</th>
                                     @endif
@@ -70,11 +73,10 @@
                             <tbody>
                                 @foreach ($productions as $production)
                                     <tr @class([
-                                            'machine_finished' => $production->status == 'F',
-                                            'machine_paused' => $production->status == 'P',
-                                            'machine_operating' => $production->status == 'C',
-                                            'machine_error' => $production->status == 'E',
-                                            'machine_preparing' => $production->status == 'R'
+                                            'prod_finished' => $production->status == 'F',
+                                            'prod_paused' => $production->status == 'P',
+                                            'prod_running' => $production->status == 'C',
+                                            'prod_initial' => $production->status == 'I'
                                         ])
                                     >
 
@@ -88,10 +90,16 @@
                                         <td>{{ $production->code_article }}</td>
                                         <td>{{ $production->desc_article }}</td>
                                         <td>{{ $production->stampo }}</td>
-                                        <td>{{ $production->machine->name }}</td>
+                                        <td>
+                                        <select class="form-control w-auto" onchange="change_machine_prod()" name="machine_prod_change" id="prod{{$production->id}}">
+                                            @foreach ($machines as $machine)
+                                                <option value="{{ $machine->id }}" {{ $machine->id == $production->machine->id ? 'selected' : '' }}>{{ $machine->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        </td>
                                         <td>{{ $production->starting_date }}</td>
                                         <td>{{ $production->ending_date }}</td>
-                                        <td><strong>{{ $production->objectif }}</strong></td>
+                                        <td><strong>{{ $production->production_lotto }}&nbsp;/&nbsp;{{ $production->objectif }}</strong></td>
                                         @if(Auth::user()->load('roles')->roles->contains('title', 'operator'))
                                             <td>
                                                 @if($production->status == 'P')

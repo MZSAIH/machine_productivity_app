@@ -50,7 +50,7 @@
                     <div class="profile-widget-name">
                         {{__('Production #')}} : {{ $production->id }}<br>
                         {{__('Order id')}} : {{ $production->order_id }}<br>
-                        {{__('Article code')}} : {{ $production->phone }}<br>
+                        {{__('Article code')}} : {{ $production->code_article }}<br>
                         {{__('Article')}} : {{ $production->desc_article }}<br>
                         {{__('Stampo')}} : {{ $production->stampo }}<br>
                         {{__('Ending date')}} : {{ $production->ending_date }}<br>
@@ -123,6 +123,7 @@
                             <th>#</th>
                             <th>{{__('Action')}}</th>
                             <th>{{__('User')}}</th>
+                            <th>{{__('Created at')}}</th>
                             <th>{{__('Quantity')}}</th>
                         </tr>
                     </thead>
@@ -135,7 +136,8 @@
                                 </td>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $action->name }}</td>
-                                <td>{{ $action->user_id }}</td>
+                                <td>{{ $action->username }}</td>
+                                <td>{{ $action->created_at }}</td>
                                 <td>{{ $action->quantity }}</td>
                             </tr>
                         @endforeach

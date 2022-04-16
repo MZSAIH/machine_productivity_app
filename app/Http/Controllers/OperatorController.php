@@ -26,9 +26,10 @@ class OperatorController extends Controller
 
         $actions = DB::table('actions')
         ->rightjoin('operation', 'actions.id', '=', 'operation.action_id')
+        ->join('users', 'users.id', '=', 'operation.user_id')
         ->where('operation.production_id', $production->id)
         ->get();
-
+//return $actions;
         return view(
             'operator.operation',
             compact(
@@ -71,8 +72,16 @@ class OperatorController extends Controller
         $data['action_id'] = $request['action_id'];
         $data['user_id'] = $request['user_id'];
         $data['quantity'] = $request['qte'];
-        DB::table('operation')->insert($data);
-        return redirect('operation?machine_id='.$request['machine_id'])->with('msg','Operation added successfully');
+
+        $production = Production::find($request['production_id']);
+        if ($request['qte'] >= $production->production_lotto){
+            $production->production_lotto = $request['qte'];
+            $production->update();
+            DB::table('operation')->insert($data);
+            return redirect('operation?machine_id='.$request['machine_id'])->with('msg','Operation added successfully');
+        }else{
+            return ;
+        }
     }
 
     /**

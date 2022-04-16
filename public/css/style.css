@@ -619,7 +619,7 @@ select.form-control:not([size]):not([multiple]) {
     padding-top: 20px;
     padding-bottom: 20px;}
   .card .card-body.stats{
-    font-size: 25px;
+    font-size: 15px;
     font-weight: bold;}
 .card .card-body.stats i{
     color:#676767c4  !important}
@@ -962,17 +962,17 @@ table tr:hover .table-links {
 .table-striped tbody tr:nth-of-type(odd) {
   background-color: rgba(0, 0, 0, 0.02); }
 
-.machine_finished{
+.machine_operating{
     color: #2a915c;
     background-color: #40e791 !important;/**/
 }
 
-.machine_paused{
+/* .machine_paused{
     color: #295c9e;
-    background-color: #3c88eb !important;/**/
-}
+    background-color: #3c88eb !important;
+}*/
 
-.machine_operating{
+.machine_finished .machine_paused{
     color: #383838;
     background-color: #dfdfdf !important; /**/
 }
@@ -984,6 +984,25 @@ table tr:hover .table-links {
     color: #757716;
     background-color: #f2f538 !important; /**/
 }
+
+.prod_running{
+    color: #2a915c;
+    background-color: #40e791 !important;/**/
+}
+.prod_paused{
+    color: #757716;
+    background-color: #f2f538 !important; /**/
+}
+.prod_initial{
+    color: #383838;
+    background-color: #dfdfdf !important; /**/
+}
+.prod_finished{
+    color: #295c9e;
+    background-color: #3c88eb !important;
+}
+
+
 
 
 @media (max-width: 575.98px) {
