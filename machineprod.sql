@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 14 avr. 2022 à 20:55
+-- Généré le : Dim 17 avr. 2022 à 01:20
 -- Version du serveur :  10.4.17-MariaDB
 -- Version de PHP : 8.0.0
 
@@ -136,9 +136,9 @@ CREATE TABLE `machines` (
 INSERT INTO `machines` (`id`, `name`, `status`) VALUES
 (1, '001', 'C'),
 (2, '002', 'E'),
-(3, '003', 'P'),
+(3, '003', 'F'),
 (4, '045', 'C'),
-(5, '095', 'R'),
+(5, '095', 'F'),
 (6, '088', 'F');
 
 -- --------------------------------------------------------
@@ -190,7 +190,10 @@ INSERT INTO `operation` (`id`, `production_id`, `action_id`, `user_id`, `quantit
 (5, 6, 25, 12, 0, '2022-04-14'),
 (6, 6, 25, 12, 0, '2022-04-14'),
 (7, 6, 56, 12, 0, '2022-04-14'),
-(8, 6, 71, 12, 10007, '2022-04-14');
+(8, 6, 71, 12, 10007, '2022-04-14'),
+(9, 3, 16, 12, 444, '2022-04-16'),
+(10, 1, 25, 12, 8000, '2022-04-16'),
+(11, 1, 16, 12, 8500, '2022-04-16');
 
 -- --------------------------------------------------------
 
@@ -240,20 +243,22 @@ CREATE TABLE `productions` (
   `objectif` int(11) NOT NULL,
   `production_lotto` int(11) NOT NULL,
   `scarto` int(11) NOT NULL,
-  `status` varchar(1) NOT NULL
+  `status` varchar(1) NOT NULL,
+  `created_at` date NOT NULL DEFAULT current_timestamp(),
+  `updated_at` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `productions`
 --
 
-INSERT INTO `productions` (`id`, `order_id`, `code_article`, `desc_article`, `stampo`, `machine_id`, `starting_date`, `ending_date`, `objectif`, `production_lotto`, `scarto`, `status`) VALUES
-(1, '22/672', '910730003AA', 'Falcone 40ML', 763, 1, '2022-03-22', '2022-03-31', 12000, 12000, 0, 'F'),
-(2, '22/673', '910730003AA', 'Falcone 60ML', 763, 2, '2022-03-22', '2022-03-31', 12000, 0, 0, 'C'),
-(3, '22/674', '910730003AA', 'Falcone 60ML', 763, 3, '2022-03-22', '2022-03-31', 12000, 4000, 0, 'C'),
-(4, '22/675', '910730003AA', 'Falcone 60ML', 763, 4, '2022-03-22', '2022-03-31', 16000, 0, 0, 'C'),
-(5, '22/676', '910730003AA', 'Falcone 60ML', 763, 1, '2022-03-22', '2022-03-31', 50000, 0, 0, 'P'),
-(6, '22/677', '910730003AA', 'Falcone 60ML', 763, 1, '2022-03-22', '2022-03-31', 12000, 0, 0, 'C');
+INSERT INTO `productions` (`id`, `order_id`, `code_article`, `desc_article`, `stampo`, `machine_id`, `starting_date`, `ending_date`, `objectif`, `production_lotto`, `scarto`, `status`, `created_at`, `updated_at`) VALUES
+(1, '22/672', '910730003AA', 'Falcone 40ML', 763, 1, '2022-03-22', '2022-03-31', 12000, 8500, 0, 'P', '2022-04-16', '2022-04-16'),
+(2, '22/673', '910730003AA', 'Falcone 60ML', 763, 2, '2022-03-22', '2022-03-31', 12000, 0, 0, 'I', '2022-04-16', '2022-04-16'),
+(3, '22/674', '910730003AA', 'Falcone 60ML', 763, 3, '2022-03-22', '2022-03-31', 12000, 4000, 0, 'C', '2022-04-16', '2022-04-16'),
+(4, '22/675', '910730003AA', 'Falcone 60ML', 763, 4, '2022-03-22', '2022-03-31', 16000, 7100, 0, 'C', '2022-04-16', '2022-04-16'),
+(5, '22/676', '910730003AA', 'Falcone 60ML', 763, 1, '2022-03-22', '2022-03-31', 50000, 450, 0, 'C', '2022-04-16', '2022-04-16'),
+(6, '22/677', '910730003AA', 'Falcone 60ML', 763, 1, '2022-03-22', '2022-03-31', 12000, 455, 0, 'P', '2022-04-16', '2022-04-16');
 
 -- --------------------------------------------------------
 
@@ -446,7 +451,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT pour la table `operation`
 --
 ALTER TABLE `operation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT pour la table `personal_access_tokens`
