@@ -44,9 +44,6 @@ Route::middleware(['auth'])->group(function ()
     Route::Post('operation/create', [OperatorController::class, 'create']);
     Route::Post('operation/store', [OperatorController::class, 'store']);
 
-    Route::post('operation/change_production',[OperatorController::class,'change_production']);
-
-
     //RESOURCES
     Route::resources([
         'machine' => MachineController::class,
@@ -54,6 +51,11 @@ Route::middleware(['auth'])->group(function ()
         'action' => ActionController::class,
         'user' => UserController::class,
     ]);
+
+    //Ajax calls
+    Route::post('production/change_machine',[ProductionController::class,'change_machine']);
+    Route::post('operation/change_production',[OperatorController::class,'change_production']);
+
 });
 
 Route::get('/upload_page', [MainController::class, 'upload_page']);

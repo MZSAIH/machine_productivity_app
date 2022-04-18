@@ -91,7 +91,7 @@
                                         <td>{{ $production->desc_article }}</td>
                                         <td>{{ $production->stampo }}</td>
                                         <td>
-                                        <select class="form-control w-auto" onchange="change_machine_prod()" name="machine_prod_change" id="prod{{$production->id}}">
+                                        <select class="form-control w-auto" onchange="change_machine_prod()" name="machine_prod_change" id="machine_prod{{$production->id}}">
                                             @foreach ($machines as $machine)
                                                 <option value="{{ $machine->id }}" {{ $machine->id == $production->machine->id ? 'selected' : '' }}>{{ $machine->name }}</option>
                                             @endforeach

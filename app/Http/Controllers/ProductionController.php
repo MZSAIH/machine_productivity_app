@@ -17,12 +17,12 @@ class ProductionController extends Controller
     public function index(Request $request)
     {
         $machine_id = 0;
+        $machines = Machine::all();
         if($request->has('machine_id')){
             $machine_id = $request['machine_id'];
             $productions = Production::where('machine_id', $machine_id)->get();
         }else{
             $productions = Production::all();
-            $machines = Machine::all();
         }
         return view(
             'admin.production.production',compact('productions','machine_id','machines')
@@ -94,5 +94,14 @@ class ProductionController extends Controller
     {
         $production->delete();
         return response(['success' => true]);
+    }
+
+    public function change_machine(Request $request)
+    {
+        return $request['id'];
+        $production = Production::find($request->prod_id);
+        $production->machine_id = $request->machine_id;
+        $production->save();
+        return response(['success' => true, 'data' => []]);
     }
 }
