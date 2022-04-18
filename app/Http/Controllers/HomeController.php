@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Gate;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -23,13 +24,19 @@ class HomeController extends Controller
             if($machine->prod == null){
                 $machine->prod = Production::where('machine_id', $machine->id)->where('status', 'P')->first();
             }
+            if($machine->prod != null)
+                //$machine->latest_action = Action::find(45);
+                $machine->latest_action = DB::table('actions')
+                ->rightjoin('operation', 'actions.id', '=', 'operation.action_id')
+                ->where('operation.production_id', $machine->prod->id)
+                ->orderBy('created_at', 'desc')->first();
         }
-        $latest_action = Action::find(45);
+
+
         return view(
             'home',
             compact(
                 'machines',
-                'latest_action'
             )
         );
     }

@@ -69,15 +69,15 @@
                                         {{-- <canvas id="progressChart{{ $machine->id }}" width="80" height="80"></canvas> --}}
 
                                         <div class="row"><span class="right">{{ $machine->prod->production_lotto }} / {{ $machine->prod->objectif }}</span></div>
-                                        {{-- <div class="row"><span class="right">{{ $machine->prod->objectif }}</span></div> --}}
+                                        <div class="row"><span class="right">{{ $machine->prod->scarto }}</span></div>
                                     </div>
                                 </div>
                                 @endif
-                                {{-- @if($machine->status == 'E') --}}
+                                @if($machine->latest_action != null)
                                     <div class="row">
-                                        <p>{{ $latest_action->name }}</p>
+                                        <p>{{ $machine->latest_action->name }}</p>
                                     </div>
-                                {{-- @endif --}}
+                                @endif
                             </div>
                         </div>
                     @if(Auth::user()->load('roles')->roles->contains('title', 'operator'))

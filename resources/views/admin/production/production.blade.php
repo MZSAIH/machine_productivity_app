@@ -61,7 +61,9 @@
                                     <th>{{__('Article code')}}</th>
                                     <th>{{__('Article desc')}}</th>
                                     <th>{{__('Stampo')}}</th>
+                                    @if(Auth::user()->load('roles')->roles->contains('title', 'admin'))
                                     <th>{{__('Machine')}}</th>
+                                    @endif
                                     <th>{{__('Starting date')}}</th>
                                     <th>{{__('Ending date')}}</th>
                                     <th>{{__('Objectif')}}</th>
@@ -90,6 +92,7 @@
                                         <td>{{ $production->code_article }}</td>
                                         <td>{{ $production->desc_article }}</td>
                                         <td>{{ $production->stampo }}</td>
+                                        @if(Auth::user()->load('roles')->roles->contains('title', 'admin'))
                                         <td>
                                         <select class="form-control w-auto" onchange="change_machine_prod()" name="machine_prod_change" id="machine_prod{{$production->id}}">
                                             @foreach ($machines as $machine)
@@ -97,6 +100,7 @@
                                             @endforeach
                                         </select>
                                         </td>
+                                        @endif
                                         <td>{{ $production->starting_date }}</td>
                                         <td>{{ $production->ending_date }}</td>
                                         <td><strong>{{ $production->production_lotto }}&nbsp;/&nbsp;{{ $production->objectif }}</strong></td>

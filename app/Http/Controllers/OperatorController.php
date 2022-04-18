@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Action;
 use App\Models\Machine;
 use App\Models\Production;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,17 +20,21 @@ class OperatorController extends Controller
     public function index(Request $req)
     {
         $machine = Machine::find($req['machine_id']);
+        $actions = [];
         $production = Production::where('machine_id', $machine->id)->where('status', 'C')->first();
         if($production == null){
             $production = Production::where('machine_id', $machine->id)->where('status', 'P')->first();
         }
-
-        $actions = DB::table('actions')
-        ->rightjoin('operation', 'actions.id', '=', 'operation.action_id')
-        ->join('users', 'users.id', '=', 'operation.user_id')
-        ->where('operation.production_id', $production->id)
-        ->get();
-//return $actions;
+        if($production != null){
+            $actions = DB::table('actions')
+            ->rightjoin('operation', 'actions.id', '=', 'operation.action_id')
+            ->join('users', 'users.id', '=', 'operation.user_id')
+            ->select('actions.id', 'actions.number', 'actions.name', 'users.username', 'operation.quantity', 'operation.created_at')
+            ->where('operation.production_id', $production->id)
+            ->orderBy('operation.created_at', 'desc')
+            ->get();
+        }
+        //return $actions;
         return view(
             'operator.operation',
             compact(
@@ -72,6 +77,7 @@ class OperatorController extends Controller
         $data['action_id'] = $request['action_id'];
         $data['user_id'] = $request['user_id'];
         $data['quantity'] = $request['qte'];
+        $data['created_at'] = Carbon::now()->toDateTimeString();
 
         $production = Production::find($request['production_id']);
         if ($request['qte'] >= $production->production_lotto){

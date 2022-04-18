@@ -50,7 +50,7 @@
                 <div class="d-sm-none d-lg-inline-block">
                     <img src="images/upload/{{ Auth::user()->image }}" style="border-radius: 30px;" alt="">
                     {{__('BIENVENUE, ')}}
-                    {{ Auth::user()->name }}
+                    {{ Auth::user()->fullname }}
 
                 </div>
             </a>
