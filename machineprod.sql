@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 19 avr. 2022 à 01:01
+-- Généré le : mar. 19 avr. 2022 à 23:54
 -- Version du serveur :  10.4.17-MariaDB
 -- Version de PHP : 8.0.0
 
@@ -245,12 +245,12 @@ CREATE TABLE `productions` (
   `desc_article` varchar(100) NOT NULL,
   `stampo` int(4) NOT NULL,
   `machine_id` int(11) NOT NULL,
-  `starting_date` date NOT NULL,
-  `ending_date` date NOT NULL,
+  `starting_date` date DEFAULT NULL,
+  `ending_date` date DEFAULT NULL,
   `objectif` int(11) NOT NULL,
-  `production_lotto` int(11) NOT NULL,
-  `scarto` int(11) NOT NULL,
-  `material` int(11) NOT NULL,
+  `production_lotto` int(11) NOT NULL DEFAULT 0,
+  `scarto` int(11) NOT NULL DEFAULT 0,
+  `material` int(11) NOT NULL DEFAULT 0,
   `status` varchar(1) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -261,12 +261,13 @@ CREATE TABLE `productions` (
 --
 
 INSERT INTO `productions` (`id`, `order_id`, `code_article`, `desc_article`, `stampo`, `machine_id`, `starting_date`, `ending_date`, `objectif`, `production_lotto`, `scarto`, `material`, `status`, `created_at`, `updated_at`) VALUES
-(1, '22/672', '910730003AA', 'Falcone 40ML', 763, 1, '2022-03-22', '2022-03-31', 12000, 8500, 0, 0, 'P', '2022-04-16 00:00:00', '2022-04-16 00:00:00'),
-(2, '22/673', '910730003AA', 'Falcone 60ML', 763, 2, '2022-03-22', '2022-03-31', 12000, 0, 0, 0, 'I', '2022-04-16 00:00:00', '2022-04-16 00:00:00'),
-(3, '22/674', '910730003AA', 'Falcone 60ML', 763, 3, '2022-03-22', '2022-03-31', 12000, 4000, 0, 0, 'C', '2022-04-16 00:00:00', '2022-04-16 00:00:00'),
-(4, '22/675', '910730003AA', 'Falcone 60ML', 763, 4, '2022-03-22', '2022-03-31', 16000, 7100, 0, 0, 'C', '2022-04-16 00:00:00', '2022-04-16 00:00:00'),
-(5, '22/676', '910730003AA', 'Falcone 60ML', 763, 1, '2022-03-22', '2022-03-31', 50000, 450, 0, 0, 'C', '2022-04-16 00:00:00', '2022-04-16 00:00:00'),
-(6, '22/677', '910730003AA', 'Falcone 60ML', 763, 1, '2022-03-22', '2022-03-31', 12000, 455, 0, 0, 'P', '2022-04-16 00:00:00', '2022-04-16 00:00:00');
+(1, '22/672', '910730003AA', 'Falcone 40ML', 763, 1, '2022-03-22', '2022-03-31', 12000, 8500, 500, 0, 'P', '2022-04-16 00:00:00', '2022-04-16 00:00:00'),
+(2, '22/673', '910730003AA', 'Falcone 60ML', 763, 2, '2022-03-22', '2022-03-31', 12000, 0, 475, 0, 'I', '2022-04-16 00:00:00', '2022-04-16 00:00:00'),
+(3, '22/674', '910730003AA', 'Falcone 60ML', 763, 3, '2022-03-22', '2022-03-31', 12000, 4000, 78, 0, 'C', '2022-04-16 00:00:00', '2022-04-16 00:00:00'),
+(4, '22/675', '910730003AA', 'Falcone 60ML', 763, 4, '2022-03-22', '2022-03-31', 16000, 7100, 100, 0, 'C', '2022-04-16 00:00:00', '2022-04-16 00:00:00'),
+(5, '22/676', '910730003AA', 'Falcone 60ML', 763, 1, '2022-03-22', '2022-03-31', 50000, 450, 470, 0, 'C', '2022-04-16 00:00:00', '2022-04-16 00:00:00'),
+(6, '22/677', '910730003AA', 'Falcone 60ML', 763, 1, '2022-03-22', '2022-03-31', 12000, 455, 47, 0, 'P', '2022-04-16 00:00:00', '2022-04-16 00:00:00'),
+(7, '75/602', '64545454A5', 'Add from app', 1000, 5, NULL, NULL, 14500, 0, 0, 0, 'I', '2022-04-19 21:46:04', '2022-04-19 21:46:04');
 
 -- --------------------------------------------------------
 
@@ -471,7 +472,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT pour la table `productions`
 --
 ALTER TABLE `productions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT pour la table `roles`
