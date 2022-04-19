@@ -11,7 +11,7 @@ class Production extends Model
 
     protected $table = 'productions';
 
-        protected $fillable = ['id','machine_id','staring_date','ending_date','objectif'];
+        protected $fillable = ['id','order_id','code_article','desc_article','stampo','machine_id'/*,'staring_date','ending_date'*/,'objectif','status'];
 
     public function getMachineAttribute()
     {

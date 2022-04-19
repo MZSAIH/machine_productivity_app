@@ -8,9 +8,13 @@
     <div class="section-header">
         <h1>{{__('Create new machine')}}</h1>
         <div class="section-header-breadcrumb">
-            <div class="breadcrumb-item active"><a href="{{ url('admin/home') }}">{{__('Dashboard')}}</a></div>
-            <div class="breadcrumb-item active"><a href="{{ url('admin/machine') }}">{{__('machine')}}</a></div>
-            <div class="breadcrumb-item">{{__('Create machine')}}</div>
+            <div class="right">
+                <form id="back" action="{{ url('operation') }}" method="GET">
+                    @csrf
+                    <input type="hidden" name='machine_id' value="{{ $machine_id }}">
+                </form>
+                <a href="" onclick="event.preventDefault(); document.getElementById('back').submit();" class="btn btn-primary">Go back</a>
+            </div>
         </div>
     </div>
 
@@ -19,13 +23,14 @@
         <p class="section-lead">{{__('Create machine')}}</p>
         <div class="card">
             <div class="card-body">
-                <form class="container-fuild" action="{{ url('admin/machine') }}" method="post">
+                <form class="container-fuild" action="{{ url('production/store') }}" method="post">
                     @csrf
+                    <input type="hidden" name='machine_id' value="{{ $machine_id }}">
                     <div class="row">
-                        <div class="col-md-12 mb-3">
-                            <label for="name">{{__('Production name')}}</label>
-                            <input type="text" name="name" class="form-control @error('name') is_invalide @enderror" id="" placeholder="{{__('machine name')}}" value="{{old('name')}}" required="" style="text-transform: none;">
-                            @error('title')
+                        <div class="col-md-6 mb-3">
+                            <label for="order_id">{{__('Order Id')}}</label>
+                            <input type="text" name="order_id" class="form-control @error('order_id') is_invalide @enderror" id="" placeholder="{{__('Order Id')}}" required="" style="text-transform: none;">
+                            @error('order_id')
                                 <span class="custom_error" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -34,10 +39,19 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-12 mb-3">
-                            <label for="email">{{__('email')}}</label>
-                            <input type="email" name="email_id" class="form-control @error('email_id') is_invalide @enderror"P placeholder="{{__('email')}}" value="{{old('email')}}" required="" style="text-transform: none;">
-                            @error('email_id')
+                        <div class="col-md-6 mb-3">
+                            <label for="code_article">{{__('Code Article')}}</label>
+                            <input type="text" name="code_article" class="form-control @error('code_article') is_invalide @enderror"P placeholder="{{__('Code Article')}}" required="" style="text-transform: none;">
+                            @error('code_article')
+                                <span class="custom_error" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="desc_article">{{__('Description Article')}}</label>
+                            <input type="text" name="desc_article" class="form-control @error('desc_article') is_invalide @enderror"P placeholder="{{__('Description Article')}}"  required="" style="text-transform: none;">
+                            @error('desc_article')
                                 <span class="custom_error" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -46,36 +60,27 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-12 mb-3">
-                            <label for="phone">{{__('phone')}}</label>
-                            <input type="number" name="phone" class="form-control @error('phone') is_invalide @enderror" id="" placeholder="{{__('phone')}}" value="{{old('phone')}}" required="" style="text-transform: none;">
-                            @error('phone')
+                        <div class="col-md-6 mb-3">
+                            <label for="stampo">{{__('Stampo')}}</label>
+                            <input type="number" name="stampo" class="form-control @error('stampo') is_invalide @enderror" id="" placeholder="{{__('Stampo')}}" required="" style="text-transform: none;">
+                            @error('stampo')
                                 <span class="custom_error" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12 mb-3">
-                            <label for="password">{{__('password')}}</label>
-                            <input type="password" name="password" class="form-control @error('password') is_invalide @enderror" id="" placeholder="{{__('* * * * * *')}}" value="{{old('password')}}" required="" style="text-transform: none;">
-                            @error('password')
+                        <div class="col-md-6 mb-3">
+                            <label for="objectif">{{__('Objectif')}}</label>
+                            <input type="number" name="objectif" class="form-control @error('objectif') is_invalide @enderror"P placeholder="{{__('Objectif')}}" required="" style="text-transform: none;">
+                            @error('objectif')
                                 <span class="custom_error" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 mb-3">
-                            <label for="role">{{__('Roles')}}</label>
-
                         </div>
                     </div>
                     <div class="text-center">
-                        <button class="btn btn-primary" type="submit">{{__('Add machine')}}</button>
+                        <button class="btn btn-primary" type="submit">{{__('Add production')}}</button>
                     </div>
                 </form>
             </div>

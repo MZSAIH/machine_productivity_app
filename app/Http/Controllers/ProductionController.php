@@ -34,9 +34,12 @@ class ProductionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $machine_id = 0;
+        if($request->has('machine_id'))
+            $machine_id = $request['machine_id'];
+        return view('admin.production.create_production',compact('machine_id'));
     }
 
     /**
@@ -47,7 +50,10 @@ class ProductionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $data['status'] = 'I';
+        Production::create($data);
+        return redirect('operation?machine_id='.$request['machine_id'])->with('msg','Production created successfully');
     }
 
     /**

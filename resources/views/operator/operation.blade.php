@@ -81,11 +81,10 @@
                                 </form>
                             </div>
                             <div class="row">
-                                <form id="create_prod" action="{{ url('add_operation') }}" method="POST">
+                                <form id="create_prod" action="{{ url('production/create') }}" method="POST">
                                     @csrf
                                     <input type="hidden" name='machine_id' value="{{ $machine->id }}">
-                                    <input type="hidden" name='operation_id' value="{{ 74 }}">
-                                    <a href="" onclick="event.preventDefault(); document.getElementById('machine_prod').submit();" class="btn btn-primary float-right">{{__('Create new order')}}</a>
+                                    <a href="" onclick="event.preventDefault(); document.getElementById('create_prod').submit();" class="btn btn-primary float-right">{{__('Create new order')}}</a>
                                 </form>
                             </div>
                         </div>

@@ -68,8 +68,9 @@
                                     <div class="col">
                                         {{-- <canvas id="progressChart{{ $machine->id }}" width="80" height="80"></canvas> --}}
 
-                                        <div class="row"><span class="right">{{ $machine->prod->production_lotto }} / {{ $machine->prod->objectif }}</span></div>
-                                        <div class="row"><span class="right">{{ $machine->prod->scarto }}</span></div>
+                                        <div class="row"><span class="right badge machine_operating">{{ $machine->prod->production_lotto }} / {{ $machine->prod->objectif }}</span></div>
+                                        <div class="row"><span class="right badge machine_error">{{ $machine->prod->scarto }}</span></div>
+                                        <div class="row"><span class="right badge prod_finished">{{ $machine->prod->material }}</span></div>
                                     </div>
                                 </div>
                                 @endif
