@@ -55,7 +55,7 @@
                 </div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-                <div class="dropdown-title">{{__('Bienvenue, ')}}{{ Auth::user()->name }}</div>
+                <div class="dropdown-title">{{__('Bienvenue, ')}}{{ Auth::user()->fullname }}</div>
                 @if(Auth::user()->load('roles')->roles->contains('title', 'admin'))
                     <!--can('admin_profile_access')-->
                         <a href="{{ url('admin/admin_profile') }}" class="dropdown-item has-icon">

@@ -51,7 +51,7 @@ class ProductionController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $data['status'] = 'I';
+        $data['status'] = 'C';
         Production::create($data);
         return redirect('operation?machine_id='.$request['machine_id'])->with('msg','Production created successfully');
     }
@@ -104,9 +104,8 @@ class ProductionController extends Controller
 
     public function change_machine(Request $request)
     {
-        return $request['id'];
-        $production = Production::find($request->prod_id);
-        $production->machine_id = $request->machine_id;
+        $production = Production::find($request->p_id);
+        $production->machine_id = $request->m_id;
         $production->save();
         return response(['success' => true, 'data' => []]);
     }

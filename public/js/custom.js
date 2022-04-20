@@ -66,19 +66,19 @@ function change_production(id) {
 function change_machine_prod(prod_id) {
     $.ajax(
     {
-        url: base_url + '/production/change_machine',
-        type: "POST",
-        contentType: 'application/json',
-        headers:{
+        headers:
+        {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
+        type: "POST",
+        url: base_url + '/production/change_machine',
         data:{
-            prod_id: prod_id,
-            machine_id: $('#machine_prod' + prod_id).val(),
+            p_id: prod_id,
+            m_id: $('#machine_prod' + prod_id).val(),
         },
         success: function (result) {
             location.reload();
-            //console.log(result);
+            // console.log(result);
             iziToast.success({
                 message: 'Change machine successfully..!!',
                 position: 'topRight',
@@ -88,6 +88,20 @@ function change_machine_prod(prod_id) {
             console.log('err ', err)
         }
     });
+}
+
+function select_action_change(value){
+    alert(value);
+    // switch (value) {
+    //     case 71:
+    //         alert('777')
+    //         $('#material').prop( "disabled", false );
+    //         break;
+    //     default:
+    //         alert('def')
+    //         $('#material').prop( "disabled", true );
+    //         break;
+    // }
 }
 
 $(document).ready(function ()
