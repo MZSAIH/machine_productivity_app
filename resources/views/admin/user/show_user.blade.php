@@ -8,8 +8,8 @@
     <div class="section-header">
     <h1>{{__('User')}}</h1>
     <div class="section-header-breadcrumb">
-        <div class="breadcrumb-item active"><a href="{{ url('admin/home') }}">{{__('Dashboard')}}</a></div>
-        <div class="breadcrumb-item active"><a href="{{ url('admin/user') }}">{{__('user')}}</a></div>
+        <div class="breadcrumb-item active"><a href="{{ url('/home') }}">{{__('Dashboard')}}</a></div>
+        <div class="breadcrumb-item active"><a href="{{ url('/user') }}">{{__('user')}}</a></div>
         <div class="breadcrumb-item">{{__('User détails')}}</div>
     </div>
     </div>
@@ -24,7 +24,7 @@
             <div class="card profile-widget">
                 <div class="profile-widget-description">
                     <div class="profile-widget-name">
-                        {{__('Name')}} : {{ $user->name }}<br>
+                        {{__('Name')}} : {{ $user->fullname }}<br>
                         {{__('Username')}} : {{ $user->username }}<br>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
         <div class="col-12 col-sm-12 col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>{{ $user->name }}  {{__('productions')}}</h4>
+                    <h4>{{ $user->fullname }}  {{__('Operations')}}</h4>
                 </div>
                 <div class="card-body">
                     <div class="tab-content" id="myTabContent">
@@ -57,12 +57,11 @@
                                 <tbody>
                                     @foreach ($productions as $production)
                                     <tr @class([
-                                            'machine_finished' => $production->status == 'F',
-                                            'machine_paused' => $production->status == 'P',
-                                            'machine_operating' => $production->status == 'C',
-                                            'machine_error' => $production->status == 'E',
-                                            'machine_preparing' => $production->status == 'R'
-                                        ])
+                                        'prod_finished' => $production->status == 'F',
+                                        'prod_paused' => $production->status == 'P',
+                                        'prod_running' => $production->status == 'C',
+                                        'prod_initial' => $production->status == 'I'
+                                    ])
                                     >
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{$production->order_id}}</td>

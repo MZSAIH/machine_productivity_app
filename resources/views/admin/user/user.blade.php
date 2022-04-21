@@ -14,7 +14,7 @@
                 message: msg,
                 position: 'topRight'
             });
-            console.log(msg);
+            //console.log(msg);
     });
     </script>
     @endif
@@ -22,7 +22,7 @@
         <h1>{{__('Users')}}</h1>
         {{-- <div class="section-header-breadcrumb">
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="{{ url('admin/home') }}">{{__('Dashboard')}}</a></div>
+                <div class="breadcrumb-item active"><a href="{{ url('/home') }}">{{__('Dashboard')}}</a></div>
                 <div class="breadcrumb-item">{{__('User')}}</div>
             </div>
         </div> --}}
@@ -60,7 +60,7 @@
                                     <label for="{{$user->id}}"></label>
                                 </td>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->fullname }}</td>
                                 <td>{{ $user->username }}</td>
                                 <td>
                                     @foreach ($user['roles'] as $item)
@@ -82,7 +82,7 @@
                                         <a href="{{ url('user/'.$user->id) }}" data-toggle="tooltip" title="" data-original-title="{{__('show user profile')}}" class="btn btn-primary btn-action mr-1 {{ $user->id == 1 ? 'disabled' : '' }}"><i class="fas fa-eye"></i></a>
                                     <!--endcan-->
                                     <!--can('user_delete')-->
-                                        <a href="javascript:void(0);" class="table-action btn btn-danger btn-action {{ $user->id == 1 ? 'disabled' : '' }}" onclick="deleteData('admin/user',{{ $user->id }},'User')">
+                                        <a href="javascript:void(0);" class="table-action btn btn-danger btn-action {{ $user->id == 1 ? 'disabled' : '' }}" onclick="deleteData('/user',{{ $user->id }},'User')">
                                             <i class="fas fa-trash"></i>
                                         </a>
                                     <!--endcan-->

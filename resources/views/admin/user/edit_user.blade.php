@@ -8,8 +8,8 @@
     <div class="section-header">
         <h1>{{__('Edit user')}}</h1>
         <div class="section-header-breadcrumb">
-            <div class="breadcrumb-item active"><a href="{{ url('admin/home') }}">{{__('Dashboard')}}</a></div>
-            <div class="breadcrumb-item"><a href="{{ url('admin/user') }}">{{__('user')}}</a></div>
+            <div class="breadcrumb-item active"><a href="{{ url('/home') }}">{{__('Dashboard')}}</a></div>
+            <div class="breadcrumb-item"><a href="{{ url('/user') }}">{{__('user')}}</a></div>
             <div class="breadcrumb-item">{{__('Edit user')}}</div>
         </div>
     </div>
@@ -24,9 +24,9 @@
                     @method('PUT')
                     <div class="row">
                         <div class="col-lg-6 col-md-12 mb-3">
-                            <label for="name">{{__('Name')}}</label>
-                            <input type="text" name="name" class="form-control @error('name') is_invalide @enderror" id="" placeholder="{{__('Name')}}" value="{{ $user->name}}" required="" style="text-transform: none;">
-                            @error('name')
+                            <label for="fullname">{{__('Full Name')}}</label>
+                            <input type="text" name="fullname" class="form-control @error('fullname') is_invalide @enderror" id="" placeholder="{{__('Full name')}}" value="{{ $user->fullname}}" required="" style="text-transform: none;">
+                            @error('fullname')
                                 <span class="custom_error" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

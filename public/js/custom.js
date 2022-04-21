@@ -92,16 +92,7 @@ function change_machine_prod(prod_id) {
 
 function select_action_change(value){
     alert(value);
-    // switch (value) {
-    //     case 71:
-    //         alert('777')
-    //         $('#material').prop( "disabled", false );
-    //         break;
-    //     default:
-    //         alert('def')
-    //         $('#material').prop( "disabled", true );
-    //         break;
-    // }
+
 }
 
 $(document).ready(function ()
@@ -132,6 +123,16 @@ $(document).ready(function ()
     //         false
     //     );
     // }
+    $('#select_action').change(function(){
+        switch ($(this).val()) {
+            case '71':
+                $('#material').prop( "readonly", false );
+                break;
+            default:
+                $('#material').prop( "readonly", true );
+                break;
+        }
+    })
 
     $(document).on('mouseover','.main-sidebar', function () {
         $(this).getNiceScroll().resize();

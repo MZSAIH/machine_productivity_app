@@ -44,7 +44,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'bail|required|max:255',
+            'fullname' => 'bail|required|max:255',
             'username' => 'bail|required|max:10',
             'password' => 'bail|required|min:6',
         ]);
@@ -98,7 +98,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'bail|required|max:255',
+            'fullname' => 'bail|required|max:255',
             'username' => 'bail|required'
         ]);
         $data = $request->all();

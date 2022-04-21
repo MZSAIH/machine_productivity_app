@@ -17,7 +17,7 @@
                         message: msg,
                         position: 'topRight'
                     });
-                    console.log(msg);
+                    //console.log(msg);
             });
             </script>
             @endif
@@ -41,7 +41,7 @@
             </div>
             <div class="section-body">
                 <h2 class="section-title">{{__('Manage productions')}}</h2>
-                <p class="section-lead">{{__('Add, Edit, manage productions.')}}</p>
+                <p class="section-lead">{{__('Manage productions.')}}</p>
                 <div class="card">
                     <div class="card-header">
                         {{-- <div class="w-100">

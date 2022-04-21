@@ -1,29 +1,29 @@
-@extends('layouts.app',['activePage' => 'production'])
+@extends('layouts.app',['activePage' => 'action'])
 
-@section('title','Production')
+@section('title','Action')
 
 @section('content')
 
 <section class="section">
     <div class="section-header">
-    <h1>{{__('User profile')}}</h1>
+    <h1>{{__('action profile')}}</h1>
     <div class="section-header-breadcrumb">
         <div class="breadcrumb-item active"><a href="{{ url('admin/home') }}">{{__('Dashboard')}}</a></div>
-        <div class="breadcrumb-item active"><a href="{{ url('admin/user') }}">{{__('user')}}</a></div>
-        <div class="breadcrumb-item">{{__('User Profile')}}</div>
+        <div class="breadcrumb-item active"><a href="{{ url('admin/action') }}">{{__('action')}}</a></div>
+        <div class="breadcrumb-item">{{__('action Profile')}}</div>
     </div>
     </div>
     <div class="section-body">
-    <h2 class="section-title">{{$user->name}}</h2>
+    <h2 class="section-title">{{$action->name}}</h2>
     <p class="section-lead">
-        {{__('Information about user')}}
+        {{__('Information about action')}}
     </p>
 
    <div class="row mt-sm-4">
         <div class="col-12 col-md-12 col-lg-12">
             <div class="card profile-widget">
                 <div class="profile-widget-header">
-                    <img alt="image" src="{{ $user->image }}" class="rounded-circle profile-widget-picture">
+                    <img alt="image" src="{{ $action->image }}" class="rounded-circle profile-widget-picture">
                     <div class="profile-widget-items">
                         <div class="profile-widget-item">
                             <div class="profile-widget-item-label">{{__('Total order')}}</div>
@@ -41,9 +41,9 @@
                 </div>
                 <div class="profile-widget-description">
                     <div class="profile-widget-name">
-                        {{__('User Name')}} : {{ $user->name }}<br>
-                        {{__('Phone number')}} : {{ $user->phone }}<br>
-                        {{__('Email')}} : {{ $user->email_id }}<br>
+                        {{__('action Name')}} : {{ $action->name }}<br>
+                        {{__('Phone number')}} : {{ $action->phone }}<br>
+                        {{__('Email')}} : {{ $action->email_id }}<br>
                     </div>
                 </div>
             </div>
@@ -53,7 +53,7 @@
         <div class="col-12 col-sm-12 col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>{{ $user->name }}  {{__('order details')}}</h4>
+                    <h4>{{ $action->name }}  {{__('order details')}}</h4>
                 </div>
                 <div class="card-body">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -78,7 +78,7 @@
                                         <th>#</th>
                                         <th>{{__('Order Id')}}</th>
                                         <th>{{__('Vendor name')}}</th>
-                                        <th>{{__('User Name')}}</th>
+                                        <th>{{__('action Name')}}</th>
                                         <th>{{__('Date')}}</th>
                                         <th>{{__('Time')}}</th>
                                         <th>{{__('Order Status')}}</th>
@@ -92,7 +92,7 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{$order->order_id}}</td>
                                             <td>{{ $order['vendor']->name }}</td>
-                                            <td>{{ $order['user']->name }}</td>
+                                            <td>{{ $order['action']->name }}</td>
                                             <td>{{ $order->date }}</td>
                                             <td>{{ $order->time }}</td>
                                             <td>
@@ -148,7 +148,7 @@
                                         <th>#</th>
                                         <th>{{__('Order Id')}}</th>
                                         <th>{{__('Vendor name')}}</th>
-                                        <th>{{__('User Name')}}</th>
+                                        <th>{{__('action Name')}}</th>
                                         <th>{{__('Date')}}</th>
                                         <th>{{__('Time')}}</th>
                                         <th>{{__('Order Status')}}</th>
@@ -162,7 +162,7 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{$order->order_id}}</td>
                                             <td>{{ $order['vendor']->name }}</td>
-                                            <td>{{ $order['user']->name }}</td>
+                                            <td>{{ $order['action']->name }}</td>
                                             <td>{{ $order->date }}</td>
                                             <td>{{ $order->time }}</td>
                                             <td>
@@ -219,7 +219,7 @@
                                         <th>#</th>
                                         <th>{{__('Order Id')}}</th>
                                         <th>{{__('Vendor name')}}</th>
-                                        <th>{{__('User Name')}}</th>
+                                        <th>{{__('action Name')}}</th>
                                         <th>{{__('Date')}}</th>
                                         <th>{{__('Time')}}</th>
                                         <th>{{__('Order Status')}}</th>
@@ -233,7 +233,7 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{$order->order_id}}</td>
                                             <td>{{ $order['vendor']->name }}</td>
-                                            <td>{{ $order['user']->name }}</td>
+                                            <td>{{ $order['action']->name }}</td>
                                             <td>{{ $order->date }}</td>
                                             <td>{{ $order->time }}</td>
                                             <td>
@@ -306,8 +306,8 @@
                         <td class="show_order_id"></td>
                     </tr>
                     <tr>
-                        <th>{{__('User name')}}</th>
-                        <td class="show_user_name"></td>
+                        <th>{{__('action name')}}</th>
+                        <td class="show_action_name"></td>
                     </tr>
                     <tr>
                         <th>{{__('date')}}</th>

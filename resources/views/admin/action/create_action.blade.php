@@ -1,6 +1,6 @@
 @extends('layouts.app',['activePage' => 'action'])
 
-@section('title','create a machine')
+@section('title','create a action')
 
 @section('content')
 
@@ -8,15 +8,15 @@
     <div class="section-header">
         <h1>{{__('Create new action')}}</h1>
         <div class="section-header-breadcrumb">
-            <div class="breadcrumb-item active"><a href="{{ url('admin/home') }}">{{__('Dashboard')}}</a></div>
-            <div class="breadcrumb-item active"><a href="{{ url('admin/machine') }}">{{__('machine')}}</a></div>
-            <div class="breadcrumb-item">{{__('Create machine')}}</div>
+            <div class="breadcrumb-item active"><a href="{{ url('/home') }}">{{__('Dashboard')}}</a></div>
+            <div class="breadcrumb-item active"><a href="{{ url('/action') }}">{{__('action')}}</a></div>
+            <div class="breadcrumb-item">{{__('Create action')}}</div>
         </div>
     </div>
 
     <div class="section-body">
         <h2 class="section-title">{{__('Action management panel')}}</h2>
-        <p class="section-lead">{{__('Create machine')}}</p>
+        <p class="section-lead">{{__('Create action')}}</p>
         <div class="card">
             <div class="card-body">
                 <form class="container-fuild" action="{{ url('action') }}" method="post">

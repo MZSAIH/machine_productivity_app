@@ -1,16 +1,16 @@
 @extends('layouts.app',['activePage' => 'machine'])
 
-@section('title','machine infos')
+@section('title','Machine infos')
 
 @section('content')
 
 <section class="section">
     <div class="section-header">
-    <h1>{{__('machine infos')}}</h1>
+    <h1>{{__('Machine infos')}}</h1>
     <div class="section-header-breadcrumb">
-        <div class="breadcrumb-item active"><a href="{{ url('admin/home') }}">{{__('Dashboard')}}</a></div>
-        <div class="breadcrumb-item active"><a href="{{ url('admin/machine') }}">{{__('machine')}}</a></div>
-        <div class="breadcrumb-item">{{__('machine Profile')}}</div>
+        <div class="breadcrumb-item active"><a href="{{ url('/home') }}">{{__('Dashboard')}}</a></div>
+        <div class="breadcrumb-item active"><a href="{{ url('/machine') }}">{{__('machine')}}</a></div>
+        <div class="breadcrumb-item">{{__('Machine infos')}}</div>
     </div>
     </div>
     <div class="section-body">
@@ -64,19 +64,12 @@
                                 <tbody>
                                     @foreach ($productions as $production)
                                         <tr @class([
-                                            'machine_finished' => $machine->status == 'F',
-                                            'machine_paused' => $machine->status == 'P',
-                                            'machine_operating' => $machine->status == 'C',
-                                            'machine_error' => $machine->status == 'E',
-                                            'machine_preparing' => $machine->status == 'R'
+                                            'prod_finished' => $production->status == 'F',
+                                            'prod_paused' => $production->status == 'P',
+                                            'prod_running' => $production->status == 'C',
+                                            'prod_initial' => $production->status == 'I'
                                             ])
                                         >
-
-
-                                            {{-- <td>
-                                                <input name="id[]" value="{{$production->id}}" id="{{$production->id}}" data-id="{{ $production->id }}" class="sub_chk" type="checkbox" />
-                                                <label for="{{$production->id}}"></label>
-                                            </td> --}}
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $production->order_id }}</td>
                                             <td>{{ $production->code_article }}</td>

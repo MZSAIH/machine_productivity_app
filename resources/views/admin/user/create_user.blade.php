@@ -8,8 +8,8 @@
     <div class="section-header">
         <h1>{{__('Create new user')}}</h1>
         <div class="section-header-breadcrumb">
-            <div class="breadcrumb-item active"><a href="{{ url('admin/home') }}">{{__('Dashboard')}}</a></div>
-            <div class="breadcrumb-item active"><a href="{{ url('admin/user') }}">{{__('user')}}</a></div>
+            <div class="breadcrumb-item active"><a href="{{ url('/home') }}">{{__('Dashboard')}}</a></div>
+            <div class="breadcrumb-item active"><a href="{{ url('/user') }}">{{__('user')}}</a></div>
             <div class="breadcrumb-item">{{__('Create user')}}</div>
         </div>
     </div>
@@ -23,8 +23,8 @@
                     @csrf
                     <div class="row">
                         <div class="col-lg-6 col-md-12 mb-3">
-                            <label for="name">{{__('Name')}}</label>
-                            <input type="text" name="name" class="form-control @error('name') is_invalide @enderror" id="" placeholder="{{__('Name')}}" value="{{old('name')}}" required="" style="text-transform: none;">
+                            <label for="fullname">{{__('Full Name')}}</label>
+                            <input type="text" name="fullname" class="form-control @error('fullname') is_invalide @enderror" id="" placeholder="{{__('Full Name')}}" required="" style="text-transform: none;">
                             @error('name')
                                 <span class="custom_error" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -33,7 +33,7 @@
                         </div>
                         <div class="col-lg-6 col-md-12 mb-3">
                             <label for="name">{{__('Username')}}</label>
-                            <input type="text" name="username" class="form-control @error('username') is_invalide @enderror" id="" placeholder="{{__('Username')}}" value="{{old('usersname')}}" required="" style="text-transform: none;">
+                            <input type="text" name="username" class="form-control @error('username') is_invalide @enderror" id="" placeholder="{{__('Username')}}" required="" style="text-transform: none;">
                             @error('username')
                                 <span class="custom_error" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -45,7 +45,7 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-6 mb-3">
                             <label for="password">{{__('password')}}</label>
-                            <input type="password" name="password" class="form-control @error('password') is_invalide @enderror" id="" placeholder="{{__('* * * * * *')}}" value="{{old('password')}}" required="" style="text-transform: none;">
+                            <input type="password" name="password" class="form-control @error('password') is_invalide @enderror" id="" placeholder="{{__('* * * * * *')}}" required="" style="text-transform: none;">
                             @error('password')
                                 <span class="custom_error" role="alert">
                                     <strong>{{ $message }}</strong>

@@ -14,7 +14,7 @@
                     message: msg,
                     position: 'topRight'
                 });
-                console.log(msg);
+                //console.log(msg);
         });
         </script>
         @endif
@@ -28,8 +28,8 @@
         </div>
     </div>
     <div class="section-body">
-        <h2 class="section-title">{{__('gestion des machines')}}</h2>
-        <p class="section-lead">{{__('Ajout, Modification, gestion machines.')}}</p>
+        <h2 class="section-title">{{__('Manage machines')}}</h2>
+        <p class="section-lead">{{__('Add, Edit, Manage machines.')}}</p>
         <div class="card">
             <div class="card-header">
                 <div class="w-100">

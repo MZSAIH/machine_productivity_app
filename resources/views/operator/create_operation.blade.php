@@ -46,7 +46,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
                             <label for="action">{{__('Action')}}</label>
-                            <select class="form-control select2" name="action_id" onchange="select_action_change(value)">
+                            <select class="form-control select2" name="action_id" id="select_action">
                                 @foreach ($actions as $action)
                                     <option value="{{ $action->id }}"> {{ $action->name  }} </option>
                                 @endforeach
@@ -63,7 +63,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
                             <label for="material">{{__('Material')}}</label>
-                            <input type="number" name="material" id="material" class="form-control @error('material') is_invalide @enderror" id="" placeholder="{{__('Material')}}" value="{{ $production->material }}" required="" min="{{ $production->material }}" style="text-transform: none;" disabled>
+                            <input type="number" name="material" id="material" class="form-control @error('material') is_invalide @enderror" id="" placeholder="{{__('Material')}}" value="{{ $production->material }}" required="" min="{{ $production->material }}" style="text-transform: none;" readonly>
                             @error('material')
                                 <span class="custom_error" role="alert">
                                     <strong>{{ $message }}</strong>

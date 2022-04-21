@@ -124,6 +124,7 @@
                             <th>{{__('User')}}</th>
                             <th>{{__('Created at')}}</th>
                             <th>{{__('Quantity')}}</th>
+                            <th>{{__('Material')}}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -135,9 +136,10 @@
                                 </td>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $action->name }}</td>
-                                <td>{{ $action->username }}</td>
+                                <td>{{ $action->fullname }}</td>
                                 <td>{{ $action->created_at }}</td>
                                 <td>{{ $action->quantity }}</td>
+                                <td>{{ $action->material }}</td>
                             </tr>
                         @endforeach
                     </tbody>

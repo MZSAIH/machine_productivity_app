@@ -29,7 +29,7 @@ class OperatorController extends Controller
             $actions = DB::table('actions')
             ->rightjoin('operation', 'actions.id', '=', 'operation.action_id')
             ->join('users', 'users.id', '=', 'operation.user_id')
-            ->select('actions.id', 'actions.number', 'actions.name', 'users.username', 'operation.quantity', 'operation.created_at')
+            ->select('actions.id', 'actions.number', 'actions.name', 'users.fullname', 'operation.quantity', 'operation.material', 'operation.created_at')
             ->where('operation.production_id', $production->id)
             ->orderBy('operation.created_at', 'desc')
             ->get();
@@ -77,11 +77,13 @@ class OperatorController extends Controller
         $data['action_id'] = $request['action_id'];
         $data['user_id'] = $request['user_id'];
         $data['quantity'] = $request['qte'];
+        $data['material'] = $request['material'];
         $data['created_at'] = Carbon::now()->toDateTimeString();
-
+        //return $data;
         $production = Production::find($request['production_id']);
         if ($request['qte'] >= $production->production_lotto){
             $production->production_lotto = $request['qte'];
+            $production->material = $request['material'];
             $production->update();
             DB::table('operation')->insert($data);
             return redirect('operation?machine_id='.$request['machine_id'])->with('msg','Operation added successfully');

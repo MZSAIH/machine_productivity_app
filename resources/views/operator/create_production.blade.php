@@ -6,7 +6,7 @@
 
 <section class="section">
     <div class="section-header">
-        <h1>{{__('Create new machine')}}</h1>
+        <h1>{{__('Create new production')}}</h1>
         <div class="section-header-breadcrumb">
             <div class="right">
                 <form id="back" action="{{ url('operation') }}" method="GET">
@@ -19,8 +19,8 @@
     </div>
 
     <div class="section-body">
-        <h2 class="section-title">{{__('machine management panel')}}</h2>
-        <p class="section-lead">{{__('Create machine')}}</p>
+        <h2 class="section-title">{{__('Production management')}}</h2>
+        <p class="section-lead">{{__('Create Production')}}</p>
         <div class="card">
             <div class="card-body">
                 <form class="container-fuild" action="{{ url('production/store') }}" method="post">

@@ -81,7 +81,7 @@ class ActionController extends Controller
     public function update(Request $request, action $action)
     {
         $request->validate([
-            'number' => 'bail|required|unique:actions|max:255',
+            'number' => 'bail|required|max:255',
             'name' => 'bail|required|max:255'
         ]);
         $data = $request->all();

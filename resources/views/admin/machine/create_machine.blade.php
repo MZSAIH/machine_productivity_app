@@ -8,8 +8,8 @@
     <div class="section-header">
         <h1>{{__('Create new machine')}}</h1>
         <div class="section-header-breadcrumb">
-            <div class="breadcrumb-item active"><a href="{{ url('admin/home') }}">{{__('Dashboard')}}</a></div>
-            <div class="breadcrumb-item active"><a href="{{ url('admin/machine') }}">{{__('machine')}}</a></div>
+            <div class="breadcrumb-item active"><a href="{{ url('/home') }}">{{__('Dashboard')}}</a></div>
+            <div class="breadcrumb-item active"><a href="{{ url('/machine') }}">{{__('machine')}}</a></div>
             <div class="breadcrumb-item">{{__('Create machine')}}</div>
         </div>
     </div>

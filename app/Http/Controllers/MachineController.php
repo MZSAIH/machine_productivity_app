@@ -44,7 +44,7 @@ class MachineController extends Controller
             'name' => 'bail|required|unique:machines|max:255',
         ]);
         $data = $request->all();
-        $data['status'] = 0;
+        $data['status'] = 'R';
         $machine = Machine::create($data);
         return redirect('machine')->with('msg','Machine added successfully');
     }

@@ -8,8 +8,8 @@
     <div class="section-header">
         <h1>{{__('Edit machine')}}</h1>
         <div class="section-header-breadcrumb">
-            <div class="breadcrumb-item active"><a href="{{ url('admin/home') }}">{{__('Dashboard')}}</a></div>
-            <div class="breadcrumb-item"><a href="{{ url('admin/machine') }}">{{__('machine')}}</a></div>
+            <div class="breadcrumb-item active"><a href="{{ url('/home') }}">{{__('Dashboard')}}</a></div>
+            <div class="breadcrumb-item"><a href="{{ url('/machine') }}">{{__('machine')}}</a></div>
             <div class="breadcrumb-item">{{__('Edit machine')}}</div>
         </div>
     </div>
@@ -19,7 +19,7 @@
         <p class="section-lead">{{__('Edit machine')}}</p>
         <div class="card">
             <div class="card-body">
-                <form class="container-fuild" action="{{ url('admin/machine/'.$machine->id) }}" method="post">
+                <form class="container-fuild" action="{{ url('machine/'.$machine->id) }}" method="post">
                     @csrf
                     @method('PUT')
                     <div class="row">

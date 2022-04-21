@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 19 avr. 2022 à 23:54
+-- Généré le : jeu. 21 avr. 2022 à 12:51
 -- Version du serveur :  10.4.17-MariaDB
 -- Version de PHP : 8.0.0
 
@@ -69,7 +69,8 @@ INSERT INTO `actions` (`id`, `number`, `name`) VALUES
 (69, 69, 'Apertura impronta'),
 (70, 70, 'Oi evaso'),
 (71, 71, 'Carico/controllo materiale'),
-(88, 88, 'Eol Non funzionante');
+(88, 88, 'Eol Non funzionante'),
+(89, 555, '555test');
 
 -- --------------------------------------------------------
 
@@ -138,8 +139,10 @@ INSERT INTO `machines` (`id`, `name`, `status`) VALUES
 (2, '002', 'E'),
 (3, '003', 'F'),
 (4, '045', 'C'),
-(5, '095', 'F'),
-(6, '088', 'F');
+(5, '095', 'R'),
+(6, '088', 'p'),
+(7, '7777', 'R'),
+(8, '999', 'R');
 
 -- --------------------------------------------------------
 
@@ -175,6 +178,7 @@ CREATE TABLE `operation` (
   `action_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL DEFAULT 0,
+  `material` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -182,25 +186,30 @@ CREATE TABLE `operation` (
 -- Déchargement des données de la table `operation`
 --
 
-INSERT INTO `operation` (`id`, `production_id`, `action_id`, `user_id`, `quantity`, `created_at`) VALUES
-(1, 6, 16, 12, 0, '2022-03-24 00:00:00'),
-(2, 1, 25, 12, 0, '2022-03-24 00:00:00'),
-(3, 1, 45, 1, 0, '2022-03-24 00:00:00'),
-(4, 5, 50, 12, 0, '2022-03-24 00:00:00'),
-(5, 6, 25, 12, 0, '2022-04-14 00:00:00'),
-(6, 6, 25, 12, 0, '2022-04-14 00:00:00'),
-(7, 6, 56, 12, 0, '2022-04-14 00:00:00'),
-(8, 6, 71, 12, 10007, '2022-04-14 00:00:00'),
-(9, 3, 16, 12, 444, '2022-04-16 00:00:00'),
-(10, 1, 25, 12, 8000, '2022-04-16 00:00:00'),
-(11, 1, 16, 12, 8500, '2022-04-16 00:00:00'),
-(12, 5, 25, 12, 450, '2022-04-18 00:00:00'),
-(13, 5, 67, 12, 450, '2022-04-18 00:00:00'),
-(14, 5, 40, 12, 450, '2022-04-18 00:00:00'),
-(15, 5, 17, 12, 450, '2022-04-18 00:00:00'),
-(16, 3, 53, 12, 4000, '2022-04-18 00:00:00'),
-(17, 4, 16, 12, 7100, '2022-04-18 00:00:00'),
-(18, 5, 43, 12, 450, '2022-04-18 22:56:37');
+INSERT INTO `operation` (`id`, `production_id`, `action_id`, `user_id`, `quantity`, `material`, `created_at`) VALUES
+(1, 6, 16, 12, 0, 0, '2022-03-24 00:00:00'),
+(2, 1, 25, 12, 0, 0, '2022-03-24 00:00:00'),
+(3, 1, 45, 1, 0, 0, '2022-03-24 00:00:00'),
+(4, 5, 50, 12, 0, 0, '2022-03-24 00:00:00'),
+(5, 6, 25, 12, 0, 0, '2022-04-14 00:00:00'),
+(6, 6, 25, 12, 0, 0, '2022-04-14 00:00:00'),
+(7, 6, 56, 12, 0, 0, '2022-04-14 00:00:00'),
+(8, 6, 71, 12, 10007, 0, '2022-04-14 00:00:00'),
+(9, 3, 16, 12, 444, 0, '2022-04-16 00:00:00'),
+(10, 1, 25, 12, 8000, 0, '2022-04-16 00:00:00'),
+(11, 1, 16, 12, 8500, 0, '2022-04-16 00:00:00'),
+(12, 5, 25, 12, 450, 0, '2022-04-18 00:00:00'),
+(13, 5, 67, 12, 450, 0, '2022-04-18 00:00:00'),
+(14, 5, 40, 12, 450, 0, '2022-04-18 00:00:00'),
+(15, 5, 17, 12, 450, 0, '2022-04-18 00:00:00'),
+(16, 3, 53, 12, 4000, 0, '2022-04-18 00:00:00'),
+(17, 4, 16, 12, 7100, 0, '2022-04-18 00:00:00'),
+(18, 5, 43, 12, 450, 0, '2022-04-18 22:56:37'),
+(19, 5, 71, 12, 450, 0, '2022-04-21 09:37:29'),
+(20, 5, 71, 12, 450, 77, '2022-04-21 09:42:40'),
+(21, 5, 71, 12, 450, 120, '2022-04-21 09:43:16'),
+(22, 4, 71, 12, 7100, 150, '2022-04-21 09:43:51'),
+(23, 5, 16, 18, 1000, 120, '2022-04-21 10:50:52');
 
 -- --------------------------------------------------------
 
@@ -261,11 +270,11 @@ CREATE TABLE `productions` (
 --
 
 INSERT INTO `productions` (`id`, `order_id`, `code_article`, `desc_article`, `stampo`, `machine_id`, `starting_date`, `ending_date`, `objectif`, `production_lotto`, `scarto`, `material`, `status`, `created_at`, `updated_at`) VALUES
-(1, '22/672', '910730003AA', 'Falcone 40ML', 763, 1, '2022-03-22', '2022-03-31', 12000, 8500, 500, 0, 'P', '2022-04-16 00:00:00', '2022-04-16 00:00:00'),
+(1, '22/672', '910730003AA', 'Falcone 40ML', 763, 1, '2022-03-22', '2022-03-31', 12000, 8500, 500, 0, 'P', '2022-04-16 00:00:00', '2022-04-20 10:16:21'),
 (2, '22/673', '910730003AA', 'Falcone 60ML', 763, 2, '2022-03-22', '2022-03-31', 12000, 0, 475, 0, 'I', '2022-04-16 00:00:00', '2022-04-16 00:00:00'),
 (3, '22/674', '910730003AA', 'Falcone 60ML', 763, 3, '2022-03-22', '2022-03-31', 12000, 4000, 78, 0, 'C', '2022-04-16 00:00:00', '2022-04-16 00:00:00'),
-(4, '22/675', '910730003AA', 'Falcone 60ML', 763, 4, '2022-03-22', '2022-03-31', 16000, 7100, 100, 0, 'C', '2022-04-16 00:00:00', '2022-04-16 00:00:00'),
-(5, '22/676', '910730003AA', 'Falcone 60ML', 763, 1, '2022-03-22', '2022-03-31', 50000, 450, 470, 0, 'C', '2022-04-16 00:00:00', '2022-04-16 00:00:00'),
+(4, '22/675', '910730003AA', 'Falcone 60ML', 763, 4, '2022-03-22', '2022-03-31', 16000, 7100, 100, 150, 'C', '2022-04-16 00:00:00', '2022-04-21 09:43:51'),
+(5, '22/676', '910730003AA', 'Falcone 60ML', 763, 1, '2022-03-22', '2022-03-31', 50000, 1000, 470, 120, 'C', '2022-04-16 00:00:00', '2022-04-21 10:50:52'),
 (6, '22/677', '910730003AA', 'Falcone 60ML', 763, 1, '2022-03-22', '2022-03-31', 12000, 455, 47, 0, 'P', '2022-04-16 00:00:00', '2022-04-16 00:00:00'),
 (7, '75/602', '64545454A5', 'Add from app', 1000, 5, NULL, NULL, 14500, 0, 0, 0, 'I', '2022-04-19 21:46:04', '2022-04-19 21:46:04');
 
@@ -312,7 +321,8 @@ CREATE TABLE `role_user` (
 INSERT INTO `role_user` (`id`, `user_id`, `role_id`, `created_at`, `updated_at`) VALUES
 (1, 1, 1, '2022-01-01 11:09:17', '2022-01-02 11:09:23'),
 (12, 12, 2, '2022-01-05 13:22:48', '2022-03-15 19:06:16'),
-(17, 18, 2, NULL, NULL);
+(17, 18, 2, NULL, NULL),
+(18, 19, 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -340,8 +350,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `fullname`, `username`, `password`, `status`, `remember_token`, `device_token`, `is_verified`, `image`, `created_at`, `updated_at`) VALUES
 (1, 'Hamza', 540, '$2a$12$yV2EJvqCf4v7gma69k9eMeN9PLdQSeKqaUeCxqEA45VzIbVXtOh0C', 1, NULL, NULL, 1, 'profile_holder.png', '2022-01-01 11:10:16', '2022-01-16 00:36:23'),
-(12, 'OP 01', 541, '$2a$12$yV2EJvqCf4v7gma69k9eMeN9PLdQSeKqaUeCxqEA45VzIbVXtOh0C', 1, NULL, 'N/A', 1, 'profile_holder.png', '2022-01-03 10:28:56', '2022-01-16 00:01:54'),
-(18, 'Test eding', 999, '$2y$10$UUQ3IOzpUNEeA26sHpzGZOrVao1kHmWpueGeUdtZZuOCyw7kamXzS', 1, NULL, NULL, 1, 'profile_holder.png', '2022-03-22 19:02:09', '2022-04-04 17:51:49');
+(12, 'OPERATOR 01', 541, '$2y$10$EyebiiNcGoznfjERlEmJa.We8tod.MCu9Wq/RdZ5ccKHny6bcnSwG', 1, NULL, 'N/A', 1, 'profile_holder.png', '2022-01-03 10:28:56', '2022-01-16 00:01:54'),
+(18, 'OPERATOR X', 999, '$2y$10$cuk5EQlnv17OrJqT2N.Xq.GwOrw/ncy3MZ892JLb.OvO.zoAI7kYa', 1, NULL, NULL, 1, 'profile_holder.png', '2022-03-22 19:02:09', '2022-04-04 17:51:49'),
+(19, 'OPERAT A', 111, '$2y$10$wZdnVDwNQIqHv5QOwu4vVuQADqSTNc/TJ9PdFOWEZd8gG3wUkRTCe', 1, NULL, NULL, 1, 'profile_holder.png', NULL, NULL);
 
 --
 -- Index pour les tables déchargées
@@ -430,7 +441,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `actions`
 --
 ALTER TABLE `actions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 
 --
 -- AUTO_INCREMENT pour la table `failed_jobs`
@@ -448,7 +459,7 @@ ALTER TABLE `general_setting`
 -- AUTO_INCREMENT pour la table `machines`
 --
 ALTER TABLE `machines`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `migrations`
@@ -460,7 +471,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT pour la table `operation`
 --
 ALTER TABLE `operation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT pour la table `personal_access_tokens`
@@ -484,13 +495,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT pour la table `role_user`
 --
 ALTER TABLE `role_user`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

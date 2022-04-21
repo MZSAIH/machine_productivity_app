@@ -1,6 +1,6 @@
-@extends('layouts.app',['activePage' => 'action'])
+@extends('layouts.app',['activePage' => 'production'])
 
-@section('title','Action')
+@section('title','Production')
 
 @section('content')
 
@@ -8,8 +8,8 @@
     <div class="section-header">
     <h1>{{__('User profile')}}</h1>
     <div class="section-header-breadcrumb">
-        <div class="breadcrumb-item active"><a href="{{ url('admin/home') }}">{{__('Dashboard')}}</a></div>
-        <div class="breadcrumb-item active"><a href="{{ url('admin/user') }}">{{__('user')}}</a></div>
+        <div class="breadcrumb-item active"><a href="{{ url('/home') }}">{{__('Dashboard')}}</a></div>
+        <div class="breadcrumb-item active"><a href="{{ url('/user') }}">{{__('user')}}</a></div>
         <div class="breadcrumb-item">{{__('User Profile')}}</div>
     </div>
     </div>

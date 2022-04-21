@@ -1,22 +1,22 @@
 @extends('layouts.app',['activePage' => 'action'])
 
-@section('title','Edit machine')
+@section('title','Edit action')
 
 @section('content')
 
 <section class="section">
     <div class="section-header">
-        <h1>{{__('Edit machine')}}</h1>
+        <h1>{{__('Edit action')}}</h1>
         <div class="section-header-breadcrumb">
-            <div class="breadcrumb-item active"><a href="{{ url('admin/home') }}">{{__('Dashboard')}}</a></div>
-            <div class="breadcrumb-item"><a href="{{ url('admin/machine') }}">{{__('machine')}}</a></div>
-            <div class="breadcrumb-item">{{__('Edit machine')}}</div>
+            <div class="breadcrumb-item active"><a href="{{ url('/home') }}">{{__('Dashboard')}}</a></div>
+            <div class="breadcrumb-item"><a href="{{ url('/action') }}">{{__('action')}}</a></div>
+            <div class="breadcrumb-item">{{__('Edit action')}}</div>
         </div>
     </div>
 
     <div class="section-body">
-        <h2 class="section-title">{{__('machine management panel')}}</h2>
-        <p class="section-lead">{{__('Edit machine')}}</p>
+        <h2 class="section-title">{{__('action management panel')}}</h2>
+        <p class="section-lead">{{__('Edit action')}}</p>
         <div class="card">
             <div class="card-body">
                 <form class="container-fuild" action="{{ url('action/'.$action->id) }}" method="post">
@@ -46,7 +46,7 @@
                     </div>
 
                     <div class="text-center">
-                        <button class="btn btn-primary" type="submit">{{__('update machine')}}</button>
+                        <button class="btn btn-primary" type="submit">{{__('update action')}}</button>
                     </div>
                 </form>
             </div>

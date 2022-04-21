@@ -17,7 +17,7 @@
                         message: msg,
                         position: 'topRight'
                     });
-                    console.log(msg);
+                    //console.log(msg);
             });
             </script>
             @endif
