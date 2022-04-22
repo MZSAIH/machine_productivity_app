@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 21 avr. 2022 à 12:51
+-- Généré le : ven. 22 avr. 2022 à 11:37
 -- Version du serveur :  10.4.17-MariaDB
 -- Version de PHP : 8.0.0
 
@@ -69,8 +69,7 @@ INSERT INTO `actions` (`id`, `number`, `name`) VALUES
 (69, 69, 'Apertura impronta'),
 (70, 70, 'Oi evaso'),
 (71, 71, 'Carico/controllo materiale'),
-(88, 88, 'Eol Non funzionante'),
-(89, 555, '555test');
+(88, 88, 'Eol Non funzionante');
 
 -- --------------------------------------------------------
 
@@ -136,13 +135,12 @@ CREATE TABLE `machines` (
 
 INSERT INTO `machines` (`id`, `name`, `status`) VALUES
 (1, '001', 'C'),
-(2, '002', 'E'),
-(3, '003', 'F'),
+(2, '002', 'C'),
+(3, '003', 'C'),
 (4, '045', 'C'),
 (5, '095', 'R'),
-(6, '088', 'p'),
-(7, '7777', 'R'),
-(8, '999', 'R');
+(6, '088', 'F'),
+(7, '7777', 'R');
 
 -- --------------------------------------------------------
 
@@ -209,7 +207,12 @@ INSERT INTO `operation` (`id`, `production_id`, `action_id`, `user_id`, `quantit
 (20, 5, 71, 12, 450, 77, '2022-04-21 09:42:40'),
 (21, 5, 71, 12, 450, 120, '2022-04-21 09:43:16'),
 (22, 4, 71, 12, 7100, 150, '2022-04-21 09:43:51'),
-(23, 5, 16, 18, 1000, 120, '2022-04-21 10:50:52');
+(23, 5, 16, 18, 1000, 120, '2022-04-21 10:50:52'),
+(24, 5, 71, 12, 1000, 150, '2022-04-21 13:58:40'),
+(25, 2, 61, 12, 10, 0, '2022-04-22 09:31:13'),
+(26, 2, 61, 12, 10, 0, '2022-04-22 09:32:38'),
+(27, 2, 66, 12, 10, 0, '2022-04-22 09:33:18'),
+(28, 8, 61, 12, 0, 0, '2022-04-22 09:35:45');
 
 -- --------------------------------------------------------
 
@@ -270,13 +273,14 @@ CREATE TABLE `productions` (
 --
 
 INSERT INTO `productions` (`id`, `order_id`, `code_article`, `desc_article`, `stampo`, `machine_id`, `starting_date`, `ending_date`, `objectif`, `production_lotto`, `scarto`, `material`, `status`, `created_at`, `updated_at`) VALUES
-(1, '22/672', '910730003AA', 'Falcone 40ML', 763, 1, '2022-03-22', '2022-03-31', 12000, 8500, 500, 0, 'P', '2022-04-16 00:00:00', '2022-04-20 10:16:21'),
-(2, '22/673', '910730003AA', 'Falcone 60ML', 763, 2, '2022-03-22', '2022-03-31', 12000, 0, 475, 0, 'I', '2022-04-16 00:00:00', '2022-04-16 00:00:00'),
+(1, '22/672', '910730003AA', 'Falcone 40ML', 763, 1, '2022-03-22', '2022-03-31', 12000, 8500, 500, 0, 'P', '2022-04-16 00:00:00', '2022-04-21 13:29:59'),
+(2, '22/673', '910730003AA', 'Falcone 60ML', 763, 2, '2022-03-22', '2022-03-31', 12000, 10, 475, 0, 'C', '2022-04-16 00:00:00', '2022-04-22 09:31:13'),
 (3, '22/674', '910730003AA', 'Falcone 60ML', 763, 3, '2022-03-22', '2022-03-31', 12000, 4000, 78, 0, 'C', '2022-04-16 00:00:00', '2022-04-16 00:00:00'),
 (4, '22/675', '910730003AA', 'Falcone 60ML', 763, 4, '2022-03-22', '2022-03-31', 16000, 7100, 100, 150, 'C', '2022-04-16 00:00:00', '2022-04-21 09:43:51'),
-(5, '22/676', '910730003AA', 'Falcone 60ML', 763, 1, '2022-03-22', '2022-03-31', 50000, 1000, 470, 120, 'C', '2022-04-16 00:00:00', '2022-04-21 10:50:52'),
+(5, '22/676', '910730003AA', 'Falcone 60ML', 763, 1, '2022-03-22', '2022-03-31', 50000, 1000, 470, 150, 'C', '2022-04-16 00:00:00', '2022-04-21 13:58:40'),
 (6, '22/677', '910730003AA', 'Falcone 60ML', 763, 1, '2022-03-22', '2022-03-31', 12000, 455, 47, 0, 'P', '2022-04-16 00:00:00', '2022-04-16 00:00:00'),
-(7, '75/602', '64545454A5', 'Add from app', 1000, 5, NULL, NULL, 14500, 0, 0, 0, 'I', '2022-04-19 21:46:04', '2022-04-19 21:46:04');
+(7, '75/602', '64545454A5', 'Add from app', 1000, 5, NULL, NULL, 14500, 0, 0, 0, 'I', '2022-04-19 21:46:04', '2022-04-19 21:46:04'),
+(8, '75/6088', '64545454A5', 'Add from app', 100, 7, NULL, NULL, 14000, 0, 0, 0, 'C', '2022-04-22 09:34:39', '2022-04-22 09:34:39');
 
 -- --------------------------------------------------------
 
@@ -327,6 +331,22 @@ INSERT INTO `role_user` (`id`, `user_id`, `role_id`, `created_at`, `updated_at`)
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `scarto`
+--
+
+CREATE TABLE `scarto` (
+  `id` int(11) NOT NULL,
+  `production_id` int(11) NOT NULL,
+  `machine_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `scarto` int(11) NOT NULL,
+  `scarto_pr` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `users`
 --
 
@@ -351,8 +371,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `fullname`, `username`, `password`, `status`, `remember_token`, `device_token`, `is_verified`, `image`, `created_at`, `updated_at`) VALUES
 (1, 'Hamza', 540, '$2a$12$yV2EJvqCf4v7gma69k9eMeN9PLdQSeKqaUeCxqEA45VzIbVXtOh0C', 1, NULL, NULL, 1, 'profile_holder.png', '2022-01-01 11:10:16', '2022-01-16 00:36:23'),
 (12, 'OPERATOR 01', 541, '$2y$10$EyebiiNcGoznfjERlEmJa.We8tod.MCu9Wq/RdZ5ccKHny6bcnSwG', 1, NULL, 'N/A', 1, 'profile_holder.png', '2022-01-03 10:28:56', '2022-01-16 00:01:54'),
-(18, 'OPERATOR X', 999, '$2y$10$cuk5EQlnv17OrJqT2N.Xq.GwOrw/ncy3MZ892JLb.OvO.zoAI7kYa', 1, NULL, NULL, 1, 'profile_holder.png', '2022-03-22 19:02:09', '2022-04-04 17:51:49'),
-(19, 'OPERAT A', 111, '$2y$10$wZdnVDwNQIqHv5QOwu4vVuQADqSTNc/TJ9PdFOWEZd8gG3wUkRTCe', 1, NULL, NULL, 1, 'profile_holder.png', NULL, NULL);
+(18, 'OPERATOR X', 999, '$2y$10$cuk5EQlnv17OrJqT2N.Xq.GwOrw/ncy3MZ892JLb.OvO.zoAI7kYa', 1, NULL, NULL, 1, 'profile_holder.png', '2022-03-22 19:02:09', '2022-04-04 17:51:49');
 
 --
 -- Index pour les tables déchargées
@@ -428,6 +447,12 @@ ALTER TABLE `role_user`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `scarto`
+--
+ALTER TABLE `scarto`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `users`
 --
 ALTER TABLE `users`
@@ -471,7 +496,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT pour la table `operation`
 --
 ALTER TABLE `operation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT pour la table `personal_access_tokens`
@@ -483,7 +508,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT pour la table `productions`
 --
 ALTER TABLE `productions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `roles`
@@ -496,6 +521,12 @@ ALTER TABLE `roles`
 --
 ALTER TABLE `role_user`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT pour la table `scarto`
+--
+ALTER TABLE `scarto`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `users`

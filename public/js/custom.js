@@ -90,10 +90,59 @@ function change_machine_prod(prod_id) {
     });
 }
 
-function select_action_change(value){
-    alert(value);
-
+function deleteData(url, id,name) {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => { 
+        if (result.value) {
+            $.ajax({
+                headers:
+                {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: "DELETE",
+                dataType: "JSON",
+                url: base_url + '/' + url + '/' + id,
+                success: function (result) {
+                    console.log(result);
+                    if (result.success == true) {
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 2000);
+                        console.log('result ', result)
+                        Swal.fire(
+                            'Deleted!',
+                            'Your '+name+' has been deleted.',
+                            'success'
+                        )
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: result.data
+                        })
+                    }
+                },
+                error: function (err) {
+                    console.log('err ', err)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'This record is conntect with another data!'
+                    })
+                }
+            });
+        }
+    });
 }
+
 
 $(document).ready(function ()
 {

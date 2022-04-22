@@ -81,11 +81,49 @@ class OperatorController extends Controller
         $data['created_at'] = Carbon::now()->toDateTimeString();
         //return $data;
         $production = Production::find($request['production_id']);
+        $machine    = Machine::find($request['machine_id']);
         if ($request['qte'] >= $production->production_lotto){
             $production->production_lotto = $request['qte'];
             $production->material = $request['material'];
             $production->update();
             DB::table('operation')->insert($data);
+            //Update status machine and production
+            if ($request['action_id'] == 61 ||
+                    $request['action_id'] == 62 ||
+                        $request['action_id'] == 63 ) {
+                $machine->status = 'R';
+            }elseif($request['action_id'] == 66 ||
+                        $request['action_id'] == 67 ){
+                $machine->status = 'C';
+            }elseif($request['action_id'] == 68 ){
+                $machine->status = 'F';
+            }elseif($request['action_id'] == 70 ){
+                $machine->status = 'P';
+                $production->status = 'F';
+            }elseif($request['action_id'] == 64 ||
+                        $request['action_id'] == 16 ||
+                        $request['action_id'] == 17 ||
+                        $request['action_id'] == 45 ||
+                        $request['action_id'] == 46 ||
+                        $request['action_id'] == 47 ||
+                        $request['action_id'] == 48 ||
+                        $request['action_id'] == 53 ||
+                        $request['action_id'] == 55 ||
+                        $request['action_id'] == 56 ||
+                        $request['action_id'] == 57 ||
+                        $request['action_id'] == 65 ||
+                        $request['action_id'] == 69 ||
+                        $request['action_id'] == 88 ||
+                        $request['action_id'] == 25 ){
+                $machine->status = 'E';
+            }elseif($request['action_id'] == 54 ){
+                $machine->status = 'P';
+            }elseif($request['action_id'] == 58 ){
+                $machine->status = 'P';
+                $production->status = 'P';
+            }
+            $machine->update();
+            $production->update();
             return redirect('operation?machine_id='.$request['machine_id'])->with('msg','Operation added successfully');
         }else{
             return ;
@@ -143,6 +181,10 @@ class OperatorController extends Controller
         //Update our production to C status
         DB::table('productions')
             ->where('id', $request['id'])
+            ->update(['status' => "C"]);
+        //Update machine status
+        DB::table('machines')
+            ->where('id', $production->machine_id)
             ->update(['status' => "C"]);
     }
 

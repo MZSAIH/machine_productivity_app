@@ -77,7 +77,7 @@
                                         <a href="{{ url('/machine/'.$machine->id) }}" data-toggle="tooltip" title="" data-original-title="{{__('show machine profile')}}" class="btn btn-primary btn-action mr-1"><i class="fas fa-eye"></i></a>
                                     <!--endcan-->
                                     <!--can('machine_delete')-->
-                                        <a href="javascript:void(0);" class="table-action btn btn-danger btn-action" onclick="deleteData('/machine',{{ $machine->id }},'machine')">
+                                        <a href="javascript:void(0);" class="table-action btn btn-danger btn-action" onclick="deleteData('machine',{{ $machine->id }},'machine')">
                                             <i class="fas fa-trash"></i>
                                         </a>
                                     <!--endcan-->

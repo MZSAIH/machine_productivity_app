@@ -6,6 +6,7 @@ use App\Models\Action;
 use App\Models\Machine;
 use App\Models\Production;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductionController extends Controller
 {
@@ -50,9 +51,19 @@ class ProductionController extends Controller
      */
     public function store(Request $request)
     {
+
+        //Paused all productions
+        DB::table('productions')
+        ->where('machine_id',$request['machine_id'])
+        ->update(['status' => "P"]);
+        //Insert new production
         $data = $request->all();
-        $data['status'] = 'C';
+        $data['status'] = 'I';
         Production::create($data);
+        //Update machine status
+        DB::table('machines')
+        ->where('id',$request['machine_id'])
+        ->update(['status' => "R"]);
         return redirect('operation?machine_id='.$request['machine_id'])->with('msg','Production created successfully');
     }
 

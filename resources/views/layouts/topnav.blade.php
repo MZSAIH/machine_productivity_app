@@ -49,7 +49,7 @@
             <a href="javascript:void(0);" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                 <div class="d-sm-none d-lg-inline-block">
                     <img src="images/upload/{{ Auth::user()->image }}" style="border-radius: 30px;" alt="">
-                    {{__('BIENVENUE, ')}}
+                    {{__('Welcome, ')}}
                     {{ Auth::user()->fullname }}
 
                 </div>

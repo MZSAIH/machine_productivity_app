@@ -44,9 +44,11 @@
                 <p class="section-lead">{{__('Manage productions.')}}</p>
                 <div class="card">
                     <div class="card-header">
-                        {{-- <div class="w-100">
-                            <a href="{{ url('/production/create') }}" class="btn btn-primary float-right"><i class="fas fa-plus"></i>{{__('  Add')}}</a>
-                        </div> --}}
+                        @if(Auth::user()->load('roles')->roles->contains('title', 'admin'))
+                        <div class="w-100">
+                            <a href="{{ url('/production/create') }}" class="btn btn-primary float-right"><i class="fas fa-plus"></i>{{__('  Add production')}}</a>
+                        </div>
+                        @endif
                     </div>
                     <div class="card-body">
                         <table id="datatable" class="table table-striped table-bordered text-center" cellspacing="0" width="100%">
@@ -106,7 +108,7 @@
                                         <td><strong>{{ $production->production_lotto }}&nbsp;/&nbsp;{{ $production->objectif }}</strong></td>
                                         @if(Auth::user()->load('roles')->roles->contains('title', 'operator'))
                                             <td>
-                                                @if($production->status == 'P')
+                                                @if($production->status == 'P' || $production->status == 'I')
                                                     <input type="button" class="btn btn-primary btn-action mr-1 " onclick="change_production({{ $production->id }})" value="Open">
                                                 @endif
                                             </td>

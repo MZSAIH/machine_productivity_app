@@ -37,13 +37,25 @@
         <div class="col-12 col-md-12 col-lg-6">
             <div class="card profile-widget">
                 <div class="profile-widget-header section-header">
-                    <h3>Current Order Details</h3>
-                    <div class="w-100">
-                        <form id="machine_prod" action="{{ url('production_machine') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name='machine_id' value="{{ $machine->id }}">
-                            <a href="" onclick="event.preventDefault(); document.getElementById('machine_prod').submit();" class="btn btn-primary float-right">{{__('All orders')}}</a>
-                        </form>
+                    <div class="col-lg-6">
+                        <h3>Current Order Details</h3>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="row">
+                            <form id="machine_prod" action="{{ url('production_machine') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name='machine_id' value="{{ $machine->id }}">
+                                <a href="" onclick="event.preventDefault(); document.getElementById('machine_prod').submit();" class="btn btn-primary float-right">{{__('All orders')}}</a>
+                            </form>
+                        </div>
+
+                        <div class="row">
+                            <form id="create_prod" action="{{ url('production/create') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name='machine_id' value="{{ $machine->id }}">
+                                <a href="" onclick="event.preventDefault(); document.getElementById('create_prod').submit();" class="btn btn-primary float-right">{{__('Create new order')}}</a>
+                            </form>
+                        </div>
                     </div>
                 </div>
                 <div class="profile-widget-description">
@@ -80,6 +92,7 @@
                                     <a href="" onclick="event.preventDefault(); document.getElementById('machine_prod').submit();" class="btn btn-primary float-right">{{__('All orders')}}</a>
                                 </form>
                             </div>
+                            
                             <div class="row">
                                 <form id="create_prod" action="{{ url('production/create') }}" method="POST">
                                     @csrf
