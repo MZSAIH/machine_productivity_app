@@ -27,7 +27,9 @@
         <h1>{{ __('Machine #').$machine->name }}</h1>
         <div class="section-header-breadcrumb">
             <div class="section-header-breadcrumb">
-                <a href="/home" class="btn btn-primary">Go back</a>
+                <a href="/home" class="btn btn-primary"><i class="fas fa-arrow-left "></i></a>
+                &nbsp;
+                <a href="/home" class="btn btn-primary"><i class="fas fa-home "></i></a>
             </div>
         </div>
     </div>
@@ -92,7 +94,7 @@
                                     <a href="" onclick="event.preventDefault(); document.getElementById('machine_prod').submit();" class="btn btn-primary float-right">{{__('All orders')}}</a>
                                 </form>
                             </div>
-                            
+
                             <div class="row">
                                 <form id="create_prod" action="{{ url('production/create') }}" method="POST">
                                     @csrf
@@ -110,7 +112,7 @@
    </div>
 
 @if( $production != null  && $production->status == 'C' )
-    <div class="section-body">
+    <div class="section-body" id="actions">
         <h2 class="section-title">{{__('Actions')}}</h2>
         <p class="section-lead">{{__('Actions within production #').$production->id}}</p>
         <div class="card">
@@ -128,10 +130,6 @@
                 <table id="datatable" class="table table-striped table-bordered text-center" cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            <th>
-                                <input name="select_all" value="1" id="master" type="checkbox" />
-                                <label for="master"></label>
-                            </th>
                             <th>#</th>
                             <th>{{__('Action')}}</th>
                             <th>{{__('User')}}</th>
@@ -143,16 +141,53 @@
                     <tbody>
                         @foreach ($actions as $action)
                             <tr>
-                                <td>
-                                    <input name="id[]" value="{{$action->id}}" id="{{$action->id}}" data-id="{{ $action->id }}" class="sub_chk" type="checkbox" />
-                                    <label for="{{$action->id}}"></label>
-                                </td>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $action->name }}</td>
                                 <td>{{ $action->fullname }}</td>
                                 <td>{{ $action->created_at }}</td>
                                 <td>{{ $action->quantity }}</td>
                                 <td>{{ $action->material }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-body" id="scartos">
+        <h2 class="section-title">{{__('Scarto')}}</h2>
+        <p class="section-lead">{{__('Scarto within production #').$production->id}}</p>
+        <div class="card">
+            <div class="card-header">
+                <div class="w-100">
+                    <form id="add_scar" action="operation/create_scarto" method="POST">
+                        @csrf
+                        <input type="hidden" name='machine_id' value="{{ $machine->id }}">
+                        <input type="hidden" name='production_id' value="{{ $production->id }}">
+                        <a href="" onclick="event.preventDefault(); document.getElementById('add_scar').submit();" class="btn btn-primary float-right">{{__('Add scarto')}}</a>
+                    </form>
+                </div>
+            </div>
+            <div class="card-body">
+                <table id="datatable" class="table table-striped table-bordered text-center" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>{{__('User')}}</th>
+                            <th>{{__('Scarto')}}</th>
+                            <th>{{__('Motif')}}</th>
+                            <th>{{__('Created at')}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($scartos as $scarto)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $scarto->fullname }}</td>
+                                <td>{{ $scarto->scarto }}</td>
+                                <td>{{ $scarto->scarto_pr }}</td>
+                                <td>{{ $scarto->created_at }}</td>
                             </tr>
                         @endforeach
                     </tbody>

@@ -21,6 +21,7 @@ class OperatorController extends Controller
     {
         $machine = Machine::find($req['machine_id']);
         $actions = [];
+        $scartos = [];
         $production = Production::where('machine_id', $machine->id)->where('status', 'C')->first();
         if($production == null){
             $production = Production::where('machine_id', $machine->id)->where('status', 'P')->first();
@@ -33,6 +34,13 @@ class OperatorController extends Controller
             ->where('operation.production_id', $production->id)
             ->orderBy('operation.created_at', 'desc')
             ->get();
+
+            $scartos = DB::table('scarto')
+            ->leftJoin('users', 'scarto.user_id', '=', 'users.id')
+            ->select('users.fullname', 'scarto.scarto', 'scarto.scarto_pr', 'scarto.created_at')
+            ->where('scarto.production_id', $production->id)
+            ->orderBy('scarto.created_at', 'desc')
+            ->get();
         }
         //return $actions;
         return view(
@@ -40,7 +48,8 @@ class OperatorController extends Controller
             compact(
                 'machine',
                 'production',
-                'actions'
+                'actions',
+                'scartos'
             )
         );
     }
@@ -186,6 +195,21 @@ class OperatorController extends Controller
         DB::table('machines')
             ->where('id', $production->machine_id)
             ->update(['status' => "C"]);
+    }
+
+    public function create_scarto(Request $req)
+    {
+        $machine = Machine::find($req['machine_id']);
+        $production = Production::find($req['production_id']);
+        $actions = Action::all();
+        return view(
+            'operator.create_scarto',
+            compact(
+                'machine',
+                'actions',
+                'production'
+            )
+        );
     }
 
 }

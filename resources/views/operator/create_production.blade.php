@@ -13,7 +13,9 @@
                     @csrf
                     <input type="hidden" name='machine_id' value="{{ $machine_id }}">
                 </form>
-                <a href="" onclick="event.preventDefault(); document.getElementById('back').submit();" class="btn btn-primary">Go back</a>
+                <a href="" onclick="event.preventDefault(); document.getElementById('back').submit();" class="btn btn-primary"><i class="fas fa-arrow-left "></i></a>
+                &nbsp;
+                <a href="/home" class="btn btn-primary"><i class="fas fa-home "></i></a>
             </div>
         </div>
     </div>

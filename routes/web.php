@@ -44,6 +44,7 @@ Route::middleware(['auth'])->group(function ()
     Route::post('production_machine', [ProductionController::class,'index']);
     Route::Post('operation/create', [OperatorController::class, 'create']);
     Route::Post('operation/store', [OperatorController::class, 'store']);
+    Route::Post('operation/create_scarto', [OperatorController::class, 'create_scarto']);
     Route::Post('production/create', [ProductionController::class, 'create']);
     Route::Post('production/store', [ProductionController::class, 'store']);
 

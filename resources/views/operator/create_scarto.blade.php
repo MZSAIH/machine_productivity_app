@@ -6,7 +6,7 @@
 
 <section class="section">
     <div class="section-header">
-        <h1>{{__('Add operation')}}</h1>
+        <h1>{{__('Add scarto')}}</h1>
         <div class="section-header-breadcrumb">
             <form id="back" action="{{ url('operation') }}" method="GET">
                 @csrf
@@ -19,7 +19,7 @@
     </div>
     <div class="section-body">
         <h2 class="section-title">{{__('Production management panel')}}</h2>
-        <p class="section-lead">{{__('Add operation')}}</p>
+        <p class="section-lead">{{__('Add scarto')}}</p>
         <div class="card">
             <div class="card-body">
                 <form class="container-fuild" action="{{ url('operation/store') }}" method="post">
