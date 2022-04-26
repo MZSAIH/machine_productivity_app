@@ -32,7 +32,6 @@ Route::post('confirm_login', [MainController::class, 'confirm_login']);
 Route::middleware(['auth'])->group(function ()
 {
     Route::get('home', [HomeController::class, 'index']);
-    Route::get('production', [ProductionController::class, 'index']);
     Route::get('setting',[SettingController::class, 'index']);
 
     //POST
@@ -45,12 +44,14 @@ Route::middleware(['auth'])->group(function ()
     Route::Post('operation/create', [OperatorController::class, 'create']);
     Route::Post('operation/store', [OperatorController::class, 'store']);
     Route::Post('operation/create_scarto', [OperatorController::class, 'create_scarto']);
-    Route::Post('production/create', [ProductionController::class, 'create']);
+    Route::Post('operation/store_scarto', [OperatorController::class, 'store_scarto']);
+    Route::Post('operation/create_production', [OperatorController::class, 'create_production']);
     Route::Post('production/store', [ProductionController::class, 'store']);
 
     //RESOURCES
     Route::resources([
         'machine' => MachineController::class,
+        'production' => ProductionController::class,
         'action' => ActionController::class,
         'user' => UserController::class,
     ]);

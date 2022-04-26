@@ -52,7 +52,7 @@
                         </div>
 
                         <div class="row">
-                            <form id="create_prod" action="{{ url('production/create') }}" method="POST">
+                            <form id="create_prod" action="{{ url('operation/create_production') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name='machine_id' value="{{ $machine->id }}">
                                 <a href="" onclick="event.preventDefault(); document.getElementById('create_prod').submit();" class="btn btn-primary float-right">{{__('Create new order')}}</a>
@@ -96,7 +96,7 @@
                             </div>
 
                             <div class="row">
-                                <form id="create_prod" action="{{ url('production/create') }}" method="POST">
+                                <form id="create_prod" action="{{ url('operation/create_production') }}" method="POST">
                                     @csrf
                                     <input type="hidden" name='machine_id' value="{{ $machine->id }}">
                                     <a href="" onclick="event.preventDefault(); document.getElementById('create_prod').submit();" class="btn btn-primary float-right">{{__('Create new order')}}</a>
@@ -112,7 +112,22 @@
    </div>
 
 @if( $production != null  && $production->status == 'C' )
-    <div class="section-body" id="actions">
+<div class="section-body">
+
+    <div class="card">
+        <div class="card-body">
+            <ul class="nav nav-pills" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active show" id="actions-tab" data-toggle="tab" href="#actions" role="tab"aria-controls="actions" aria-selected="true">{{__('Actions')}}({{count($actions)}})</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="scartos-tab" data-toggle="tab" href="#scartos" role="tab" aria-controls="scartos" aria-selected="false">{{__('Scartos')}}({{count($scartos)}})</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section-action tab-pane fade show active" id="actions" role="tabpanel" aria-labelledby="actions-tab">
         <h2 class="section-title">{{__('Actions')}}</h2>
         <p class="section-lead">{{__('Actions within production #').$production->id}}</p>
         <div class="card">
@@ -144,7 +159,7 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $action->name }}</td>
                                 <td>{{ $action->fullname }}</td>
-                                <td>{{ $action->created_at }}</td>
+                                <td>{{ date('H:i:s d/m/Y', strtotime($action->created_at)) }}</td>
                                 <td>{{ $action->quantity }}</td>
                                 <td>{{ $action->material }}</td>
                             </tr>
@@ -155,7 +170,7 @@
         </div>
     </div>
 
-    <div class="section-body" id="scartos">
+    <div class="section-scarto tab-pane fade" id="scartos" role="tabpanel" aria-labelledby="scartos-tab">
         <h2 class="section-title">{{__('Scarto')}}</h2>
         <p class="section-lead">{{__('Scarto within production #').$production->id}}</p>
         <div class="card">
@@ -176,8 +191,8 @@
                             <th>#</th>
                             <th>{{__('User')}}</th>
                             <th>{{__('Scarto')}}</th>
-                            <th>{{__('Motif')}}</th>
                             <th>{{__('Created at')}}</th>
+                            <th>{{__('Motif')}}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -186,8 +201,8 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $scarto->fullname }}</td>
                                 <td>{{ $scarto->scarto }}</td>
+                                <td>{{ date('H:i:s d/m/Y', strtotime($scarto->created_at)) }}</td>
                                 <td>{{ $scarto->scarto_pr }}</td>
-                                <td>{{ $scarto->created_at }}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -195,6 +210,7 @@
             </div>
         </div>
     </div>
+</div>
 @endif
 </section>
 @endsection

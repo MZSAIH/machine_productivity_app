@@ -24,6 +24,9 @@ class HomeController extends Controller
             if($machine->prod == null){
                 $machine->prod = Production::where('machine_id', $machine->id)->where('status', 'P')->first();
             }
+            if($machine->prod == null){
+                $machine->prod = Production::where('machine_id', $machine->id)->where('status', 'F')->first();
+            }
             if($machine->prod != null)
                 //$machine->latest_action = Action::find(45);
                 $machine->latest_action = DB::table('actions')

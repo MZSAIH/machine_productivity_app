@@ -110,9 +110,10 @@
                                         <td><strong>{{ $production->production_lotto }}&nbsp;/&nbsp;{{ $production->objectif }}</strong></td>
                                         @if(Auth::user()->load('roles')->roles->contains('title', 'operator'))
                                             <td>
-                                                @if($production->status == 'P' || $production->status == 'I')
-                                                    <input type="button" class="btn btn-primary btn-action mr-1 " onclick="change_production({{ $production->id }})" value="Open">
-                                                @endif
+                                                {{-- @i f($production->status == 'P' || $production->status == 'I') --}}
+                                                    <a href="" class="btn btn-primary btn-action mr-1" onclick="event.preventDefault(); change_production({{ $production->id }});"><i class="fas fa-newspaper"></i></a>
+
+                                                {{-- @endif --}}
                                             </td>
                                         @endif
                                     </tr>

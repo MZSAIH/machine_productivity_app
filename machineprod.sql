@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 22 avr. 2022 à 11:37
+-- Généré le : mar. 26 avr. 2022 à 16:30
 -- Version du serveur :  10.4.17-MariaDB
 -- Version de PHP : 8.0.0
 
@@ -134,7 +134,7 @@ CREATE TABLE `machines` (
 --
 
 INSERT INTO `machines` (`id`, `name`, `status`) VALUES
-(1, '001', 'C'),
+(1, '001', 'E'),
 (2, '002', 'C'),
 (3, '003', 'C'),
 (4, '045', 'C'),
@@ -212,7 +212,9 @@ INSERT INTO `operation` (`id`, `production_id`, `action_id`, `user_id`, `quantit
 (25, 2, 61, 12, 10, 0, '2022-04-22 09:31:13'),
 (26, 2, 61, 12, 10, 0, '2022-04-22 09:32:38'),
 (27, 2, 66, 12, 10, 0, '2022-04-22 09:33:18'),
-(28, 8, 61, 12, 0, 0, '2022-04-22 09:35:45');
+(28, 8, 61, 12, 0, 0, '2022-04-22 09:35:45'),
+(29, 5, 16, 12, 1000, 150, '2022-04-26 15:17:31'),
+(30, 2, 70, 12, 10, 0, '2022-04-26 13:30:10');
 
 -- --------------------------------------------------------
 
@@ -274,10 +276,10 @@ CREATE TABLE `productions` (
 
 INSERT INTO `productions` (`id`, `order_id`, `code_article`, `desc_article`, `stampo`, `machine_id`, `starting_date`, `ending_date`, `objectif`, `production_lotto`, `scarto`, `material`, `status`, `created_at`, `updated_at`) VALUES
 (1, '22/672', '910730003AA', 'Falcone 40ML', 763, 1, '2022-03-22', '2022-03-31', 12000, 8500, 500, 0, 'P', '2022-04-16 00:00:00', '2022-04-21 13:29:59'),
-(2, '22/673', '910730003AA', 'Falcone 60ML', 763, 2, '2022-03-22', '2022-03-31', 12000, 10, 475, 0, 'C', '2022-04-16 00:00:00', '2022-04-22 09:31:13'),
+(2, '22/673', '910730003AA', 'Falcone 60ML', 763, 2, '2022-03-22', '2022-03-31', 12000, 10, 500, 0, 'C', '2022-04-16 00:00:00', '2022-04-26 13:39:11'),
 (3, '22/674', '910730003AA', 'Falcone 60ML', 763, 3, '2022-03-22', '2022-03-31', 12000, 4000, 78, 0, 'C', '2022-04-16 00:00:00', '2022-04-16 00:00:00'),
 (4, '22/675', '910730003AA', 'Falcone 60ML', 763, 4, '2022-03-22', '2022-03-31', 16000, 7100, 100, 150, 'C', '2022-04-16 00:00:00', '2022-04-21 09:43:51'),
-(5, '22/676', '910730003AA', 'Falcone 60ML', 763, 1, '2022-03-22', '2022-03-31', 50000, 1000, 470, 150, 'C', '2022-04-16 00:00:00', '2022-04-21 13:58:40'),
+(5, '22/676', '910730003AA', 'Falcone 60ML', 763, 1, '2022-03-22', '2022-03-31', 50000, 1000, 1400, 150, 'C', '2022-04-16 00:00:00', '2022-04-26 13:13:09'),
 (6, '22/677', '910730003AA', 'Falcone 60ML', 763, 1, '2022-03-22', '2022-03-31', 12000, 455, 47, 0, 'P', '2022-04-16 00:00:00', '2022-04-16 00:00:00'),
 (7, '75/602', '64545454A5', 'Add from app', 1000, 5, NULL, NULL, 14500, 0, 0, 0, 'I', '2022-04-19 21:46:04', '2022-04-19 21:46:04'),
 (8, '75/6088', '64545454A5', 'Add from app', 100, 7, NULL, NULL, 14000, 0, 0, 0, 'C', '2022-04-22 09:34:39', '2022-04-22 09:34:39');
@@ -343,6 +345,16 @@ CREATE TABLE `scarto` (
   `scarto_pr` text NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `scarto`
+--
+
+INSERT INTO `scarto` (`id`, `production_id`, `machine_id`, `user_id`, `scarto`, `scarto_pr`, `created_at`) VALUES
+(1, 5, 1, 1, 5000, 'Liquid erreur 404', '2022-04-26 12:14:31'),
+(2, 5, 1, 12, 500, 'test adding from app scartoo', '2022-04-26 13:12:10'),
+(3, 5, 1, 12, 1400, 'nothing', '2022-04-26 13:13:09'),
+(4, 2, 2, 12, 500, 'testdjdjdjdj', '2022-04-26 13:39:11');
 
 -- --------------------------------------------------------
 
@@ -496,7 +508,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT pour la table `operation`
 --
 ALTER TABLE `operation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT pour la table `personal_access_tokens`
@@ -526,7 +538,7 @@ ALTER TABLE `role_user`
 -- AUTO_INCREMENT pour la table `scarto`
 --
 ALTER TABLE `scarto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `users`

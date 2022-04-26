@@ -1002,6 +1002,9 @@ table tr:hover .table-links {
     background-color: #3c88eb !important;
 }
 
+.hs_show{
+ display: block !important;
+}
 
 
 

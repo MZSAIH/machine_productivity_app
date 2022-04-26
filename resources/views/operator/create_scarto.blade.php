@@ -22,7 +22,7 @@
         <p class="section-lead">{{__('Add scarto')}}</p>
         <div class="card">
             <div class="card-body">
-                <form class="container-fuild" action="{{ url('operation/store') }}" method="post">
+                <form class="container-fuild" action="{{ url('operation/store_scarto') }}" method="post">
                     @csrf
                     <div class="row">
                         <input type="hidden" name='machine_id' value="{{ $machine->id }}">
@@ -47,26 +47,18 @@
                             @enderror
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
-                            <label for="action">{{__('Action')}}</label>
-                            <select class="form-control select2" name="action_id" id="select_action">
-                                @foreach ($actions as $action)
-                                    <option value="{{ $action->id }}"> {{ $action->name  }} </option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
-                            <label for="qte">{{__('Quantity')}}</label>
-                            <input type="number" name="qte" class="form-control @error('qte') is_invalide @enderror" id="" placeholder="{{__('Quantity')}}" value="{{ $production->production_lotto }}" required="" min="{{ $production->production_lotto }}" style="text-transform: none;">
-                            @error('qte')
+                            <label for="scarto">{{__('Scarto')}}</label>
+                            <input type="number" name="scarto" class="form-control @error('scarto') is_invalide @enderror" id="" placeholder="{{__('Scarto')}}" value="{{ $production->scarto }}" required="" min="{{ $production->scarto }}" style="text-transform: none;">
+                            @error('scarto')
                                 <span class="custom_error" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
-                            <label for="material">{{__('Material')}}</label>
-                            <input type="number" name="material" id="material" class="form-control @error('material') is_invalide @enderror" id="" placeholder="{{__('Material')}}" value="{{ $production->material }}" required="" min="{{ $production->material }}" style="text-transform: none;" readonly>
-                            @error('material')
+                            <label for="scarto_pr">{{__('Scarto Pr')}}</label>
+                            <input type="text" name="scarto_pr" class="form-control @error('scarto_pr') is_invalide @enderror" id="" placeholder="{{__('Motif')}}" value="" required="" style="text-transform: none;">
+                            @error('scarto_pr')
                                 <span class="custom_error" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -75,7 +67,7 @@
                     </div>
 
                     <div class="text-center">
-                        <button class="btn btn-primary" type="submit">{{__('Add operation')}}</button>
+                        <button class="btn btn-primary" type="submit">{{__('Add scarto')}}</button>
                     </div>
                 </form>
             </div>

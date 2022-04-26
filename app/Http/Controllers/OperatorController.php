@@ -41,8 +41,9 @@ class OperatorController extends Controller
             ->where('scarto.production_id', $production->id)
             ->orderBy('scarto.created_at', 'desc')
             ->get();
+
         }
-        //return $actions;
+        //return $scartos;
         return view(
             'operator.operation',
             compact(
@@ -94,7 +95,6 @@ class OperatorController extends Controller
         if ($request['qte'] >= $production->production_lotto){
             $production->production_lotto = $request['qte'];
             $production->material = $request['material'];
-            $production->update();
             DB::table('operation')->insert($data);
             //Update status machine and production
             if ($request['action_id'] == 61 ||
@@ -197,6 +197,14 @@ class OperatorController extends Controller
             ->update(['status' => "C"]);
     }
 
+    public function create_production(Request $request)
+    {
+        $machine_id = 0;
+        if($request->has('machine_id'))
+            $machine_id = $request['machine_id'];
+        return view('operator.create_production',compact('machine_id'));
+    }
+
     public function create_scarto(Request $req)
     {
         $machine = Machine::find($req['machine_id']);
@@ -210,6 +218,26 @@ class OperatorController extends Controller
                 'production'
             )
         );
+    }
+
+    public function store_scarto(Request $request)
+    {
+        $data['production_id'] = $request['production_id'];
+        $data['machine_id'] = $request['machine_id'];
+        $data['user_id'] = $request['user_id'];
+        $data['scarto'] = $request['scarto'];
+        $data['scarto_pr'] = $request['scarto_pr'];
+        $data['created_at'] = Carbon::now()->toDateTimeString();
+        //return $data;
+        $production = Production::find($request['production_id']);
+        if ($request['scarto'] >= $production->scarto){
+            $production->scarto = $request['scarto'];
+            $production->update();
+            DB::table('scarto')->insert($data);
+            return redirect('operation?machine_id='.$request['machine_id'])->with('msg','Scarto added successfully');
+        }else{
+            return ;
+        }
     }
 
 }

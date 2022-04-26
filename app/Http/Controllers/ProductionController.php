@@ -37,10 +37,8 @@ class ProductionController extends Controller
      */
     public function create(Request $request)
     {
-        $machine_id = 0;
-        if($request->has('machine_id'))
-            $machine_id = $request['machine_id'];
-        return view('operator.create_production',compact('machine_id'));
+        $machines = Machine::all();
+        return view('admin.production.create_production',compact('machines'));
     }
 
     /**
