@@ -21,10 +21,11 @@
             <div class="card-body">
                 <form class="container-fuild" action="{{ url('production/store') }}" method="post">
                     @csrf
+                    <input type="hidden" name="is_crlf" value="x">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
-                            <label for="machine">{{__('Machine')}}</label>
-                            <select class="form-control select2" name="machine" id="select_action">
+                            <label for="machine_id">{{__('Machine')}}</label>
+                            <select class="form-control select2" name="machine_id" id="select_action">
                                 @foreach ($machines as $machine)
                                     <option value="{{ $machine->id }}"> {{ $machine->name  }} </option>
                                 @endforeach

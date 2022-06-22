@@ -40,10 +40,6 @@
                 <table id="datatable" class="table table-striped table-bordered text-center" cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            <th>
-                                <input name="select_all" value="1" id="master" type="checkbox" />
-                                <label for="master"></label>
-                            </th>
                             <th>#</th>
                             <th>{{__('Machine')}}</th>
                             <th>{{__('Status')}}</th>
@@ -53,11 +49,13 @@
                     <tbody>
                         @foreach ($machines as $machine)
                             <tr>
-                                <td>
-                                    <input name="id[]" value="{{$machine->id}}" id="{{$machine->id}}" data-id="{{ $machine->id }}" class="sub_chk" type="checkbox" />
-                                    <label for="{{$machine->id}}"></label>
-                                </td>
-                                <td>{{ $loop->iteration }}</td>
+                                <td  @class([
+                                    'machine_finished' => $machine->status == 'F',
+                                    'machine_paused' => $machine->status == 'P',
+                                    'machine_operating' => $machine->status == 'C',
+                                    'machine_error' => $machine->status == 'E',
+                                    'machine_preparing' => $machine->status == 'R'])
+                                >{{ $loop->iteration }}</td>
                                 <td>{{ $machine->name }}</td>
                                 <td>
                                     <span @class([
@@ -90,7 +88,6 @@
                 </table>
             </div>
             <div class="card-footer">
-                <input type="button" value="Supprimer la sélection" onclick="deleteAll('machine_multi_delete','machine')" class="btn btn-primary">
             </div>
         </div>
     </div>

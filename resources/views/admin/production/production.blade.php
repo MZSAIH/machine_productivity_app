@@ -74,24 +74,26 @@
                                     @if(Auth::user()->load('roles')->roles->contains('title', 'operator'))
                                     <th>{{__('Open')}}</th>
                                     @endif
+                                    @if(Auth::user()->load('roles')->roles->contains('title', 'admin'))
+                                    <th>Action</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($productions as $production)
-                                    <tr @class([
-                                            'prod_finished' => $production->status == 'F',
-                                            'prod_paused' => $production->status == 'P',
-                                            'prod_running' => $production->status == 'C',
-                                            'prod_initial' => $production->status == 'I'
-                                        ])
-                                    >
+                                    <tr>
 
 
                                         {{-- <td>
                                             <input name="id[]" value="{{$production->id}}" id="{{$production->id}}" data-id="{{ $production->id }}" class="sub_chk" type="checkbox" />
                                             <label for="{{$production->id}}"></label>
                                         </td> --}}
-                                        <td>{{ $loop->iteration }}</td>
+                                        <td @class([
+                                            'prod_finished' => $production->status == 'F',
+                                            'prod_paused' => $production->status == 'P',
+                                            'prod_running' => $production->status == 'C',
+                                            'prod_initial' => $production->status == 'I'
+                                        ])>{{ $loop->iteration }}</td>
                                         <td>{{ $production->order_id }}</td>
                                         <td>{{ $production->code_article }}</td>
                                         <td>{{ $production->desc_article }}</td>
@@ -112,8 +114,16 @@
                                             <td>
                                                 {{-- @i f($production->status == 'P' || $production->status == 'I') --}}
                                                     <a href="" class="btn btn-primary btn-action mr-1" onclick="event.preventDefault(); change_production({{ $production->id }});"><i class="fas fa-newspaper"></i></a>
-
                                                 {{-- @endif --}}
+                                            </td>
+                                        @endif
+                                        @if(Auth::user()->load('roles')->roles->contains('title', 'admin'))
+                                            <td>
+                                                <form id="export{{ $production->id }}" action="production/export" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name='production_id' value="{{ $production->id }}">
+                                                </form>
+                                                <a onclick="event.preventDefault(); document.getElementById('export{{ $production->id }}').submit();"  class="btn btn-success btn-action mr-1" ><i class="fas fa-file"></i> Download</a>
                                             </td>
                                         @endif
                                     </tr>

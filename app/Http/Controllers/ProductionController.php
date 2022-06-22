@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Action;
 use App\Models\Machine;
 use App\Models\Production;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ProductionExport;
+use Carbon\Carbon;
 
 class ProductionController extends Controller
 {
@@ -62,6 +64,8 @@ class ProductionController extends Controller
         DB::table('machines')
         ->where('id',$request['machine_id'])
         ->update(['status' => "R"]);
+        if($request['is_crlf'])
+            return redirect('production')->with('msg','Production created successfully');
         return redirect('operation?machine_id='.$request['machine_id'])->with('msg','Production created successfully');
     }
 
@@ -109,6 +113,24 @@ class ProductionController extends Controller
     {
         $production->delete();
         return response(['success' => true]);
+    }
+
+    public function export(Request $request){
+        $production = Production::find($request['production_id']);
+        $actions = DB::table('actions')
+            ->rightjoin('operation', 'actions.id', '=', 'operation.action_id')
+            ->join('users', 'users.id', '=', 'operation.user_id')
+            ->select('actions.id', 'actions.number', 'actions.name', 'users.fullname', 'operation.quantity', 'operation.material', 'operation.created_at')
+            ->where('operation.production_id', $production->id)
+            ->orderBy('operation.created_at', 'desc')
+            ->get();
+
+        return view('exports.export', [
+            'production' => $production,
+            'actions' => $actions
+        ]);
+        // $export = new ProductionExport(Production::find($request['production_id']));
+        // return Excel::download($export, 'export'.Carbon::now()->toDateString().'.xlsx');
     }
 
     public function change_machine(Request $request)

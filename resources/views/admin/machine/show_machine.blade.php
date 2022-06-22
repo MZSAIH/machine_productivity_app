@@ -63,14 +63,13 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($productions as $production)
-                                        <tr @class([
-                                            'prod_finished' => $production->status == 'F',
-                                            'prod_paused' => $production->status == 'P',
-                                            'prod_running' => $production->status == 'C',
-                                            'prod_initial' => $production->status == 'I'
-                                            ])
-                                        >
-                                            <td>{{ $loop->iteration }}</td>
+                                        <tr >
+                                            <td @class([
+                                                'prod_finished' => $production->status == 'F',
+                                                'prod_paused' => $production->status == 'P',
+                                                'prod_running' => $production->status == 'C',
+                                                'prod_initial' => $production->status == 'I'
+                                                ])>{{ $loop->iteration }}</td>
                                             <td>{{ $production->order_id }}</td>
                                             <td>{{ $production->code_article }}</td>
                                             <td>{{ $production->desc_article }}</td>

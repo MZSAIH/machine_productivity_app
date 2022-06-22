@@ -46,7 +46,7 @@ Route::middleware(['auth'])->group(function ()
     Route::Post('operation/create_scarto', [OperatorController::class, 'create_scarto']);
     Route::Post('operation/store_scarto', [OperatorController::class, 'store_scarto']);
     Route::Post('operation/create_production', [OperatorController::class, 'create_production']);
-    Route::Post('production/store', [ProductionController::class, 'store']);
+    // Route::Post('production/store', [ProductionController::class, 'store']);
 
     //RESOURCES
     Route::resources([
@@ -56,6 +56,7 @@ Route::middleware(['auth'])->group(function ()
         'user' => UserController::class,
     ]);
 
+    Route::post('production/export',[ProductionController::class,'export']);
     //Ajax calls
     Route::post('production/change_machine',[ProductionController::class,'change_machine']);
     Route::post('operation/change_production',[OperatorController::class,'change_production']);
