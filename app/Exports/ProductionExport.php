@@ -5,9 +5,8 @@ namespace App\Exports;
 use App\Models\Production;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
-use Maatwebsite\Excel\Concerns\FromView;
 
-class ProductionExport implements FromView
+class ProductionExport //implements FromView
 {
 
     protected $production;
